@@ -10,6 +10,6 @@ public class GUIController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText(DemoView.demo());
+        welcomeText.setText("Hello");
     }
 }
