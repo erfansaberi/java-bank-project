@@ -15,11 +15,11 @@ public class Employee {
     private String nationalId;
     private String password; // Hashed
     private String email;
-    private Status status; // Active, Deactive, Deleted
+    private EmployeeStatus status; // Active, Deactive, Deleted
 
 }
 
-enum Status {
+enum EmployeeStatus {
     Active,
     Deactive,
     Deleted
