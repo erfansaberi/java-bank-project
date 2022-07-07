@@ -1,2 +1,4 @@
-package com.bank.models;public class Loan {
+package com.bank.models;
+
+public class Loan {
 }

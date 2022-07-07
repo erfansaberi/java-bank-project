@@ -1,2 +1,4 @@
-package com.bank.validator;public class Validator {
+package com.bank.validator;
+
+public class Validator {
 }
