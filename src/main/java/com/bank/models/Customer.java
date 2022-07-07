@@ -7,3 +7,11 @@ public class Customer {
 
     private long id;
 }
+
+enum CustomerStatus {
+    Pending,
+    Active,
+    Deactivated,
+    Banned,
+    Deleted
+}
