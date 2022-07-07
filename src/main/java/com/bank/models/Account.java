@@ -7,3 +7,10 @@ public class Account {
 
     private long id;
 }
+
+enum AccountStatus {
+    Pending,
+    Active,
+    Deactivated,
+    Deleted
+}
