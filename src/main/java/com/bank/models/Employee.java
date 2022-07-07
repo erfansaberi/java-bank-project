@@ -33,6 +33,58 @@ public class Employee extends Person {
         allEmployees.add(this);
     }
 
+    /**
+     * Check if email is used in arraylist.
+     * @param email Email to check.
+     * @return True if email is used, false otherwise.
+     */
+    public static boolean emailExists(String email) {
+        for (Employee employee : allEmployees) {
+            if (employee.getEmail().equals(email)) {
+                if (employee.getStatus() != EmployeeStatus.DELETED) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Get employee by email.
+     * @param email Email to get employee by.
+     * @return Employee with given email, null if not found.
+     */
+    public static Employee getByEmail(String email) {
+        for (Employee employee : allEmployees) {
+            if (employee.getEmail().equals(email)) {
+                if (employee.getStatus() != EmployeeStatus.DELETED) {
+                    return employee;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Authenticate employee.
+     * @param email Email entered by user.
+     * @param rawPassword Password entered by user.
+     * @return true if email and password are correct, false otherwise
+     */
+    public static boolean authenticate(String email, String rawPassword) {
+        if (emailExists(email)) {
+            Employee employee = Employee.getByEmail(email);
+            if (employee.getPassword().equals(Core.hashPassword(rawPassword))) {
+                if (employee.getStatus() == EmployeeStatus.ACTIVE) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // Getters and setters
+    
     public String getEmail() {
         return this.email;
     }
@@ -54,52 +106,37 @@ public class Employee extends Person {
         this.password = Core.hashPassword(rawPassword);
     }
 
-    /**
-     * Check if email is used in arraylist.
-     * @param email Email to check.
-     * @return True if email is used, false otherwise.
-     */
-    public static boolean emailExists(String email) {
-        for (Employee employee : allEmployees) {
-            if (employee.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+    public Date getJoinDate() {
+        return this.joinDate;
     }
 
-    /**
-     * Get employee by email.
-     * @param email Email to get employee by.
-     * @return Employee with given email, null if not found.
-     */
-    public static Employee getByEmail(String email) {
-        for (Employee employee : allEmployees) {
-            if (employee.getEmail().equals(email)) {
-                return employee;
-            }
-        }
-        return null;
+    public EmployeeStatus getStatus() {
+        return this.status;
     }
 
-    /**
-     * Authenticate employee.
-     * @param email Email entered by user.
-     * @param rawPassword Password entered by user.
-     * @return true if email and password are correct, false otherwise
-     */
-    public static boolean authenticate(String email, String rawPassword) {
-        if (emailExists(email)) {
-            Employee employee = Employee.getByEmail(email);
-            if (employee.getPassword().equals(Core.hashPassword(rawPassword))) {
-                return true;
-            }
-        }
-        return false;
+    public void setStatus(EmployeeStatus status) {
+        this.status = status;
     }
 
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
 
+    public String getFullNameWithId() {
+        return this.firstName + " " + this.lastName + " (" + this.id + ")";
+    }
 
+    public Gender getGender() {
+        return this.gender;
+    }
+
+    public String toString() {
+        return "Employee{" +
+                "id=" + this.id +
+                ", email='" + this.email + '\'' +
+                ", status=" + this.status +
+                '}';
+    }
 }
 
 /**
