@@ -1,2 +1,7 @@
-package com.bank.models;public enum Gender {
+package com.bank.models;
+
+public enum Gender {
+    MALE,
+    FEMALE,
+    NONE
 }
