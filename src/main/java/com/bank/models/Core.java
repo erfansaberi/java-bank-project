@@ -1,3 +1,5 @@
+package com.bank.models;
+
 public class Core {
     /**
      * Get password hash.
