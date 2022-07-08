@@ -2,6 +2,18 @@ package com.bank.models;
 
 public class Core {
     /**
+     * Call this method when the application starts to load the data.
+     */
+    public static void startup() {
+        Admin.setAdminCredentials(); // Set admin username and password from configs.properties file
+        // TODO: Employee.loadData()
+        // TODO: Customer.loadData()
+        // TODO: Account.loadData()
+        // TODO: Transaction.loadData()
+        // TODO: Loan.loadData()
+    }
+
+    /**
      * Get password hash.
      * Password is hashed with SHA-256.
      * Password salt
