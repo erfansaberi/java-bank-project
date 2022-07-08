@@ -10,7 +10,7 @@ public class Admin {
 
     public static void setAdminCredentials() {
         try {
-            FileInputStream  configsFile = new FileInputStream ("src/main/java/com/bank/configs/configs.properties");
+            FileInputStream configsFile = new FileInputStream("src/main/java/com/bank/configs/configs.properties");
             Properties configs = new Properties();
             configs.load(configsFile);
             username = configs.getProperty("ADMIN_USERNAME");
