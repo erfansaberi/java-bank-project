@@ -11,6 +11,8 @@ import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import java.io.IOException;
 
+import com.bank.models.Core;
+
 public class GUI extends Application {
 //	public static Stage newStage;
 
@@ -30,6 +32,7 @@ public class GUI extends Application {
     
 
     public static void main(String[] args) {
+        Core.startup();
         launch();
     }
 }
