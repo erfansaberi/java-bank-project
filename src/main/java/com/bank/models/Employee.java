@@ -95,6 +95,7 @@ public class Employee extends Person {
      * @throws ParseException
      */
     public static void loadData() {
+        // TODO: Add all fields
         String filePath = "src/main/java/com/bank/data/employees.csv";
         try (Scanner employeesScanner = new Scanner(new File(filePath))) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
