@@ -14,9 +14,9 @@ public class Customer extends Person {
 }
 
 enum CustomerStatus {
-    Pending,
-    Active,
-    Deactivated,
-    Banned,
-    Deleted
+    PENDING,
+    ACTIVE,
+    INACTIVE,
+    BANNED,
+    DELETED
 }
