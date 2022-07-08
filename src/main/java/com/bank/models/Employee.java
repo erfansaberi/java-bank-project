@@ -120,7 +120,10 @@ public class Employee extends Person {
     }
 
     // Getters and setters
-    
+    public ArrayList<Employee> getAllEmployees() {
+        return allEmployees;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
