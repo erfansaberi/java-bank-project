@@ -1,7 +1,13 @@
 package com.bank.models;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Employee extends Person {
     static ArrayList<Employee> allEmployees = new ArrayList<>(); // All created accounts
@@ -83,8 +89,54 @@ public class Employee extends Person {
         return false;
     }
 
+    /**
+     * Read all employees from employees.csv file and save them to arraylist.
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
+    public static void loadData() {
+        String filePath = "src/main/java/com/bank/data/employees.csv";
+        try (Scanner employeesScanner = new Scanner(new File(filePath))) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            while (employeesScanner.hasNextLine()) {
+                String line = employeesScanner.nextLine();
+                String[] employeeData = line.split(", ");
+                Employee employee = new Employee();
+                employee.setId(Long.parseLong(employeeData[0]));
+                employee.setFirstName(employeeData[1]);
+                employee.setLastName(employeeData[2]);
+                employee.setEmail(employeeData[3]);
+                employee.setPasswordHash(employeeData[4]);
+                employee.setJoinDate(dateFormat.parse(employeeData[5]));
+                employee.setStatus(EmployeeStatus.valueOf(employeeData[6]));
+                employee.save();
+            }
+        } catch (NumberFormatException | FileNotFoundException | ParseException e) {
+            // TODO Auto-generated catch block
+            System.err.println("[!] Error loading employees from file.");
+            e.printStackTrace();
+        }
+    }
+
     // Getters and setters
     
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
+
     public String getEmail() {
         return this.email;
     }
@@ -104,6 +156,10 @@ public class Employee extends Person {
 
     public void setPassword(String rawPassword) {
         this.password = Core.hashPassword(rawPassword);
+    }
+
+    public void setPasswordHash(String password) {
+        this.password = password;
     }
 
     public Date getJoinDate() {

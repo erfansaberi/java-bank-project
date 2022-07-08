@@ -6,7 +6,7 @@ public class Core {
      */
     public static void startup() {
         Admin.setAdminCredentials(); // Set admin username and password from configs.properties file
-        // TODO: Employee.loadData()
+        Employee.loadData();
         // TODO: Customer.loadData()
         // TODO: Account.loadData()
         // TODO: Transaction.loadData()
