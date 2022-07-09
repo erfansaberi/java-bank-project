@@ -19,13 +19,8 @@ public class GUI extends Application {
     	@Override
     	public void start(Stage stage) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("login.fxml"));
-            
-			stage.setIconified(true);
-			
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-//            stage.getIcons().add(icon);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
             stage.setTitle("Login Page");
-//            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         }

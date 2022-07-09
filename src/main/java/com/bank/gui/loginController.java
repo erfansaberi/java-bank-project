@@ -2,11 +2,12 @@ package com.bank.gui;
 
 import java.io.IOException;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.BorderPane;
 //import javafx.scene.control.Label;
 //import javafx.fxml.Initializable;
 //import java.io.IOException;
@@ -16,7 +17,7 @@ import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Node;
-
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -30,6 +31,9 @@ public class loginController {
 
 	@FXML
 	private Button regbutt;
+	 @FXML
+	   private BorderPane myBorderPane;
+    
 
 	@FXML
 	void RegisterClick(MouseEvent event) {
@@ -44,7 +48,12 @@ public class loginController {
 			//set what you want on your stage
 			stage.setTitle("Register Page");
 			stage.setScene(new Scene(root1));
+			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
+			
+			
+			
+			
 		}
 		catch(Exception e)
 		{
@@ -63,6 +72,7 @@ public class loginController {
 			//set what you want on your stage
 			stage.setTitle("Customer Login");
 			stage.setScene(new Scene(root1));
+			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
 		}
 		catch(Exception e)
@@ -82,6 +92,7 @@ public class loginController {
 			//set what you want on your stage
 			stage.setTitle("Managment Page");
 			stage.setScene(new Scene(root1));
+			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
 		}
 		catch(Exception e)
