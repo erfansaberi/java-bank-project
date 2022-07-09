@@ -20,9 +20,9 @@ public class GUI extends Application {
     	public void start(Stage stage) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("login.fxml"));
             
-			stage.setIconified(true);
 			
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+			
+            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
 //            stage.getIcons().add(icon);
             stage.setTitle("Login Page");
 //            stage.setResizable(false);
