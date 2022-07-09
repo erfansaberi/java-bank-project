@@ -22,6 +22,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class loginController {
+	
+	public static Stage Regstage;
+	public static Stage Loginstage;
 
 	@FXML
 	private Button loginbutt;
@@ -37,19 +40,18 @@ public class loginController {
 
 	@FXML
 	void RegisterClick(MouseEvent event) {
-		//    	Stage stage = new Stage();
-//		    	System.out.println("Hello Bitch");
+
 		try
 		{
 			FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("Register.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
+			 Regstage = new Stage();
 			;
 			//set what you want on your stage
-			stage.setTitle("Register Page");
-			stage.setScene(new Scene(root1));
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.show();
+			Regstage.setTitle("Register Page");
+			Regstage.setScene(new Scene(root1));
+			Regstage.initModality(Modality.APPLICATION_MODAL);
+			Regstage.show();
 			
 			
 			
@@ -68,12 +70,13 @@ public class loginController {
 		{
 			FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("CustomerLogin.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
+			Loginstage = new Stage();
 			//set what you want on your stage
-			stage.setTitle("Customer Login");
-			stage.setScene(new Scene(root1));
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.show();
+			Loginstage.setTitle("Customer Login");
+			Loginstage.setScene(new Scene(root1));
+			Loginstage.initModality(Modality.APPLICATION_MODAL);
+			Loginstage.show();
+			GUI.preStage.close();
 		}
 		catch(Exception e)
 		{
@@ -94,6 +97,7 @@ public class loginController {
 			stage.setScene(new Scene(root1));
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
+			GUI.preStage.close();
 		}
 		catch(Exception e)
 		{

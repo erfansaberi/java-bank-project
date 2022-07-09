@@ -1,6 +1,6 @@
 package com.bank.gui;
 
-import com.bank.models.Employee;
+import com.bank.views.ManagementViews;
 import com.bank.models.Admin;
 
 import javafx.fxml.FXML;
@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class ManagementController {
+	enum accesslevel {admin,employee,none};
+	
 	  @FXML
 	    private TextField EmailManageAuth;
 
@@ -24,21 +26,20 @@ public class ManagementController {
 	    private Label UsPasError;
     
     @FXML
-    void Adminauthentication()
+    void authentication()
     {
 //    	if(!Employee.authenticate(EmailManageAuth.getText(),PasswordManageAuth.getText()))
   //  		UsPasError.setText("Username Or Password is Wrong");
-    		
-    	if(Admin.authenticate(EmailManageAuth.getText(),PasswordManageAuth.getText()))
-    		UsPasError.setText("Success!");
+//    	System.out.println(ManagementViews.authenticate(EmailManageAuth.getText(),PasswordManageAuth.getText()));
+    	if(ManagementViews.authenticate(EmailManageAuth.getText(),PasswordManageAuth.getText()).toString().equals("NONE"))
+    		  UsPasError.setText("Username Or Password is Wrong");	
     	else
-    		UsPasError.setText("Username Or Password is Wrong");	
+    		System.out.println("amsdsd");
+    	
+//    	else
+//    		System.out.println("Hellooo");
     		
     }
-    @FXML
-    void Employeeauthentication()
-    {
-    	
-    }
+   
     
 }

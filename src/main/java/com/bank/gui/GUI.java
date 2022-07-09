@@ -14,7 +14,8 @@ import java.io.IOException;
 import com.bank.models.Core;
 
 public class GUI extends Application {
-//	public static Stage newStage;
+	
+	public static Stage preStage;
 
     	@Override
     	public void start(Stage stage) throws IOException {
@@ -23,6 +24,7 @@ public class GUI extends Application {
             stage.setTitle("Login Page");
             stage.setScene(scene);
             stage.show();
+            preStage = stage;
         }
     
 

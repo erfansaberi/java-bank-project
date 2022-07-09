@@ -21,7 +21,7 @@
                </font>
             </Text>
             <TextField fx:id="EmailManageAuth" layoutX="104.0" layoutY="169.0" prefHeight="26.0" prefWidth="184.0" promptText="Email or Username" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
-            <Button fx:id="ManageLogin" layoutX="122.0" layoutY="318.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="144.0" style="-fx-background-radius: 22; -fx-font-size: 18; -fx-background-color: #3B83B4; -fx-text-fill: white;" text=" Login">
+            <Button fx:id="ManageLogin" layoutX="122.0" layoutY="318.0" mnemonicParsing="false" onMouseClicked="#authentication" prefHeight="48.0" prefWidth="144.0" style="-fx-background-radius: 22; -fx-font-size: 18; -fx-background-color: #3B83B4; -fx-text-fill: white;" text=" Login">
                <font>
                   <Font size="17.0" />
                </font>
