@@ -16,6 +16,7 @@ class EmployeeTest {
 
     @BeforeAll
     static void setUp() {
+        Core.loadConfig();
         // Create an active employee
         activeEmployee = new Employee();
         activeEmployee.setEmail(testEmailActive);
