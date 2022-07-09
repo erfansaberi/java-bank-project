@@ -46,12 +46,12 @@
                <children>
                   <Pane fx:id="HomePane" prefHeight="120.0">
                      <children>
-                        <Text fill="#b59bcf" layoutX="77.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home">
+                        <Text fill="#20ff0b" layoutX="77.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Text>
-                        <Text fill="#d1d8ff" layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🏠">
+                        <Text fill="#20ff0b" layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🏠">
                            <font>
                               <Font size="45.0" />
                            </font>
@@ -97,12 +97,12 @@
                   </Pane>
                   <Pane fx:id="ExitPane" prefHeight="120.0">
                      <children>
-                        <Text fill="#b79cd1" layoutX="84.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit" wrappingWidth="32.655117988586426">
+                        <Text fill="#ff3f2a" layoutX="84.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit" wrappingWidth="32.655117988586426">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="#d1d8ff" layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="❌">
+                        <Text fill="RED" layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="❌">
                            <font>
                               <Font size="45.0" />
                            </font>
