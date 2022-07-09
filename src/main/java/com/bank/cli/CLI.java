@@ -36,6 +36,8 @@ public class CLI {
                      break ;
 
                 case "exit":
+                    System.out.println("[~] Exiting...");
+                    Core.shutdown();
                     System.out.println("[~] Bye!");
                     System.exit(0);
                     break;

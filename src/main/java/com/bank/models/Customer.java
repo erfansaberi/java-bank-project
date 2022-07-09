@@ -2,6 +2,7 @@ package com.bank.models;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Customer extends Person {
+    static String CUSTOMER_DATAFILE_PATH = "src/main/java/com/bank/data/customers.csv";
     static ArrayList<Customer> allCustomers = new ArrayList<>(); // All created accounts
 
     private long id;
@@ -129,11 +131,13 @@ public class Customer extends Person {
 
     /**
      * Read all customers from customers.csv file and save them to arraylist.
+     * Format:
+     * id, firstName, lastName, email, phoneNumber, passwordHash, gender,
+     * nationalId, birthDate, joinDate, status
      */
     public static void loadData() {
         // TODO: Add all fields
-        String filePath = "src/main/java/com/bank/data/customers.csv";
-        try (Scanner customerScanner = new Scanner(new File(filePath))) {
+        try (Scanner customerScanner = new Scanner(new File(CUSTOMER_DATAFILE_PATH))) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             while (customerScanner.hasNextLine()) {
                 String line = customerScanner.nextLine();
@@ -145,13 +149,40 @@ public class Customer extends Person {
                 customer.setEmail(customerData[3]);
                 customer.setPhoneNumber(customerData[4]);
                 customer.setPasswordHash(customerData[5]);
-                customer.setJoinDate(dateFormat.parse(customerData[6]));
-                customer.setStatus(CustomerStatus.valueOf(customerData[7]));
+                customer.setGender(Gender.valueOf(customerData[6]));
+                customer.setNationalId(customerData[7]);
+                customer.setBirthDate(dateFormat.parse(customerData[8]));
+                customer.setJoinDate(dateFormat.parse(customerData[9]));
+                customer.setStatus(CustomerStatus.valueOf(customerData[10]));
                 customer.save();
             }
         } catch (NumberFormatException | FileNotFoundException | ParseException e) {
             System.err.println("[!] Error loading customers from file.");
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Save all customers to customers.csv file.
+     * Write all customers data to customers.csv file in format:
+     * id, firstName, lastName, email, phoneNumber, passwordHash, gender,
+     * nationalId, birthDate, joinDate, status
+     */
+    public static void saveData() {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            FileWriter dataFile = new FileWriter(CUSTOMER_DATAFILE_PATH);
+            for (Customer customer : allCustomers) {
+                dataFile.write(customer.getId() + ", " + customer.getFirstName() + ", " + customer.getLastName() + ", "
+                        + customer.getEmail() + ", " + customer.getPhoneNumber() + ", " + customer.getPassword() + ", "
+                        + customer.getGender() + ", " + customer.getNationalId() + ", "
+                        + dateFormat.format(customer.getBirthDate()) + ", " + dateFormat.format(customer.getJoinDate())
+                        + ", " + customer.getStatus() + "\n");
+            }
+            dataFile.close();
+        } catch (Exception e) {
+            System.err.println("[!] Error saving customers to file.");
+            System.err.println(e);
         }
     }
 
@@ -215,6 +246,30 @@ public class Customer extends Person {
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Gender getGender() {
+        return this.gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public Date getJoinDate() {

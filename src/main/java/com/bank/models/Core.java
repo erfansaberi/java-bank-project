@@ -21,6 +21,17 @@ public class Core {
     }
 
     /**
+     * Call this method when the application closes to save the data.
+     */
+    public static void shutdown() {
+        // Employee.saveData(); TODO: Save employee data to file
+        Customer.saveData();
+        // TODO: Account.saveData()
+        // TODO: Transaction.saveData()
+        // TODO: Loan.saveData()
+    }
+
+    /**
      * Loads the configs from configs.properties file.
      */
     public static void loadConfig() {
