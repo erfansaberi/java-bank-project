@@ -6,14 +6,14 @@ import com.bank.models.Employee;
 
 public class EmployeeCLI {
     static Scanner sc = new Scanner(System.in);
-    static Employee Employee;
+    static Employee employee;
 
-    public static void launch(Employee Employee) {
-        EmployeeCLI.Employee = Employee;
-        System.out.println("[+] Welcome " + Employee.getEmail() +"!");
+    public static void launch(Employee employee) {
+        EmployeeCLI.employee = employee;
+        System.out.println("[+] Welcome " + employee.getFirstName() +"!");
         System.out.println("[+] Enter 'help' for help.");
-        while (Employee != null) {
-            System.out.print("\n["+ Employee.getFullName() +"]> ");
+        while (employee != null) {
+            System.out.print("\n["+ employee.getFullName() +"]> ");
             String input = sc.nextLine();
             System.out.println();
             String[] inputSplit = input.split(" ");
@@ -25,11 +25,12 @@ public class EmployeeCLI {
                     break;
 
                 case "logout":
-                break;
+                    break;
 
                 case "help":
                     printHelp();
                     break;
+
                 default:
                     System.out.println("[!] Unknown command.");
                     break;
