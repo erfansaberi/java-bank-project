@@ -12,7 +12,7 @@ public class CustomerCLI {
         CustomerCLI.customer = customer;
         System.out.println("[+] Welcome " + customer.getFirstName() +"!");
         System.out.println("[+] Enter 'help' for help.");
-        while (customer != null) {
+        while (CustomerCLI.customer != null) {
             System.out.print("\n["+ customer.getFullName() +" (Customer)]> ");
             String input = sc.nextLine();
             System.out.println();
@@ -37,6 +37,7 @@ public class CustomerCLI {
 
 
                 case "logout":
+                logout();
                 break;
 
                 
@@ -55,11 +56,20 @@ public class CustomerCLI {
      */
     public static void printHelp() { // TODO: Add customer commands to help text
         System.out.println("[?] Customer Commands:");
-        System.out.println("[+] balance: Print balance.");
-        System.out.println("[+] history: Print history.");
-        System.out.println("[+] transfer: Transfer money.");
-        System.out.println("[+] logout: Logout.");
-        System.out.println("[+] exit: Exit program.");
-        System.out.println("[+] help: Print help text.");
+        System.out.println("[C] balance: Print balance.");
+        System.out.println("[C] history: Print history.");
+        System.out.println("[C] transfer: Transfer money.");
+        System.out.println("[C] logout: Logout.");
+        System.out.println("[C] exit: Exit program.");
+        System.out.println("[C] help: Print help text.");
+    }
+
+    /**
+     * Logout
+     * Set customer to null.
+     */
+    public static void logout() {
+        customer = null;
+        System.out.println("[+] Logout successful.");
     }
 }

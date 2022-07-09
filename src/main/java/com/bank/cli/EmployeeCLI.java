@@ -12,7 +12,7 @@ public class EmployeeCLI {
         EmployeeCLI.employee = employee;
         System.out.println("[+] Welcome " + employee.getFirstName() +"!");
         System.out.println("[+] Enter 'help' for help.");
-        while (employee != null) {
+        while (EmployeeCLI.employee != null) {
             System.out.print("\n["+ employee.getFullName() +" (Employee)]> ");
             String input = sc.nextLine();
             System.out.println();
@@ -25,6 +25,7 @@ public class EmployeeCLI {
                     break;
 
                 case "logout":
+                    logout();
                     break;
 
                 case "help":
@@ -43,11 +44,17 @@ public class EmployeeCLI {
      */
     public static void printHelp() { // TODO: Add Employee commands to help text
         System.out.println("[?] Employee Commands:");
-        System.out.println("[+] ");
-        System.out.println("[+] ");
-        System.out.println("[+] ");
-        System.out.println("[+] logout: Logout.");
-        System.out.println("[+] exit: Exit program ");
-        System.out.println("[+] help: Print help text.");
+        System.out.println("[C] logout: Logout.");
+        System.out.println("[C] exit: Exit program ");
+        System.out.println("[C] help: Print help text.");
+    }
+
+    /**
+     * Logout
+     * Set employee to null.
+     */
+    public static void logout() {
+        employee = null;
+        System.out.println("[+] Logout successful.");
     }
 }
