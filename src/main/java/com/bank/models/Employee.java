@@ -2,6 +2,7 @@ package com.bank.models;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,12 +11,9 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Employee extends Person {
+    static String EMPLOYEE_DATAFILE_PATH = "src/main/java/com/bank/data/employees.csv";
     static ArrayList<Employee> allEmployees = new ArrayList<>(); // All created accounts
 
-    private long id;
-    private String email;
-    private String password; // Hashed
-    private Date joinDate;
     private EmployeeStatus status;
 
     /**
@@ -95,11 +93,11 @@ public class Employee extends Person {
     /**
      * Read all employees from employees.csv file and save them to arraylist.
      * CSV file format:
-     * id, firstName, lastName, email, password, gender, nationalId, birthDate, joinDate, status
+     * id, firstName, lastName, email, password, gender, nationalId, birthDate,
+     * joinDate, status
      */
     public static void loadData() {
-        String filePath = "src/main/java/com/bank/data/employees.csv";
-        try (Scanner employeesScanner = new Scanner(new File(filePath))) {
+        try (Scanner employeesScanner = new Scanner(new File(EMPLOYEE_DATAFILE_PATH))) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             while (employeesScanner.hasNextLine()) {
                 String line = employeesScanner.nextLine();
@@ -109,12 +107,13 @@ public class Employee extends Person {
                 employee.setFirstName(employeeData[1]);
                 employee.setLastName(employeeData[2]);
                 employee.setEmail(employeeData[3]);
-                employee.setPasswordHash(employeeData[4]);
-                employee.setGender(Gender.valueOf(employeeData[5]));
-                employee.setNationalId(employeeData[6]);
-                employee.setBirthDate(dateFormat.parse(employeeData[7]));
-                employee.setJoinDate(dateFormat.parse(employeeData[8]));
-                employee.setStatus(EmployeeStatus.valueOf(employeeData[9]));
+                employee.setPhoneNumber(employeeData[4]);
+                employee.setPasswordHash(employeeData[5]);
+                employee.setGender(Gender.valueOf(employeeData[6]));
+                employee.setNationalId(employeeData[7]);
+                employee.setBirthDate(dateFormat.parse(employeeData[8]));
+                employee.setJoinDate(dateFormat.parse(employeeData[9]));
+                employee.setStatus(EmployeeStatus.valueOf(employeeData[10]));
                 employee.save();
             }
         } catch (NumberFormatException | FileNotFoundException | ParseException e) {
@@ -123,78 +122,33 @@ public class Employee extends Person {
         }
     }
 
+    /**
+     * Save all employees to employees.csv file.
+     * Write all employees data to employees.csv file in format:
+     * id, firstName, lastName, email, phoneNumber, passwordHash, gender,
+     * nationalId, birthDate, joinDate, status
+     */
+    public static void saveData() {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            FileWriter dataFile = new FileWriter(EMPLOYEE_DATAFILE_PATH);
+            for (Employee employee : allEmployees) {
+                dataFile.write(employee.getId() + ", " + employee.getFirstName() + ", " + employee.getLastName() + ", "
+                        + employee.getEmail() + ", " + employee.getPhoneNumber() + ", " + employee.getPassword() + ", "
+                        + employee.getGender() + ", " + employee.getNationalId() + ", "
+                        + dateFormat.format(employee.getBirthDate()) + ", " + dateFormat.format(employee.getJoinDate())
+                        + ", " + employee.getStatus() + "\n");
+            }
+            dataFile.close();
+        } catch (Exception e) {
+            System.err.println("[!] Error saving employees to file.");
+            System.err.println(e);
+        }
+    }
+
     // Getters and setters
     public ArrayList<Employee> getAllEmployees() {
         return allEmployees;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        // TODO: Validate email with Validator.validateEmail()
-        this.email = email;
-    }
-
-    public long getId() {
-        return this.id;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String rawPassword) {
-        this.password = Core.hashPassword(rawPassword);
-    }
-
-    public void setPasswordHash(String password) {
-        this.password = password;
-    }
-
-    public String getNationalId() {
-        return this.nationalId;
-    }
-
-    public void setNationalId(String nationalId) {
-        this.nationalId = nationalId;
-    }
-
-    public Date getBirthDate() {
-        return this.birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Date getJoinDate() {
-        return this.joinDate;
     }
 
     public EmployeeStatus getStatus() {
@@ -203,22 +157,6 @@ public class Employee extends Person {
 
     public void setStatus(EmployeeStatus status) {
         this.status = status;
-    }
-
-    public String getFullName() {
-        return this.firstName + " " + this.lastName;
-    }
-
-    public String getFullNameWithId() {
-        return this.firstName + " " + this.lastName + " (" + this.id + ")";
-    }
-
-    public Gender getGender() {
-        return this.gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
     }
 
     public String toString() {

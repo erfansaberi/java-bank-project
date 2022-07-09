@@ -14,11 +14,7 @@ public class Customer extends Person {
     static String CUSTOMER_DATAFILE_PATH = "src/main/java/com/bank/data/customers.csv";
     static ArrayList<Customer> allCustomers = new ArrayList<>(); // All created accounts
 
-    private long id;
-    private String email;
-    private String phoneNumber; // Customer logs in with phone number
-    private String password; // Hashed
-    private Date joinDate;
+    // Note: Customer logs in with phone number
     private CustomerStatus status;
 
     /**
@@ -192,94 +188,6 @@ public class Customer extends Person {
     }
 
     // Getters and setters
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.password = passwordHash;
-    }
-
-    public void setPassword(String rawPassword) {
-        this.password = Core.hashPassword(rawPassword);
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFullName() {
-        return this.firstName + " " + this.lastName;
-    }
-
-    public String getNationalId() {
-        return nationalId;
-    }
-
-    public void setNationalId(String nationalId) {
-        this.nationalId = nationalId;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Gender getGender() {
-        return this.gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public Date getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
-    }
-
     public CustomerStatus getStatus() {
         return status;
     }
