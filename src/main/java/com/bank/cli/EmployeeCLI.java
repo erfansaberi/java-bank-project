@@ -13,7 +13,7 @@ public class EmployeeCLI {
         System.out.println("[+] Welcome " + employee.getFirstName() +"!");
         System.out.println("[+] Enter 'help' for help.");
         while (employee != null) {
-            System.out.print("\n["+ employee.getFullName() +"]> ");
+            System.out.print("\n["+ employee.getFullName() +" (Employee)]> ");
             String input = sc.nextLine();
             System.out.println();
             String[] inputSplit = input.split(" ");

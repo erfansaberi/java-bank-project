@@ -13,7 +13,7 @@ public class CustomerCLI {
         System.out.println("[+] Welcome " + customer.getFirstName() +"!");
         System.out.println("[+] Enter 'help' for help.");
         while (customer != null) {
-            System.out.print("\n["+ customer.getFullName() +"]> ");
+            System.out.print("\n["+ customer.getFullName() +" (Customer)]> ");
             String input = sc.nextLine();
             System.out.println();
             String[] inputSplit = input.split(" ");
