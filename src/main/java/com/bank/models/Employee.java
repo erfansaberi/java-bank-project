@@ -147,7 +147,7 @@ public class Employee extends Person {
     }
 
     // Getters and setters
-    public ArrayList<Employee> getAllEmployees() {
+    public static ArrayList<Employee> getAllEmployees() {
         return allEmployees;
     }
 

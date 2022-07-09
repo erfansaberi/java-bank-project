@@ -70,4 +70,34 @@ public class Core {
         }
         return hash;
     }
+
+    /**
+     * DEBUG: Prints the password hash.
+     */
+    public static void debugPrintPasswordHash(String password) {
+        System.out.println("[!] Password hash: " + Core.hashPassword(password));
+    }
+
+    /**
+     * DEBUG: Prints all employees.
+     */
+    public static void debugPrintEmployees() {
+        System.out.println("[!] Employees:");
+        for (Employee employee : Employee.getAllEmployees()) {
+            System.out.println("\t[!] " + employee.toString());
+            System.out.println(employee.getPassword());
+        }
+    }
+
+    /**
+     * DEBUG: Prints all customers.
+     */
+    public static void debugPrintCustomers() {
+        System.out.println("[!] Customers:");
+        for (Customer customer : Customer.getAllCustomers()) {
+            System.out.println("\t[!] " + customer.toString());
+            System.out.println(customer.getPassword());
+        }
+    }
+
 }
