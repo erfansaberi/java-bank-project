@@ -41,6 +41,7 @@ public class Employee extends Person {
 
     /**
      * Check if email is used in arraylist.
+     * 
      * @param email Email to check.
      * @return True if email is used, false otherwise.
      */
@@ -57,6 +58,7 @@ public class Employee extends Person {
 
     /**
      * Get employee by email.
+     * 
      * @param email Email to get employee by.
      * @return Employee with given email, null if not found.
      */
@@ -73,7 +75,8 @@ public class Employee extends Person {
 
     /**
      * Authenticate employee.
-     * @param email Email entered by user.
+     * 
+     * @param email       Email entered by user.
      * @param rawPassword Password entered by user.
      * @return true if email and password are correct, false otherwise
      */
@@ -136,7 +139,6 @@ public class Employee extends Person {
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
-
 
     public String getEmail() {
         return this.email;

@@ -14,7 +14,7 @@ class ManagementViewsTest {
     static Employee employee;
     static String testEmail = "erfan.saberi@ut.ac.ir";
     static String testPassword = "HESOYAM";
-    
+
     @BeforeAll
     static void setUp() {
         Core.loadConfig();
@@ -32,7 +32,7 @@ class ManagementViewsTest {
 
     @Test
     void managerAuthenticateTest() {
-        assertEquals(ManagementViews.accessLevel.EMPLOYEE, ManagementViews.authenticate(testEmail, testPassword)); 
-        assertEquals(ManagementViews.accessLevel.NONE, ManagementViews.authenticate("wrong@email.com", testPassword)); 
+        assertEquals(ManagementViews.accessLevel.EMPLOYEE, ManagementViews.authenticate(testEmail, testPassword));
+        assertEquals(ManagementViews.accessLevel.NONE, ManagementViews.authenticate("wrong@email.com", testPassword));
     }
 }

@@ -156,7 +156,8 @@ public class Customer extends Person {
     }
 
     public String toString() {
-        return "Customer: " + this.getFirstName() + " " + this.getLastName() + " " + this.getPhoneNumber() + " (" + this.getStatus() + ")";
+        return "Customer: " + this.getFirstName() + " " + this.getLastName() + " " + this.getPhoneNumber() + " ("
+                + this.getStatus() + ")";
     }
 
     // Getters and setters
