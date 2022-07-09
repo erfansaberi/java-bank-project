@@ -23,12 +23,12 @@ public class CLI {
             String[] inputSplit = input.split(" ");
             String command = inputSplit[0];
             switch (command) {
-                case "customerlogin":
-                    customerLogin(); // TODO: implement customer login in CLI.java
+                case "login":
+                    customerLogin();
                     break;
 
-                case "loginadmin" : 
-                    
+                case "adminlogin" : 
+                    // TODO: Add admin login
                     break;
 
                 case "employeelogin" :
@@ -77,7 +77,7 @@ public class CLI {
         System.out.println("[?] Commands:");
         System.out.println("\t[#] Customer commands:");
         System.out.println("\t\t[C] register - Customer register");
-        System.out.println("\t\t[C] customerlogin - Customer login");
+        System.out.println("\t\t[C] login - Customer login");
         System.out.println("\t[#] Employee commands:");
         System.out.println("\t\t[C] employeelogin - Employee login");
         System.out.println("\t[#] Admin commands:");
@@ -119,15 +119,20 @@ public class CLI {
         }
     }
 
+    /**
+     * Employee login.
+     * If credentials are correct, call EmployeeCLI.launch() and pass employee object,
+     * otherwise, print error message.
+     */
     public static void employeeLogin() {
         System.out.println("[~] Employee login:");
-        System.out.print("  [>] Phone number: ");
+        System.out.print("  [>] Email address: ");
         String email = sc.nextLine();
         System.out.print("  [>] Password: ");
         String password = getPassword();
         if (Employee.authenticate(email, password)) {
             System.out.println("[+] Login successful!");
-            EmployeeCLI.launch(Employee.getByEmail( email)); // Goto customer CLI.
+            EmployeeCLI.launch(Employee.getByEmail( email)); // Goto employee CLI.
         } else {
             System.out.println("[!] Login failed!");
         }
