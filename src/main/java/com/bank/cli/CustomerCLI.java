@@ -23,6 +23,23 @@ public class CustomerCLI {
                     System.out.println("[~] Bye!");
                     System.exit(0);
                     break;
+
+                case "balance":
+                break;
+
+
+                case "history":
+                break;
+
+
+                case "transfer":
+                break;
+
+
+                case "logout":
+                break;
+
+                
                 case "help":
                     printHelp();
                     break;
@@ -32,7 +49,7 @@ public class CustomerCLI {
             }
         }
     }
-
+    
     /**
      * Print help text.
      */
