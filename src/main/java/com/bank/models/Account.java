@@ -14,3 +14,9 @@ enum AccountStatus {
     Deactivated,
     Deleted
 }
+
+enum AccountType {
+    Transaction,
+    LongTerm,
+    ShortTerm
+}
