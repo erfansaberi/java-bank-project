@@ -91,8 +91,6 @@ public class Employee extends Person {
 
     /**
      * Read all employees from employees.csv file and save them to arraylist.
-     * @throws FileNotFoundException
-     * @throws ParseException
      */
     public static void loadData() {
         // TODO: Add all fields
@@ -113,7 +111,6 @@ public class Employee extends Person {
                 employee.save();
             }
         } catch (NumberFormatException | FileNotFoundException | ParseException e) {
-            // TODO Auto-generated catch block
             System.err.println("[!] Error loading employees from file.");
             e.printStackTrace();
         }

@@ -14,7 +14,7 @@ public class Core {
         Core.loadConfig(); // Load configs like salt from configs.properties
         Admin.setAdminCredentials(); // Set admin username and password from configs.properties file
         Employee.loadData();
-        // TODO: Customer.loadData()
+        Customer.loadData();
         // TODO: Account.loadData()
         // TODO: Transaction.loadData()
         // TODO: Loan.loadData()

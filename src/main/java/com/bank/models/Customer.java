@@ -1,7 +1,13 @@
 package com.bank.models;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Customer extends Person {
     static ArrayList<Customer> allCustomers = new ArrayList<>(); // All created accounts
@@ -36,6 +42,7 @@ public class Customer extends Person {
 
     /**
      * Check if phone number is used in arraylist.
+     * 
      * @param phoneNumber Phone number to check.
      * @return True if phone number is used, false otherwise.
      */
@@ -52,6 +59,7 @@ public class Customer extends Person {
 
     /**
      * Check if email is used in arraylist.
+     * 
      * @param email Email to check.
      * @return True if email is used, false otherwise.
      */
@@ -68,6 +76,7 @@ public class Customer extends Person {
 
     /**
      * Get customer by phone number.
+     * 
      * @param phoneNumber Phone number to get customer by.
      * @return Customer with given phone number, null if not found.
      */
@@ -84,6 +93,7 @@ public class Customer extends Person {
 
     /**
      * Get customer by email.
+     * 
      * @param email Email to get customer by.
      * @return Customer with given email, null if not found.
      */
@@ -100,6 +110,7 @@ public class Customer extends Person {
 
     /**
      * Authenticate customer.
+     * 
      * @param phoneNumber Phone number entered by user.
      * @param rawPassword Password entered by user.
      * @return true if phone number and password are correct, false otherwise
@@ -114,6 +125,38 @@ public class Customer extends Person {
             }
         }
         return false;
+    }
+
+    /**
+     * Read all customers from customers.csv file and save them to arraylist.
+     */
+    public static void loadData() {
+        // TODO: Add all fields
+        String filePath = "src/main/java/com/bank/data/customers.csv";
+        try (Scanner customerScanner = new Scanner(new File(filePath))) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            while (customerScanner.hasNextLine()) {
+                String line = customerScanner.nextLine();
+                String[] customerData = line.split(", ");
+                Customer customer = new Customer();
+                customer.setId(Long.parseLong(customerData[0]));
+                customer.setFirstName(customerData[1]);
+                customer.setLastName(customerData[2]);
+                customer.setEmail(customerData[3]);
+                customer.setPhoneNumber(customerData[4]);
+                customer.setPasswordHash(customerData[5]);
+                customer.setJoinDate(dateFormat.parse(customerData[6]));
+                customer.setStatus(CustomerStatus.valueOf(customerData[7]));
+                customer.save();
+            }
+        } catch (NumberFormatException | FileNotFoundException | ParseException e) {
+            System.err.println("[!] Error loading customers from file.");
+            e.printStackTrace();
+        }
+    }
+
+    public String toString() {
+        return "Customer: " + this.getFirstName() + " " + this.getLastName() + " " + this.getPhoneNumber() + " (" + this.getStatus() + ")";
     }
 
     // Getters and setters
@@ -151,6 +194,22 @@ public class Customer extends Person {
 
     public void setPassword(String rawPassword) {
         this.password = Core.hashPassword(rawPassword);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Date getJoinDate() {

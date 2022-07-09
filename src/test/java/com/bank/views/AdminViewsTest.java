@@ -6,12 +6,4 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AdminViewsTest {
 
-    @Test
-    void adminAddEmployee() {
-        AdminViews.adminAddEmployee();
-    }
-
-    @Test
-    void adminGetEmployee() {
-    }
 }
