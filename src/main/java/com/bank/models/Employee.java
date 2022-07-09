@@ -94,9 +94,10 @@ public class Employee extends Person {
 
     /**
      * Read all employees from employees.csv file and save them to arraylist.
+     * CSV file format:
+     * id, firstName, lastName, email, password, gender, nationalId, birthDate, joinDate, status
      */
     public static void loadData() {
-        // TODO: Add all fields
         String filePath = "src/main/java/com/bank/data/employees.csv";
         try (Scanner employeesScanner = new Scanner(new File(filePath))) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -109,8 +110,11 @@ public class Employee extends Person {
                 employee.setLastName(employeeData[2]);
                 employee.setEmail(employeeData[3]);
                 employee.setPasswordHash(employeeData[4]);
-                employee.setJoinDate(dateFormat.parse(employeeData[5]));
-                employee.setStatus(EmployeeStatus.valueOf(employeeData[6]));
+                employee.setGender(Gender.valueOf(employeeData[5]));
+                employee.setNationalId(employeeData[6]);
+                employee.setBirthDate(dateFormat.parse(employeeData[7]));
+                employee.setJoinDate(dateFormat.parse(employeeData[8]));
+                employee.setStatus(EmployeeStatus.valueOf(employeeData[9]));
                 employee.save();
             }
         } catch (NumberFormatException | FileNotFoundException | ParseException e) {
@@ -165,6 +169,22 @@ public class Employee extends Person {
         this.password = password;
     }
 
+    public String getNationalId() {
+        return this.nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
+    public Date getBirthDate() {
+        return this.birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
     public Date getJoinDate() {
         return this.joinDate;
     }
@@ -187,6 +207,10 @@ public class Employee extends Person {
 
     public Gender getGender() {
         return this.gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String toString() {
