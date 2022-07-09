@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import com.bank.models.Core;
 import com.bank.models.Customer;
+import com.bank.models.Admin;
+import com.bank.models.Employee;
 
 public class CLI {
     public static Scanner sc = new Scanner(System.in);
@@ -13,6 +15,7 @@ public class CLI {
     public static void main(String[] args) {
         Core.startup();
         printSplashText();
+
         while (true) {
             System.out.print("\n[Guest]> ");
             String input = sc.nextLine();
@@ -20,13 +23,23 @@ public class CLI {
             String[] inputSplit = input.split(" ");
             String command = inputSplit[0];
             switch (command) {
-                case "login":
+                case "customerlogin":
                     customerLogin(); // TODO: implement customer login in CLI.java
                     break;
+
+                case "loginadmin" : 
+                    
+                    break;
+
+                case "employeelogin" :
+                     employeeLogin() ;
+                     break ;
+
                 case "exit":
                     System.out.println("[~] Bye!");
                     System.exit(0);
                     break;
+
                 case "help":
                     printHelp();
                     break;
@@ -64,7 +77,7 @@ public class CLI {
         System.out.println("[?] Commands:");
         System.out.println("\t[#] Customer commands:");
         System.out.println("\t\t[C] register - Customer register");
-        System.out.println("\t\t[C] login - Customer login");
+        System.out.println("\t\t[C] customerlogin - Customer login");
         System.out.println("\t[#] Employee commands:");
         System.out.println("\t\t[C] employeelogin - Employee login");
         System.out.println("\t[#] Admin commands:");
@@ -101,6 +114,20 @@ public class CLI {
         if (Customer.authenticate(phoneNumber, password)) {
             System.out.println("[+] Login successful!");
             CustomerCLI.launch(Customer.getByPhoneNumber(phoneNumber)); // Goto customer CLI.
+        } else {
+            System.out.println("[!] Login failed!");
+        }
+    }
+
+    public static void employeeLogin() {
+        System.out.println("[~] Employee login:");
+        System.out.print("  [>] Phone number: ");
+        String email = sc.nextLine();
+        System.out.print("  [>] Password: ");
+        String password = getPassword();
+        if (Employee.authenticate(email, password)) {
+            System.out.println("[+] Login successful!");
+            EmployeeCLI.launch(Employee.getByEmail( email)); // Goto customer CLI.
         } else {
             System.out.println("[!] Login failed!");
         }
