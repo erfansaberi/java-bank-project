@@ -107,6 +107,23 @@ public class Customer extends Person {
     }
 
     /**
+     * Get customer by national id.
+     * 
+     * @param nationalId National id to get customer by.
+     * @return Customer with given national id, null if not found.
+     */
+    public static Customer getByNationalId(String nationalId) {
+        for (Customer customer : allCustomers) {
+            if (customer.getNationalId().equals(nationalId)) {
+                if (customer.getStatus() != CustomerStatus.DELETED) {
+                    return customer;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * Authenticate customer.
      * 
      * @param phoneNumber Phone number entered by user.
@@ -200,12 +217,12 @@ public class Customer extends Person {
         return allCustomers;
     }
 
+    public enum CustomerStatus {
+        PENDING,
+        ACTIVE,
+        INACTIVE,
+        BANNED,
+        DELETED
+    }
 }
 
-enum CustomerStatus {
-    PENDING,
-    ACTIVE,
-    INACTIVE,
-    BANNED,
-    DELETED
-}

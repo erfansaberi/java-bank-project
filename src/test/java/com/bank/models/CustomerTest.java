@@ -31,7 +31,7 @@ class CustomerTest {
         pendingCustomer.setPhoneNumber(testPhoneNumberPending);
         pendingCustomer.setEmail(testEmailPending);
         pendingCustomer.setPassword(testPassword);
-        pendingCustomer.setStatus(CustomerStatus.PENDING);
+        pendingCustomer.setStatus(Customer.CustomerStatus.PENDING);
         pendingCustomer.save();
 
         // Create an active Customer
@@ -46,7 +46,7 @@ class CustomerTest {
         inactiveCustomer.setPhoneNumber(testPhoneNumberInactive);
         inactiveCustomer.setEmail(testEmailInactive);
         inactiveCustomer.setPassword(testPassword);
-        inactiveCustomer.setStatus(CustomerStatus.INACTIVE);
+        inactiveCustomer.setStatus(Customer.CustomerStatus.INACTIVE);
         inactiveCustomer.save();
 
         // Create a banned Customer
@@ -54,7 +54,7 @@ class CustomerTest {
         bannedCustomer.setPhoneNumber(testPhoneNumberBanned);
         bannedCustomer.setEmail(testEmailBanned);
         bannedCustomer.setPassword(testPassword);
-        bannedCustomer.setStatus(CustomerStatus.BANNED);
+        bannedCustomer.setStatus(Customer.CustomerStatus.BANNED);
         bannedCustomer.save();
 
         // Create a deleted Customer
@@ -62,7 +62,7 @@ class CustomerTest {
         deletedCustomer.setPhoneNumber(testPhoneNumberDeleted);
         deletedCustomer.setEmail(testEmailDeleted);
         deletedCustomer.setPassword(testPassword);
-        deletedCustomer.setStatus(CustomerStatus.DELETED);
+        deletedCustomer.setStatus(Customer.CustomerStatus.DELETED);
         deletedCustomer.save();
     }
 

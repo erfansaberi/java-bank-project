@@ -30,6 +30,6 @@ public class Validator {
      * @return true if the phone number is valid, false otherwise.
      */
     public static boolean isValidPhoneNumber(String phoneNumber) {
-        return phoneNumber.matches("^[0-9]{10}$");
+        return phoneNumber.matches("^[0-9]{11}$");
     }
 }
