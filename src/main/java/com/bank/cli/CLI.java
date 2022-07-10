@@ -42,10 +42,7 @@ public class CLI {
                     break;
 
                 case "exit":
-                    System.out.println("[~] Exiting...");
-                    Core.shutdown();
-                    System.out.println("[~] Bye!");
-                    System.exit(0);
+                    exit();
                     break;
 
                 case "help":
@@ -57,6 +54,16 @@ public class CLI {
                     break;
             }
         }
+    }
+
+    /**
+     * Save data and exit program
+     */
+    public static void exit() {
+        System.out.println("[~] Exiting...");
+        Core.shutdown();
+        System.out.println("[~] Bye!");
+        System.exit(0);
     }
 
     /**

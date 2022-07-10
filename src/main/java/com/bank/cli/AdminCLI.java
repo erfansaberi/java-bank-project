@@ -21,8 +21,7 @@ public class AdminCLI {
             String command = inputSplit[0];
             switch (command) {
                 case "exit":
-                    System.out.println("[~] Bye!");
-                    System.exit(0);
+                    CLI.exit();
                     break;
 
                 case "logout":
