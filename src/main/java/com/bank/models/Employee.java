@@ -14,6 +14,7 @@ public class Employee extends Person {
     static String EMPLOYEE_DATAFILE_PATH = "src/main/java/com/bank/data/employees.csv";
     static ArrayList<Employee> allEmployees = new ArrayList<>(); // All created accounts
 
+    private double salary;
     private EmployeeStatus status;
 
     /**
@@ -165,6 +166,14 @@ public class Employee extends Person {
                 ", email='" + this.email + '\'' +
                 ", status=" + this.status +
                 '}';
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 }
 
