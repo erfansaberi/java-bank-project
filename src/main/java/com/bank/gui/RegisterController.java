@@ -18,7 +18,7 @@ public class RegisterController {
     private DatePicker birthDay;
 
     @FXML
-    private Button confirmbutt;
+    private Button confirmButt;
 
     @FXML
     private TextField emailAd;
@@ -40,7 +40,7 @@ public class RegisterController {
 
     @FXML
     void Previous() {
-        loginController.Regstage.close();
+        loginController.RegStage.close();
         GUI.preStage.show();
     }
 
