@@ -18,18 +18,19 @@ import javafx.stage.Stage;
 
 public class loginController {
 
-	public static Stage Regstage;
-	public static Stage Loginstage;
-	public static Stage ManageMentStage;
+	public static Stage RegStage;
+	public static Stage LoginStage;
+	public static Stage ManagementStage;
 
 	@FXML
-	private Button loginbutt;
+	private Button loginButt;
 
 	@FXML
-	private Button managbutt;
+	private Button managButt;
 
 	@FXML
-	private Button regbutt;
+	private Button regButt;
+	
 	@FXML
 	private BorderPane myBorderPane;
 
@@ -47,7 +48,7 @@ public class loginController {
 			GUI.preStage.close();
 
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println(e);
 		}
 
 	}
@@ -65,7 +66,7 @@ public class loginController {
 			Loginstage.getIcons().add(new Image("file:icons/CustomerLogo.png"));
 			GUI.preStage.close();
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println(e);
 		}
 
 	}
@@ -83,7 +84,7 @@ public class loginController {
 			ManageMentStage.show();
 			GUI.preStage.close();
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println(e);
 		}
 
 	}
