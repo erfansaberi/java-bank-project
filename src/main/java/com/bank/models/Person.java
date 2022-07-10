@@ -119,4 +119,24 @@ public class Person {
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
+
+    public boolean haveMoneyInSafeBox(double amount) {
+        return this.safeBoxBalance >= amount;
+    }
+
+    public double getSafeBoxBalance() {
+        return this.safeBoxBalance;
+    }
+
+    public void setSafeBoxBalance(double safeBoxBalance) {
+        this.safeBoxBalance = safeBoxBalance;
+    }
+
+    public void addToSafeBoxBalance(double amount) {
+        this.safeBoxBalance += amount;
+    }
+
+    public void withdrawFromSafeBoxBalance(double amount) {
+        this.safeBoxBalance -= amount;
+    }
 }

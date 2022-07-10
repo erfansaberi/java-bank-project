@@ -27,6 +27,10 @@ public class CustomerCLI {
                         System.out.println("[~] Bye!");
                         System.exit(0);
                         break;
+                    
+                    case "safebox":
+                        printSafeBoxBalance();
+                        break;
 
                     case "account":
                         switch (inputSplit[1]) {
@@ -66,6 +70,13 @@ public class CustomerCLI {
                 System.out.println("[!] Missing arguments. Type 'help' for help.");
             }
         }
+    }
+
+    /**
+     * Prints the customer's safebox balance
+     */
+    private static void printSafeBoxBalance() {
+        System.out.println("[+] SafeBox balance: " + customer.getSafeBoxBalance());
     }
 
     /**
@@ -148,6 +159,9 @@ public class CustomerCLI {
             case NEGATIVE_BALANCE:
                 System.out.println("[!] Negative balance.");
                 break;
+            case NOT_ENOUGH_MONEY_IN_SAFE_BOX:
+                System.out.println("[!] Not enough money in safe box.");
+                break;
             default:
                 System.out.println("[!] Unknown error.");
                 break;
@@ -173,6 +187,7 @@ public class CustomerCLI {
      */
     public static void printHelp() { // TODO: Add customer commands to help text
         System.out.println("[?] Customer Commands:");
+        System.out.println("[C] safebox (Print your safebox balance)");
         System.out.println("[C] account list (Print your accounts)"); // TODO: Add account list command
         System.out.println("[C] account show $id (Print account details)"); // TODO: Add account show command
         System.out.println("[C] account create (Create a new account)"); // TODO: Add account create command

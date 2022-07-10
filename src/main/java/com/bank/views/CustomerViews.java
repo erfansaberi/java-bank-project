@@ -107,6 +107,8 @@ public class CustomerViews {
                 return CreateAccountStatus.MAX_PENDING_ACCOUNT_LIMIT_REACHED;
             if (balance < 0)
                 return CreateAccountStatus.NEGATIVE_BALANCE;
+            if (!customer.haveMoneyInSafeBox(balance))
+                return CreateAccountStatus.NOT_ENOUGH_MONEY_IN_SAFE_BOX;
 
             AccountType accountType;
             // 1: TRANSACTION, 2: LONGTERM, 3: SHORTTERM
@@ -123,7 +125,6 @@ public class CustomerViews {
                 default:
                     return CreateAccountStatus.INVALID_ACCOUNT_TYPE;
             }
-            
 
             Account newAccount = new Account();
             newAccount.setOwner(customer);
@@ -132,6 +133,7 @@ public class CustomerViews {
             newAccount.setStatus(Account.AccountStatus.PENDING);
             newAccount.setType(accountType);
             newAccount.save();
+            customer.withdrawFromSafeBoxBalance(balance);
             return CreateAccountStatus.SUCCESS;
         } catch (Exception e) {
             return CreateAccountStatus.FAILURE;
@@ -144,6 +146,7 @@ public class CustomerViews {
         MAX_PENDING_ACCOUNT_LIMIT_REACHED,
         NEGATIVE_BALANCE,
         INVALID_ACCOUNT_TYPE,
+        NOT_ENOUGH_MONEY_IN_SAFE_BOX,
         FAILURE
     }
 

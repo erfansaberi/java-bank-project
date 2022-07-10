@@ -149,7 +149,7 @@ public class Customer extends Person {
      * Read all customers from customers.csv file and save them to arraylist.
      * Format:
      * id, firstName, lastName, email, phoneNumber, passwordHash, gender,
-     * nationalId, birthDate, joinDate, status
+     * nationalId, birthDate, joinDate, safeBoxBalance, status
      */
     public static void loadData() {
         try (Scanner customerScanner = new Scanner(new File(CUSTOMER_DATAFILE_PATH))) {
@@ -168,7 +168,8 @@ public class Customer extends Person {
                 customer.setNationalId(customerData[7]);
                 customer.setBirthDate(dateFormat.parse(customerData[8]));
                 customer.setJoinDate(dateFormat.parse(customerData[9]));
-                customer.setStatus(CustomerStatus.valueOf(customerData[10]));
+                customer.setSafeBoxBalance(Double.parseDouble(customerData[10]));
+                customer.setStatus(CustomerStatus.valueOf(customerData[11]));
                 customer.save();
             }
         } catch (NumberFormatException | FileNotFoundException | ParseException e) {
@@ -181,7 +182,7 @@ public class Customer extends Person {
      * Save all customers to customers.csv file.
      * Write all customers data to customers.csv file in format:
      * id, firstName, lastName, email, phoneNumber, passwordHash, gender,
-     * nationalId, birthDate, joinDate, status
+     * nationalId, birthDate, joinDate, safeBoxBalance, status
      */
     public static void saveData() {
         try {
@@ -192,7 +193,7 @@ public class Customer extends Person {
                         + customer.getEmail() + ", " + customer.getPhoneNumber() + ", " + customer.getPassword() + ", "
                         + customer.getGender() + ", " + customer.getNationalId() + ", "
                         + dateFormat.format(customer.getBirthDate()) + ", " + dateFormat.format(customer.getJoinDate())
-                        + ", " + customer.getStatus() + "\n");
+                        + ", " + customer.getSafeBoxBalance() + ", " + customer.getStatus() + "\n");
             }
             dataFile.close();
         } catch (Exception e) {
