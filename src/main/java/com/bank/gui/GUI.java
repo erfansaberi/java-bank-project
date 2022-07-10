@@ -22,6 +22,8 @@ public class GUI extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 800, 500);
             stage.setTitle("Login Page");
+            Image myimg = new Image("file:icons/loginLogo.png");
+            stage.getIcons().add(myimg);
             stage.setScene(scene);
             stage.show();
             preStage = stage;

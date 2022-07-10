@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 
 public class CustomerLoginController {
 
+	public static Stage CustomerLoginStage;
+	public static Stage CustomerRegisterStage;
+	
     @FXML
     private Button LoginButt;
 
@@ -39,11 +42,11 @@ public class CustomerLoginController {
 //    		{
     			FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("Dashboard.fxml"));
     			Parent root1 = (Parent) fxmlLoader.load();
-    			Stage stage = new Stage();
+    			CustomerLoginStage = new Stage();
     			//set what you want on your stage
-    			stage.setTitle("Dashboard Panel");
-    			stage.setScene(new Scene(root1));
-    			stage.show();
+    			CustomerLoginStage.setTitle("Dashboard Panel");
+    			CustomerLoginStage.setScene(new Scene(root1));
+    			CustomerLoginStage.show();
     			loginController.Loginstage.close();
     		}
 //    		else
@@ -58,17 +61,25 @@ public class CustomerLoginController {
 		
     }
     @FXML
+   	void Previous()
+   	{
+    	   loginController.Loginstage.close();
+           GUI.preStage.show();
+   		
+   	}
+    @FXML
     void register()
     {
     	try
 		{
 			FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("Register.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
+			CustomerRegisterStage = new Stage();
 			//set what you want on your stage
-			stage.setTitle("Register Page");
-			stage.setScene(new Scene(root1));
-			stage.show();
+			CustomerRegisterStage.setTitle("Register Page");
+			CustomerRegisterStage.setScene(new Scene(root1));
+			CustomerRegisterStage.show();
+			
 		}
 		catch(Exception e)
 		{

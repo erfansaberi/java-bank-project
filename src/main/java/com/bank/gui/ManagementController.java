@@ -36,10 +36,14 @@ public class ManagementController {
     	else
     		System.out.println("amsdsd");
     	
-//    	else
-//    		System.out.println("Hellooo");
+
     		
     }
    
-    
+    @FXML
+   	void Previous()
+   	{
+    	   loginController.ManageMentStage.close();
+           GUI.preStage.show();
+   	}
 }

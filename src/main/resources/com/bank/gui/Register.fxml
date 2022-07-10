@@ -6,13 +6,14 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #262833;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.gui.RegisterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="800.0" style="-fx-background-color: #262833;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.gui.RegisterController">
    <center>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="586.0" style="-fx-background-color: #262833; -fx-border-width: 1; -fx-border-color: #ced1ff; -fx-border-radius: 30;" BorderPane.alignment="CENTER">
          <children>
@@ -47,9 +48,23 @@
                   <Font name="Blackletter 686 BT" size="30.0" />
                </font>
             </Text>
-            <RadioButton layoutX="412.0" layoutY="143.0" mnemonicParsing="false" text="RadioButton" textFill="#d6d6ff" />
-            <RadioButton layoutX="285.0" layoutY="143.0" mnemonicParsing="false" text="RadioButton" textFill="#d6d6ff" />
+            <RadioButton fx:id="FemaleGender" layoutX="412.0" layoutY="143.0" mnemonicParsing="false" text="Female" textFill="#d6d6ff" />
+            <RadioButton fx:id="MaleGender" layoutX="285.0" layoutY="143.0" mnemonicParsing="false" text="Male" textFill="#d6d6ff" />
          </children>
       </Pane>
    </center>
+   <top>
+      <AnchorPane prefHeight="54.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="prePage" cache="true" depthTest="DISABLE" fill="#ffe3e3" layoutX="14.0" layoutY="48.0" onMouseClicked="#Previous" stroke="#ff000000" strokeType="OUTSIDE" strokeWidth="0.0" text="🔙">
+               <font>
+                  <Font size="40.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

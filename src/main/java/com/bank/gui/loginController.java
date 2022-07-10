@@ -25,6 +25,7 @@ public class loginController {
 	
 	public static Stage Regstage;
 	public static Stage Loginstage;
+	public static Stage ManageMentStage;
 
 	@FXML
 	private Button loginbutt;
@@ -51,10 +52,9 @@ public class loginController {
 			Regstage.setTitle("Register Page");
 			Regstage.setScene(new Scene(root1));
 			Regstage.initModality(Modality.APPLICATION_MODAL);
+			Regstage.getIcons().add(new Image("file:icons/RegisterFormLogo.png"));
 			Regstage.show();
-			
-			
-			
+			GUI.preStage.close();
 			
 		}
 		catch(Exception e)
@@ -76,6 +76,7 @@ public class loginController {
 			Loginstage.setScene(new Scene(root1));
 			Loginstage.initModality(Modality.APPLICATION_MODAL);
 			Loginstage.show();
+			Loginstage.getIcons().add(new Image("file:icons/CustomerLogo.png"));
 			GUI.preStage.close();
 		}
 		catch(Exception e)
@@ -91,12 +92,13 @@ public class loginController {
 		{
 			FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("management.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
+			ManageMentStage = new Stage();
 			//set what you want on your stage
-			stage.setTitle("Managment Page");
-			stage.setScene(new Scene(root1));
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.show();
+			ManageMentStage.setTitle("Managment Page");
+			ManageMentStage.setScene(new Scene(root1));
+			ManageMentStage.initModality(Modality.APPLICATION_MODAL);
+			ManageMentStage.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+			ManageMentStage.show();
 			GUI.preStage.close();
 		}
 		catch(Exception e)
