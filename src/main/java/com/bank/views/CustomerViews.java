@@ -8,8 +8,10 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
+import com.bank.models.Account;
 import com.bank.models.Customer;
 import com.bank.models.Gender;
+import com.bank.models.Account.AccountType;
 import com.bank.validator.Validator;
 
 import javafx.css.CssParser.ParseError;
@@ -51,7 +53,8 @@ public class CustomerViews {
             return RegisterStatus.INVALID_BIRTH_DATE;
         }
 
-        Period age = Period.between(LocalDate.from(birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()), LocalDate.now());
+        Period age = Period.between(LocalDate.from(birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()),
+                LocalDate.now());
         if (age.getYears() < 18)
             return RegisterStatus.TOO_YOUNG_TO_REGISTER;
 
@@ -82,6 +85,58 @@ public class CustomerViews {
         newCustomer.setStatus(Customer.CustomerStatus.PENDING);
         newCustomer.save();
         return RegisterStatus.SUCCESS;
+    }
+
+    /**
+     * Customer create account view
+     * Takes customer, account type and balance as input
+     * Creates new account with status = PENDING
+     * Needs to be approved by admin or employees
+     * @param customer Customer object
+     * @param int accountTypeNumber // 1: TRANSACTION, 2: LONGTERM, 3: SHORTTERM
+     * @param double balance 
+     * @return CreateAccountStatus Creation status
+     */
+    public static CreateAccountStatus customerCreateAccount(Customer customer, int accountTypeNumber, double balance) {
+        if (customer.getStatus() != Customer.CustomerStatus.ACTIVE)
+            return CreateAccountStatus.CUSTOMER_NOT_ACTIVE;
+        if (customer.getPendingAccounts().size() >= 3)
+            return CreateAccountStatus.MAX_PENDING_ACCOUNT_LIMIT_REACHED;
+        if (balance < 0)
+            return CreateAccountStatus.NEGATIVE_BALANCE;
+
+        AccountType accountType;
+        // 1: TRANSACTION, 2: LONGTERM, 3: SHORTTERM
+        switch (accountTypeNumber) {
+            case 1:
+                accountType = AccountType.TRANSACTION;
+                break;
+            case 2:
+                accountType = AccountType.LONGTERM;
+                break;
+            case 3:
+                accountType = AccountType.SHORTTERM;
+                break;
+            default:
+                return CreateAccountStatus.INVALID_ACCOUNT_TYPE;
+        }
+
+        Account newAccount = new Account();
+        newAccount.setOwner(customer);
+        newAccount.setBalance(balance);
+        newAccount.setCreationDate(new Date());
+        newAccount.setStatus(Account.AccountStatus.PENDING);
+        newAccount.setType(accountType);
+        newAccount.save();
+        return CreateAccountStatus.SUCCESS;
+    }
+
+    public enum CreateAccountStatus {
+        SUCCESS,
+        CUSTOMER_NOT_ACTIVE,
+        MAX_PENDING_ACCOUNT_LIMIT_REACHED,
+        NEGATIVE_BALANCE,
+        INVALID_ACCOUNT_TYPE
     }
 
     public enum RegisterStatus {

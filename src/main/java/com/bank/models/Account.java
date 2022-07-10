@@ -10,7 +10,9 @@ public class Account {
     private Customer owner;
     private double balance;
     private Date creationDate;
+    private AccountType type;
     private AccountStatus status;
+    private ArrayList<Transaction> transactions = new ArrayList<>();
 
     public Account() {
         this.id = allAccounts.size() + 1;
@@ -82,6 +84,14 @@ public class Account {
         this.creationDate = creationDate;
     }
 
+    public AccountType getType() {
+        return type;
+    }
+
+    public void setType(AccountType type) {
+        this.type = type;
+    }
+
     public AccountStatus getStatus() {
         return status;
     }
@@ -105,17 +115,18 @@ public class Account {
                 '}';
     }
 
+    public enum AccountStatus {
+        PENDING,
+        ACTIVE,
+        INACTIVE,
+        BANNED,
+        DELETED
+    }
+    
+    public enum AccountType {
+        TRANSACTION,
+        LONGTERM,
+        SHORTTERM
+    }
 }
 
-enum AccountStatus {
-    PENDING,
-    ACTIVE,
-    DEACTIVATED,
-    DELETED
-}
-
-enum AccountType {
-    TRANSACTION,
-    LONGTERM,
-    SHORTTERM
-}

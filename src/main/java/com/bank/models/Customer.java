@@ -10,11 +10,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.bank.models.Account.AccountStatus;
+
 public class Customer extends Person {
     static String CUSTOMER_DATAFILE_PATH = "src/main/java/com/bank/data/customers.csv";
     static ArrayList<Customer> allCustomers = new ArrayList<>(); // All created accounts
 
-    // Note: Customer logs in with phone number
+    // Note: Customer logs-in with phone number
+    private ArrayList<Account> accounts = new ArrayList<>();
     private CustomerStatus status;
 
     /**
@@ -205,16 +208,17 @@ public class Customer extends Person {
     }
 
     // Getters and setters
+
+    public static ArrayList<Customer> getAllCustomers() {
+        return allCustomers;
+    }
+
     public CustomerStatus getStatus() {
         return status;
     }
 
     public void setStatus(CustomerStatus status) {
         this.status = status;
-    }
-
-    public static ArrayList<Customer> getAllCustomers() {
-        return allCustomers;
     }
 
     public enum CustomerStatus {
@@ -224,5 +228,64 @@ public class Customer extends Person {
         BANNED,
         DELETED
     }
-}
 
+    public ArrayList<Account> getPendingAccounts() {
+        ArrayList<Account> pendingAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.PENDING) {
+                pendingAccounts.add(account);
+            }
+        }
+        return pendingAccounts;
+    }
+
+    public ArrayList<Account> getActiveAccounts() {
+        ArrayList<Account> activeAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.ACTIVE) {
+                activeAccounts.add(account);
+            }
+        }
+        return activeAccounts;
+    }
+
+    public ArrayList<Account> getInactiveAccounts() {
+        ArrayList<Account> inactiveAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.INACTIVE) {
+                inactiveAccounts.add(account);
+            }
+        }
+        return inactiveAccounts;
+    }
+
+    public ArrayList<Account> getBannedAccounts() {
+        ArrayList<Account> bannedAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.BANNED) {
+                bannedAccounts.add(account);
+            }
+        }
+        return bannedAccounts;
+    }
+
+    public ArrayList<Account> getDeletedAccounts() {
+        ArrayList<Account> deletedAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.DELETED) {
+                deletedAccounts.add(account);
+            }
+        }
+        return deletedAccounts;
+    }
+
+    public ArrayList<Account> getAllAccounts() {
+        ArrayList<Account> allAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId()) {
+                allAccounts.add(account);
+            }
+        }
+        return allAccounts;
+    }
+}
