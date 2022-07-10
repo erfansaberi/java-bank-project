@@ -28,7 +28,7 @@ public class CLI {
                     break;
 
                 case "adminlogin" : 
-                    // TODO: Add admin login
+                    adminLogin();
                     break;
 
                 case "employeelogin" :
@@ -135,6 +135,25 @@ public class CLI {
         if (Employee.authenticate(email, password)) {
             System.out.println("[+] Login successful!");
             EmployeeCLI.launch(Employee.getByEmail( email)); // Goto employee CLI.
+        } else {
+            System.out.println("[!] Login failed!");
+        }
+    }
+
+    /**
+     * Admin login.
+     * If credentials are correct, call AdminCLI.launch() and pass admin object,
+     * otherwise, print error message.
+     */
+    public static void adminLogin() {
+        System.out.println("[~] Admin login:");
+        System.out.print("  [>] Username: ");
+        String username = sc.nextLine();
+        System.out.print("  [>] Password: ");
+        String password = getPassword();
+        if (Admin.authenticate(username, password)) {
+            System.out.println("[+] Login successful!");
+            AdminCLI.launch(new Admin()); // Goto admin CLI.
         } else {
             System.out.println("[!] Login failed!");
         }
