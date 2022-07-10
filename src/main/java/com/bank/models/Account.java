@@ -114,13 +114,12 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account {" +
+        return "Account :{ " +
                 "id=" + id +
                 ", owner=" + owner.getFullNameWithId() +
                 ", balance=" + balance +
                 ", creationDate=" + creationDate +
-                ", status=" + status +
-                '}';
+                ", status=" + status + "}" ;
     }
 
     public static ArrayList<Account> getAllAccounts() {
