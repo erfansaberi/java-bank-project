@@ -13,6 +13,7 @@ public class Person {
     Gender gender;
     String nationalId;
     Date joinDate;
+    double safeBoxBalance;
 
     public Person() {
 
@@ -21,6 +22,7 @@ public class Person {
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.safeBoxBalance = 0;
     }
 
     // Getter and setters
