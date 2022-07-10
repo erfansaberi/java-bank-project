@@ -123,6 +123,7 @@ public class CustomerViews {
                 default:
                     return CreateAccountStatus.INVALID_ACCOUNT_TYPE;
             }
+            
 
             Account newAccount = new Account();
             newAccount.setOwner(customer);
