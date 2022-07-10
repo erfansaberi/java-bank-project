@@ -5,9 +5,10 @@ import java.util.Scanner;
 import com.bank.models.Admin;
 
 public class AdminCLI {
-    static Scanner sc = new Scanner(System.in);
+    static Scanner sc;
     static Admin admin;
-    public static void launch(Admin admin) {
+    public static void launch(Admin admin, Scanner sc) {
+        AdminCLI.sc = sc;
         AdminCLI.admin = admin;
         System.out.println("[!] Welcome to the Admin CLI.");
         System.out.println("[!] Type 'help' for a list of commands.");

@@ -100,8 +100,8 @@ public class Account {
         this.status = status;
     }
 
-    public static ArrayList<Account> getAllAccounts() {
-        return allAccounts;
+    public boolean isDeleted() {
+        return status == AccountStatus.DELETED;
     }
 
     @Override
@@ -113,6 +113,10 @@ public class Account {
                 ", creationDate=" + creationDate +
                 ", status=" + status +
                 '}';
+    }
+
+    public static ArrayList<Account> getAllAccounts() {
+        return allAccounts;
     }
 
     public enum AccountStatus {

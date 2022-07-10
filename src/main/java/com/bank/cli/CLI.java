@@ -122,7 +122,7 @@ public class CLI {
         String password = getPassword();
         if (Customer.authenticate(phoneNumber, password)) {
             System.out.println("[+] Login successful!");
-            CustomerCLI.launch(Customer.getByPhoneNumber(phoneNumber)); // Goto customer CLI.
+            CustomerCLI.launch(Customer.getByPhoneNumber(phoneNumber), sc); // Goto customer CLI.
         } else {
             System.out.println("[!] Login failed!");
         }
@@ -142,7 +142,7 @@ public class CLI {
         String password = getPassword();
         if (Employee.authenticate(email, password)) {
             System.out.println("[+] Login successful!");
-            EmployeeCLI.launch(Employee.getByEmail(email)); // Goto employee CLI.
+            EmployeeCLI.launch(Employee.getByEmail(email), sc); // Goto employee CLI.
         } else {
             System.out.println("[!] Login failed!");
         }
@@ -161,7 +161,7 @@ public class CLI {
         String password = getPassword();
         if (Admin.authenticate(username, password)) {
             System.out.println("[+] Login successful!");
-            AdminCLI.launch(new Admin()); // Goto admin CLI.
+            AdminCLI.launch(new Admin(), sc); // Goto admin CLI.
         } else {
             System.out.println("[!] Login failed!");
         }

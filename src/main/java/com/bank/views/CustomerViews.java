@@ -92,43 +92,49 @@ public class CustomerViews {
      * Takes customer, account type and balance as input
      * Creates new account with status = PENDING
      * Needs to be approved by admin or employees
+     * 
      * @param customer Customer object
-     * @param int accountTypeNumber // 1: TRANSACTION, 2: LONGTERM, 3: SHORTTERM
-     * @param double balance 
+     * @param int      accountTypeNumber // 1: TRANSACTION, 2: LONGTERM, 3:
+     *                 SHORTTERM
+     * @param double   balance
      * @return CreateAccountStatus Creation status
      */
     public static CreateAccountStatus customerCreateAccount(Customer customer, int accountTypeNumber, double balance) {
-        if (customer.getStatus() != Customer.CustomerStatus.ACTIVE)
-            return CreateAccountStatus.CUSTOMER_NOT_ACTIVE;
-        if (customer.getPendingAccounts().size() >= 3)
-            return CreateAccountStatus.MAX_PENDING_ACCOUNT_LIMIT_REACHED;
-        if (balance < 0)
-            return CreateAccountStatus.NEGATIVE_BALANCE;
+        try {
+            if (customer.getStatus() != Customer.CustomerStatus.ACTIVE)
+                return CreateAccountStatus.CUSTOMER_NOT_ACTIVE;
+            if (customer.getPendingAccounts().size() >= 3)
+                return CreateAccountStatus.MAX_PENDING_ACCOUNT_LIMIT_REACHED;
+            if (balance < 0)
+                return CreateAccountStatus.NEGATIVE_BALANCE;
 
-        AccountType accountType;
-        // 1: TRANSACTION, 2: LONGTERM, 3: SHORTTERM
-        switch (accountTypeNumber) {
-            case 1:
-                accountType = AccountType.TRANSACTION;
-                break;
-            case 2:
-                accountType = AccountType.LONGTERM;
-                break;
-            case 3:
-                accountType = AccountType.SHORTTERM;
-                break;
-            default:
-                return CreateAccountStatus.INVALID_ACCOUNT_TYPE;
+            AccountType accountType;
+            // 1: TRANSACTION, 2: LONGTERM, 3: SHORTTERM
+            switch (accountTypeNumber) {
+                case 1:
+                    accountType = AccountType.TRANSACTION;
+                    break;
+                case 2:
+                    accountType = AccountType.LONGTERM;
+                    break;
+                case 3:
+                    accountType = AccountType.SHORTTERM;
+                    break;
+                default:
+                    return CreateAccountStatus.INVALID_ACCOUNT_TYPE;
+            }
+
+            Account newAccount = new Account();
+            newAccount.setOwner(customer);
+            newAccount.setBalance(balance);
+            newAccount.setCreationDate(new Date());
+            newAccount.setStatus(Account.AccountStatus.PENDING);
+            newAccount.setType(accountType);
+            newAccount.save();
+            return CreateAccountStatus.SUCCESS;
+        } catch (Exception e) {
+            return CreateAccountStatus.FAILURE;
         }
-
-        Account newAccount = new Account();
-        newAccount.setOwner(customer);
-        newAccount.setBalance(balance);
-        newAccount.setCreationDate(new Date());
-        newAccount.setStatus(Account.AccountStatus.PENDING);
-        newAccount.setType(accountType);
-        newAccount.save();
-        return CreateAccountStatus.SUCCESS;
     }
 
     public enum CreateAccountStatus {
@@ -136,7 +142,8 @@ public class CustomerViews {
         CUSTOMER_NOT_ACTIVE,
         MAX_PENDING_ACCOUNT_LIMIT_REACHED,
         NEGATIVE_BALANCE,
-        INVALID_ACCOUNT_TYPE
+        INVALID_ACCOUNT_TYPE,
+        FAILURE
     }
 
     public enum RegisterStatus {

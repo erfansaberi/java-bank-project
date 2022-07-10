@@ -5,10 +5,11 @@ import java.util.Scanner;
 import com.bank.models.Employee;
 
 public class EmployeeCLI {
-    static Scanner sc = new Scanner(System.in);
+    static Scanner sc;
     static Employee employee;
 
-    public static void launch(Employee employee) {
+    public static void launch(Employee employee, Scanner sc) {
+        EmployeeCLI.sc = sc;
         EmployeeCLI.employee = employee;
         System.out.println("[+] Welcome " + employee.getFirstName() +"!");
         System.out.println("[+] Enter 'help' for help.");
