@@ -152,7 +152,6 @@ public class Customer extends Person {
      * nationalId, birthDate, joinDate, status
      */
     public static void loadData() {
-        // TODO: Add all fields
         try (Scanner customerScanner = new Scanner(new File(CUSTOMER_DATAFILE_PATH))) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             while (customerScanner.hasNextLine()) {

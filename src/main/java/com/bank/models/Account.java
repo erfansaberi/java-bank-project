@@ -51,6 +51,14 @@ public class Account {
         return null;
     }
 
+    public static void loadData() {
+        // TODO: Load all accounts from csv file
+    }
+
+    public static void saveData() {
+        // TODO: Save all accounts to csv file
+    }
+
     // Getters and setters
     public long getId() {
         return id;
