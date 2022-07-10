@@ -30,7 +30,7 @@ public class CustomerLoginController {
 			stage.setScene(new Scene(root1));
 			stage.show();
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println(e);
 		}
 
 	}
@@ -45,7 +45,7 @@ public class CustomerLoginController {
 			stage.setScene(new Scene(root1));
 			stage.show();
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println(e);
 		}
 	}
 }
