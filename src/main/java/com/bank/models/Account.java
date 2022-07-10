@@ -132,5 +132,9 @@ public class Account {
         LONGTERM,
         SHORTTERM
     }
+
+    public void delete() {
+        this.status = AccountStatus.DELETED;
+    }
 }
 

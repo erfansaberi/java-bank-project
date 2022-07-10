@@ -70,6 +70,7 @@ public class CustomerCLI {
 
     /**
      * Print account id and balance
+     * 
      * @param accountId
      */
     private static void showAccount(long accountId) {
@@ -77,7 +78,10 @@ public class CustomerCLI {
         if (account == null) {
             System.out.println("[!] Account not found.");
         } else {
-            System.out.println("[+] Account " + account.getId() + ": " + account.getBalance());
+            System.out.println("[~] Account ID:" + account.getId());
+            System.out.println("[~] Type: " + account.getType());
+            System.out.println("[~] Status: " + account.getStatus());
+            System.out.println("[~] Balance: " + account.getBalance());
         }
     }
 
@@ -85,10 +89,28 @@ public class CustomerCLI {
      * Delete an existing account
      * Ask customer to confirm deletion
      * Account balance will be lost
+     * 
      * @param accountId
      */
     private static void deleteAccount(long accountId) {
-        // TODO: Implement deleteAccount for customer CLI
+        Account account = Account.getAccountById(accountId);
+        if (account == null) {
+            System.out.println("[!] Account not found.");
+        } else {
+            System.out.println("[~] Account ID:" + account.getId());
+            System.out.println("[~] Type: " + account.getType());
+            System.out.println("[~] Status: " + account.getStatus());
+            System.out.println("[~] Balance: " + account.getBalance());
+            System.out.println("[!] Your account will be deleted and its balance will be lost!");
+            System.out.println("[~] Are you sure you want to delete this account? (y/n)");
+            String input = sc.nextLine();
+            if (input.equals("y")) {
+                account.delete();
+                System.out.println("[~] Account deleted.");
+            } else {
+                System.out.println("[~] Account not deleted.");
+            }
+        }
     }
 
     /**
@@ -105,7 +127,8 @@ public class CustomerCLI {
         int accountType = Integer.parseInt(sc.nextLine());
         System.out.print("  [>] Initial money: ");
         Double initialMoney = Double.parseDouble(sc.nextLine());
-        CustomerViews.CreateAccountStatus status = CustomerViews.customerCreateAccount(customer, accountType, initialMoney);
+        CustomerViews.CreateAccountStatus status = CustomerViews.customerCreateAccount(customer, accountType,
+                initialMoney);
         switch (status) {
             case SUCCESS:
                 System.out.println("[+] Account created successfully.");
@@ -138,10 +161,9 @@ public class CustomerCLI {
         System.out.println("[+] Your accounts:");
         for (Account account : customer.getAllAccounts()) {
             if (!account.isDeleted()) {
-                System.out.println("  [+] Account " + account.getId() + ": ");
-                System.out.println("    [>] Balance: " + account.getBalance());
-                System.out.println("    [>] Type: " + account.getType());
-                System.out.println("    [>] Status: " + account.getStatus());
+                // Print account id, balance, account type and status
+                System.out.println("  [" + account.getStatus() + "] Account ID: " + account.getId() + " - Balance: "
+                        + account.getBalance() + " - Type: " + account.getType());
             }
         }
     }
