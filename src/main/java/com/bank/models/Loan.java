@@ -97,13 +97,12 @@ public class Loan {
     }
 
     public String toString() {
-        return "Loan{" +
-                "id=" + this.Id +
-                ", installment='" + this.installment + '\'' +
-                ", totalPaid='" + this.totalPaid + '\'' +
-                ", mustPaid='" + this.mustPaid + '\'' +
-                ", status=" + this.status +
-                '}';
+        return "Loan :{ " +
+                "id = " + this.Id +
+                ", installment = " + this.installment +
+                ", totalPaid = " + this.totalPaid +
+                ", mustPaid = " + this.mustPaid +
+                ", status = " + this.status + " }";
     }
 
     public enum LoanStatus {
