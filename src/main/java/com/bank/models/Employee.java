@@ -161,11 +161,10 @@ public class Employee extends Person {
     }
 
     public String toString() {
-        return "Employee{" +
+        return "Employee :{" +
                 "id=" + this.id +
                 ", email='" + this.email + '\'' +
-                ", status=" + this.status +
-                '}';
+                ", status=" + this.status + '}';
     }
 
     public double getSalary() {
