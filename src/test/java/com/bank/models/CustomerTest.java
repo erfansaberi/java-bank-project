@@ -3,6 +3,8 @@ package com.bank.models;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.bank.views.CustomerViews;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
@@ -31,7 +33,7 @@ class CustomerTest {
         pendingCustomer.setPhoneNumber(testPhoneNumberPending);
         pendingCustomer.setEmail(testEmailPending);
         pendingCustomer.setPassword(testPassword);
-        pendingCustomer.setStatus(CustomerStatus.PENDING);
+        pendingCustomer.setStatus(Customer.CustomerStatus.PENDING);
         pendingCustomer.save();
 
         // Create an active Customer
@@ -46,7 +48,7 @@ class CustomerTest {
         inactiveCustomer.setPhoneNumber(testPhoneNumberInactive);
         inactiveCustomer.setEmail(testEmailInactive);
         inactiveCustomer.setPassword(testPassword);
-        inactiveCustomer.setStatus(CustomerStatus.INACTIVE);
+        inactiveCustomer.setStatus(Customer.CustomerStatus.INACTIVE);
         inactiveCustomer.save();
 
         // Create a banned Customer
@@ -54,7 +56,7 @@ class CustomerTest {
         bannedCustomer.setPhoneNumber(testPhoneNumberBanned);
         bannedCustomer.setEmail(testEmailBanned);
         bannedCustomer.setPassword(testPassword);
-        bannedCustomer.setStatus(CustomerStatus.BANNED);
+        bannedCustomer.setStatus(Customer.CustomerStatus.BANNED);
         bannedCustomer.save();
 
         // Create a deleted Customer
@@ -62,7 +64,7 @@ class CustomerTest {
         deletedCustomer.setPhoneNumber(testPhoneNumberDeleted);
         deletedCustomer.setEmail(testEmailDeleted);
         deletedCustomer.setPassword(testPassword);
-        deletedCustomer.setStatus(CustomerStatus.DELETED);
+        deletedCustomer.setStatus(Customer.CustomerStatus.DELETED);
         deletedCustomer.save();
     }
 
@@ -90,5 +92,25 @@ class CustomerTest {
         assertFalse(Customer.authenticate(testPhoneNumberInactive, testPassword));
         assertFalse(Customer.authenticate(testPhoneNumberBanned, testPassword));
         assertFalse(Customer.authenticate(testPhoneNumberDeleted, testPassword));
+    }
+
+    /**
+     * Test Customer create account using the following steps:
+     * CustomerViews.customerCreateAccount(Customer customer, int accountTypeNumber, double balance)
+     * Create 3 accounts for active customer and check if they are created correctly (1:Transaction, 2:LONGTERM, 3:SHORTTERM) (should return CustomerViews.CreateAccountStatus.SUCCESS)
+     * Create another account for active customer (should fail) (maximum pending accounts reached) (should return CustomerViews.CreateAccountStatus.MAX_PENDING_ACCOUNT_LIMIT_REACHED)
+     * Create 1 account for deleted customer (should fail) (should return CustomerViews.CreateAccountStatus.CUSTOMER_NOT_ACTIVE)
+     * Create 1 account for banned customer (should fail) (should return CustomerViews.CreateAccountStatus.CUSTOMER_NOT_ACTIVE)
+     * Create 1 account for pending customer (should fail) (should return CustomerViews.CreateAccountStatus.CUSTOMER_NOT_ACTIVE)
+     */
+    @Test
+    void testCustomerCreateAccount() {
+        assertEquals(CustomerViews.CreateAccountStatus.SUCCESS, CustomerViews.customerCreateAccount(activeCustomer, 1, 0));
+        assertEquals(CustomerViews.CreateAccountStatus.SUCCESS, CustomerViews.customerCreateAccount(activeCustomer, 2, 10000));
+        assertEquals(CustomerViews.CreateAccountStatus.SUCCESS, CustomerViews.customerCreateAccount(activeCustomer, 3, 10000));
+        assertEquals(CustomerViews.CreateAccountStatus.MAX_PENDING_ACCOUNT_LIMIT_REACHED, CustomerViews.customerCreateAccount(activeCustomer, 1, 10000));
+        assertEquals(CustomerViews.CreateAccountStatus.CUSTOMER_NOT_ACTIVE, CustomerViews.customerCreateAccount(deletedCustomer, 1, 0));
+        assertEquals(CustomerViews.CreateAccountStatus.CUSTOMER_NOT_ACTIVE, CustomerViews.customerCreateAccount(bannedCustomer, 1, 0));
+        assertEquals(CustomerViews.CreateAccountStatus.CUSTOMER_NOT_ACTIVE, CustomerViews.customerCreateAccount(pendingCustomer, 1, 0));
     }
 }

@@ -33,5 +33,6 @@ public class GUI extends Application {
     public static void main(String[] args) {
         Core.startup();
         launch();
+        Core.shutdown();
     }
 }

@@ -2,6 +2,7 @@ package com.bank.models;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,14 +10,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.bank.models.Account.AccountStatus;
+
 public class Customer extends Person {
+    static String CUSTOMER_DATAFILE_PATH = "src/main/java/com/bank/data/customers.csv";
     static ArrayList<Customer> allCustomers = new ArrayList<>(); // All created accounts
 
-    private long id;
-    private String email;
-    private String phoneNumber; // Customer logs in with phone number
-    private String password; // Hashed
-    private Date joinDate;
+    // Note: Customer logs-in with phone number
+    private ArrayList<Account> accounts = new ArrayList<>();
     private CustomerStatus status;
 
     /**
@@ -109,6 +110,23 @@ public class Customer extends Person {
     }
 
     /**
+     * Get customer by national id.
+     * 
+     * @param nationalId National id to get customer by.
+     * @return Customer with given national id, null if not found.
+     */
+    public static Customer getByNationalId(String nationalId) {
+        for (Customer customer : allCustomers) {
+            if (customer.getNationalId().equals(nationalId)) {
+                if (customer.getStatus() != CustomerStatus.DELETED) {
+                    return customer;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * Authenticate customer.
      * 
      * @param phoneNumber Phone number entered by user.
@@ -129,11 +147,12 @@ public class Customer extends Person {
 
     /**
      * Read all customers from customers.csv file and save them to arraylist.
+     * Format:
+     * id, firstName, lastName, email, phoneNumber, passwordHash, gender,
+     * nationalId, birthDate, joinDate, safeBoxBalance, status
      */
     public static void loadData() {
-        // TODO: Add all fields
-        String filePath = "src/main/java/com/bank/data/customers.csv";
-        try (Scanner customerScanner = new Scanner(new File(filePath))) {
+        try (Scanner customerScanner = new Scanner(new File(CUSTOMER_DATAFILE_PATH))) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             while (customerScanner.hasNextLine()) {
                 String line = customerScanner.nextLine();
@@ -145,13 +164,41 @@ public class Customer extends Person {
                 customer.setEmail(customerData[3]);
                 customer.setPhoneNumber(customerData[4]);
                 customer.setPasswordHash(customerData[5]);
-                customer.setJoinDate(dateFormat.parse(customerData[6]));
-                customer.setStatus(CustomerStatus.valueOf(customerData[7]));
+                customer.setGender(Gender.valueOf(customerData[6]));
+                customer.setNationalId(customerData[7]);
+                customer.setBirthDate(dateFormat.parse(customerData[8]));
+                customer.setJoinDate(dateFormat.parse(customerData[9]));
+                customer.setSafeBoxBalance(Double.parseDouble(customerData[10]));
+                customer.setStatus(CustomerStatus.valueOf(customerData[11]));
                 customer.save();
             }
         } catch (NumberFormatException | FileNotFoundException | ParseException e) {
             System.err.println("[!] Error loading customers from file.");
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Save all customers to customers.csv file.
+     * Write all customers data to customers.csv file in format:
+     * id, firstName, lastName, email, phoneNumber, passwordHash, gender,
+     * nationalId, birthDate, joinDate, safeBoxBalance, status
+     */
+    public static void saveData() {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            FileWriter dataFile = new FileWriter(CUSTOMER_DATAFILE_PATH);
+            for (Customer customer : allCustomers) {
+                dataFile.write(customer.getId() + ", " + customer.getFirstName() + ", " + customer.getLastName() + ", "
+                        + customer.getEmail() + ", " + customer.getPhoneNumber() + ", " + customer.getPassword() + ", "
+                        + customer.getGender() + ", " + customer.getNationalId() + ", "
+                        + dateFormat.format(customer.getBirthDate()) + ", " + dateFormat.format(customer.getJoinDate())
+                        + ", " + customer.getSafeBoxBalance() + ", " + customer.getStatus() + "\n");
+            }
+            dataFile.close();
+        } catch (Exception e) {
+            System.err.println("[!] Error saving customers to file.");
+            System.err.println(e);
         }
     }
 
@@ -161,68 +208,9 @@ public class Customer extends Person {
     }
 
     // Getters and setters
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.password = passwordHash;
-    }
-
-    public void setPassword(String rawPassword) {
-        this.password = Core.hashPassword(rawPassword);
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFullName() {
-        return this.firstName + " " + this.lastName;
-    }
-
-    public Date getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
+    public static ArrayList<Customer> getAllCustomers() {
+        return allCustomers;
     }
 
     public CustomerStatus getStatus() {
@@ -233,16 +221,71 @@ public class Customer extends Person {
         this.status = status;
     }
 
-    public static ArrayList<Customer> getAllCustomers() {
-        return allCustomers;
+    public enum CustomerStatus {
+        PENDING,
+        ACTIVE,
+        INACTIVE,
+        BANNED,
+        DELETED
     }
 
-}
+    public ArrayList<Account> getPendingAccounts() {
+        ArrayList<Account> pendingAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.PENDING) {
+                pendingAccounts.add(account);
+            }
+        }
+        return pendingAccounts;
+    }
 
-enum CustomerStatus {
-    PENDING,
-    ACTIVE,
-    INACTIVE,
-    BANNED,
-    DELETED
+    public ArrayList<Account> getActiveAccounts() {
+        ArrayList<Account> activeAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.ACTIVE) {
+                activeAccounts.add(account);
+            }
+        }
+        return activeAccounts;
+    }
+
+    public ArrayList<Account> getInactiveAccounts() {
+        ArrayList<Account> inactiveAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.INACTIVE) {
+                inactiveAccounts.add(account);
+            }
+        }
+        return inactiveAccounts;
+    }
+
+    public ArrayList<Account> getBannedAccounts() {
+        ArrayList<Account> bannedAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.BANNED) {
+                bannedAccounts.add(account);
+            }
+        }
+        return bannedAccounts;
+    }
+
+    public ArrayList<Account> getDeletedAccounts() {
+        ArrayList<Account> deletedAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId() && account.getStatus() == AccountStatus.DELETED) {
+                deletedAccounts.add(account);
+            }
+        }
+        return deletedAccounts;
+    }
+
+    public ArrayList<Account> getAllAccounts() {
+        ArrayList<Account> allAccounts = new ArrayList<>();
+        for (Account account : Account.getAllAccounts()) {
+            if (account.getOwner().getId() == this.getId()) {
+                allAccounts.add(account);
+            }
+        }
+        return allAccounts;
+    }
 }
