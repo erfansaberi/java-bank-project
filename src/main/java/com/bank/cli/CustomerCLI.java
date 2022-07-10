@@ -3,6 +3,7 @@ package com.bank.cli;
 import java.util.Scanner;
 
 import com.bank.models.Customer;
+import com.bank.models.Account;
 
 public class CustomerCLI {
     static Scanner sc = new Scanner(System.in);
@@ -25,16 +26,28 @@ public class CustomerCLI {
                     break;
 
                 case "balance":
+                //TODO: Add methods relate to balance
                 break;
 
 
                 case "history":
+                //TODO: Add methods relate to history
                 break;
 
 
                 case "transfer":
+                //TODO: Add methods relate to transfer
                 break;
 
+                case "showbyid":
+                System.out.println("Enter the id wanna show the details:\n");
+                Long idForShowDetails = sc.nextLong() ;
+                Account.getAccountById(idForShowDetails) ;
+                break;
+
+                case "list":
+                Account.getAllAccounts() ;
+                break;
 
                 case "logout":
                 logout();
@@ -60,6 +73,8 @@ public class CustomerCLI {
         System.out.println("[C] history: Print history.");
         System.out.println("[C] transfer: Transfer money.");
         System.out.println("[C] logout: Logout.");
+        System.out.println("[C] list: prints customer accounts. ");
+        System.out.println("[C] Showbyid: take id prints details. ");
         System.out.println("[C] exit: Exit program.");
         System.out.println("[C] help: Print help text.");
     }
