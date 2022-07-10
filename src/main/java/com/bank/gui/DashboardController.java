@@ -18,22 +18,22 @@ public class DashboardController {
     private Pane TransPane;
 
     @FXML
-    void homechecker() {
+    void homeChecker() {
         System.out.println("Home Check");
     }
 
     @FXML
-    void Exchecker() {
+    void ExChecker() {
         System.out.println("Exit Check");
     }
 
     @FXML
-    void Acchecker() {
+    void AcChecker() {
         System.out.println("Account Check");
     }
 
     @FXML
-    void Transchecker() {
+    void TransChecker() {
         System.out.println("Trans Check");
     }
 
