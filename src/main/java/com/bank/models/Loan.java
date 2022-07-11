@@ -34,8 +34,8 @@ public class Loan {
         this.loanAmount = loanAmount;
         this.payingLengthMonths = payingLengthMonths;
         this.account = account;
-        // TODO: Calculate mustPay by adding 20% interest fee to loanAmount
-        // TODO: Calculate installment amount by dividing mustPay to payingLengthMonth
+        this.mustPay = (loanAmount + (2 * loanAmount) / 10);// adding 20% interest fee to loanAmount
+        this.installment = mustPay / payingLengthMonths;
     }
 
     // setter and getters
@@ -123,10 +123,10 @@ public class Loan {
         return allLoans;
     }
 
-    public ArrayList<Loan> getCustomerAllLoans(String Id) { // TODO: String Id? Should be "long customerId"
+    public ArrayList<Loan> getCustomerAllLoans(long customerId) {
         ArrayList<Loan> allThisCustomerLoans = new ArrayList<>();
         for (Loan loan : Loan.getAllLoans()) {
-            if (loan.getId() == this.id) { // TODO: WTF? Did you mean loan.account.customer.getId()?
+            if (loan.account.getId() == customerId) {
                 allThisCustomerLoans.add(loan);
             }
         }
@@ -138,74 +138,61 @@ public class Loan {
      */
 
     public static ArrayList<Loan> getPendingLoans() {
-        {
-            ArrayList<Loan> allPendingLoans = new ArrayList<>();
-            for (Loan loan : Loan.getAllLoans()) {
-                if (loan.getStatus() == LoanStatus.PENDING) {
-                    allPendingLoans.add(loan);
-                }
+        ArrayList<Loan> allPendingLoans = new ArrayList<>();
+        for (Loan loan : Loan.getAllLoans()) {
+            if (loan.getStatus() == LoanStatus.PENDING) {
+                allPendingLoans.add(loan);
             }
-            return allPendingLoans;
         }
+        return allPendingLoans;
     }
 
-    public ArrayList<Loan> getCustomerPendingLoans(String Id) { // TODO: id must be long, not String
-        {
-            ArrayList<Loan> allCustomerPendingLoans = new ArrayList<>();
-            for (Loan loan : Loan.getPendingLoans()) {
-                if (loan.getId() == this.id) { // TODO: loan.account.customer.getId() and why this.id?
-                    allCustomerPendingLoans.add(loan);
-                }
+    public ArrayList<Loan> getCustomerPendingLoans(long customerId) {
+        ArrayList<Loan> allCustomerPendingLoans = new ArrayList<>();
+        for (Loan loan : Loan.getPendingLoans()) {
+            if (loan.account.getId() == customerId) {
             }
-            return allCustomerPendingLoans;
         }
+        return allCustomerPendingLoans;
     }
 
     public static ArrayList<Loan> getPayingLoans() {
-        { // TODO: I don't understand why did you created another block inside this block
-            ArrayList<Loan> allPayingLoans = new ArrayList<>();
-            for (Loan loan : Loan.getAllLoans()) {
-                if (loan.getStatus() == LoanStatus.PAYING) {
-                    allPayingLoans.add(loan);
-                }
+        ArrayList<Loan> allPayingLoans = new ArrayList<>();
+        for (Loan loan : Loan.getAllLoans()) {
+            if (loan.getStatus() == LoanStatus.PAYING) {
+                allPayingLoans.add(loan);
             }
-            return allPayingLoans;
         }
+        return allPayingLoans;
     }
 
-    public ArrayList<Loan> getCustomerPayingLoans(String Id) { // TODO: Same as previous methods
-        {
-            ArrayList<Loan> allCustomerPayingLoans = new ArrayList<>();
-            for (Loan loan : Loan.getPayingLoans()) {
-                if (loan.getId() == this.id) { // TODO: Again
-                    allCustomerPayingLoans.add(loan);
-                }
+    public ArrayList<Loan> getCustomerPayingLoans(long customerId) {
+        ArrayList<Loan> allCustomerPayingLoans = new ArrayList<>();
+        for (Loan loan : Loan.getPayingLoans()) {
+            if (loan.account.getId() == customerId) {
+                allCustomerPayingLoans.add(loan);
             }
-            return allCustomerPayingLoans;
         }
+        return allCustomerPayingLoans;
     }
 
     public static ArrayList<Loan> getFinishedLoans() {
-        {
-            ArrayList<Loan> allFinishedLoans = new ArrayList<>();
-            for (Loan loan : Loan.getAllLoans()) {
-                if (loan.getStatus() == LoanStatus.FINISHED) {
-                    allFinishedLoans.add(loan);
-                }
+        ArrayList<Loan> allFinishedLoans = new ArrayList<>();
+        for (Loan loan : Loan.getAllLoans()) {
+            if (loan.getStatus() == LoanStatus.FINISHED) {
+                allFinishedLoans.add(loan);
             }
-            return allFinishedLoans;
         }
+        return allFinishedLoans;
     }
 
-    public ArrayList<Loan> getCustomerFinishedLoans(String Id) { // TODO: ...
-        { // TODO: Remove the unnecessary block identifiers
-            ArrayList<Loan> allCustomerFinishedLoans = new ArrayList<>();
-            for (Loan loan : Loan.getPayingLoans()) {
-                if (loan.getId() == this.id) { // TODO: .....
-                    allCustomerFinishedLoans.add(loan);
-                }
+    public ArrayList<Loan> getCustomerFinishedLoans(long customerId) {
+        ArrayList<Loan> allCustomerFinishedLoans = new ArrayList<>();
+        for (Loan loan : Loan.getPayingLoans()) {
+            if (loan.account.getId() == customerId) {
+                allCustomerFinishedLoans.add(loan);
             }
-            return allCustomerFinishedLoans;
         }
+        return allCustomerFinishedLoans;
     }
 }
