@@ -143,5 +143,15 @@ public class Account {
     public void delete() {
         this.status = AccountStatus.DELETED;
     }
+
+    public static ArrayList<Account> getAllPendingAccounts() {
+        ArrayList<Account> pendingAccounts = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account.getStatus() == AccountStatus.PENDING) {
+                pendingAccounts.add(account);
+            }
+        }
+        return pendingAccounts;
+    }
 }
 

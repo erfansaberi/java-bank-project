@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Loan {
-
+    // TODO: Write tests for Loan class
     private static ArrayList<Loan> allLoans = new ArrayList<>();
 
     private long id;

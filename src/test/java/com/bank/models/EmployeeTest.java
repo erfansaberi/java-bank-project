@@ -27,14 +27,14 @@ class EmployeeTest {
         inactiveEmployee = new Employee();
         inactiveEmployee.setEmail(testEmailInactive);
         inactiveEmployee.setPassword(testPassword);
-        inactiveEmployee.setStatus(EmployeeStatus.INACTIVE);
+        inactiveEmployee.setStatus(Employee.EmployeeStatus.INACTIVE);
         inactiveEmployee.save();
 
         // Create a deleted employee
         deletedEmployee = new Employee();
         deletedEmployee.setEmail(testEmailDeleted);
         deletedEmployee.setPassword(testPassword);
-        deletedEmployee.setStatus(EmployeeStatus.DELETED);
+        deletedEmployee.setStatus(Employee.EmployeeStatus.DELETED);
         deletedEmployee.save();
     }
 

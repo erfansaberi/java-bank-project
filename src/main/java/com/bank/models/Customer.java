@@ -288,4 +288,14 @@ public class Customer extends Person {
         }
         return allAccounts;
     }
+
+    public static ArrayList<Customer> getAllPendingCustomers() {
+        ArrayList<Customer> pendingCustomers = new ArrayList<>();
+        for (Customer customer : allCustomers) {
+            if (customer.getStatus() == CustomerStatus.PENDING) {
+                pendingCustomers.add(customer);
+            }
+        }
+        return pendingCustomers;
+    }
 }

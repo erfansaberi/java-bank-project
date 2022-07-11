@@ -73,6 +73,23 @@ public class Employee extends Person {
     }
 
     /**
+     * Get employee by id.
+     * 
+     * @param id Id to get employee by.
+     * @return Employee with given id, null if not found.
+     */
+    public static Employee getById(long id) {
+        for (Employee employee : allEmployees) {
+            if (employee.getId() == id) {
+                if (employee.getStatus() != EmployeeStatus.DELETED) {
+                    return employee;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * Authenticate employee.
      * 
      * @param email       Email entered by user.
@@ -174,16 +191,39 @@ public class Employee extends Person {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+
+    public static Employee getByPhoneNumber(String phoneNumber) {
+        for (Employee employee : allEmployees) {
+            if (employee.getPhoneNumber().equals(phoneNumber)) {
+                if (employee.getStatus() != EmployeeStatus.DELETED) {
+                    return employee;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static Employee getByNationalId(String nationalId) {
+        for (Employee employee : allEmployees) {
+            if (employee.getNationalId().equals(nationalId)) {
+                if (employee.getStatus() != EmployeeStatus.DELETED) {
+                    return employee;
+                }
+            }
+        }
+        return null;
+    }
+    /**
+     * Employee status.
+     * ACTIVE: Employee is active.
+     * INACTIVE: Employee is inactive.
+     * DELETED: Employee is deleted.
+     */
+    public enum EmployeeStatus {
+        ACTIVE,
+        INACTIVE,
+        DELETED
+    }
+
 }
 
-/**
- * Employee status.
- * ACTIVE: Employee is active.
- * INACTIVE: Employee is inactive.
- * DELETED: Employee is deleted.
- */
-enum EmployeeStatus {
-    ACTIVE,
-    INACTIVE,
-    DELETED
-}
