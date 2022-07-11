@@ -7,37 +7,45 @@ public class Loan {
 
     private static ArrayList<Loan> allLoans = new ArrayList<>();
 
-    private long Id;
-    private long moneyForLoan;
-    private int payingLengthMonths;
+    private long id;
+    private double loanAmount;
     private Account account;
+    private short payingLengthMonths;
+    private short payedMonths;
     private double installment; // ghest
+    private double mustPay;
     private double totalPaid;
-    private double mustPaid;
-    private Date recieveDate;
+    private Date requestDate;
+    private Date acceptDate;
     private LoanStatus status;
 
     // constructor
 
     public Loan() {
-        this.Id = allLoans.size() + 1;
-        // TODO: assigned date .
+        this.id = allLoans.size() + 1;
+        this.requestDate = new Date();
+        this.totalPaid = 0;
+        this.payedMonths = 0;
+        this.status = LoanStatus.PENDING;
     }
 
-    public Loan(long moneyForLoan, int payingLengthMonths, Account account) {
-        this.moneyForLoan = moneyForLoan;
+    public Loan(double loanAmount, short payingLengthMonths, Account account) {
+        this();
+        this.loanAmount = loanAmount;
         this.payingLengthMonths = payingLengthMonths;
         this.account = account;
+        // TODO: Calculate mustPay by adding 20% interest fee to loanAmount
+        // TODO: Calculate installment amount by dividing mustPay to payingLengthMonth
     }
 
     // setter and getters
 
-    public void setId(long Id) {
-        this.Id = Id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getId() {
-        return this.Id;
+        return this.id;
     }
 
     public void setInstallment(double installment) {
@@ -49,27 +57,27 @@ public class Loan {
     }
 
     public void setTotalPaid(double totalPaid) {
-        this.totalPaid += installment;
+        this.totalPaid = totalPaid;
     }
 
     public double getTotalPaid() {
         return this.totalPaid;
     }
 
-    public void setMustPaid(double mustPaid) {
-        this.mustPaid = moneyForLoan - totalPaid;
+    public void setMustPay(double mustPay) {
+        this.mustPay = mustPay;
     }
 
-    public double getMustPaid() {
-        return this.mustPaid;
+    public double getMustPay() {
+        return this.mustPay;
     }
 
-    public Date getRecieveDate() {
-        return this.recieveDate;
+    public Date getRequestDate() {
+        return this.requestDate;
     }
 
-    public void setRecieveDate(Date recieveDate) {
-        this.recieveDate = recieveDate;
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
     }
 
     public LoanStatus getStatus() {
@@ -80,28 +88,28 @@ public class Loan {
         this.status = status;
     }
 
-    public long getMoneyForLoan() {
-        return moneyForLoan;
+    public double getLoanAmount() {
+        return loanAmount;
     }
 
-    public void setMoneyForLoan(long moneyForLoan) {
-        this.moneyForLoan = moneyForLoan;
+    public void setLoanAmount(double loanAmount) {
+        this.loanAmount = loanAmount;
     }
 
     public int getPayingLengthMonths() {
         return payingLengthMonths;
     }
 
-    public void setPayingLengthMonths(int payingLengthMonths) {
+    public void setPayingLengthMonths(short payingLengthMonths) {
         this.payingLengthMonths = payingLengthMonths;
     }
 
     public String toString() {
         return "Loan :{ " +
-                "id = " + this.Id +
+                "id = " + this.id +
                 ", installment = " + this.installment +
+                ", mustPay = " + this.mustPay +
                 ", totalPaid = " + this.totalPaid +
-                ", mustPaid = " + this.mustPaid +
                 ", status = " + this.status + " }";
     }
 
@@ -115,10 +123,10 @@ public class Loan {
         return allLoans;
     }
 
-    public ArrayList<Loan> getCustomerAllLoans(String Id) {
+    public ArrayList<Loan> getCustomerAllLoans(String Id) { // TODO: String Id? Should be "long customerId"
         ArrayList<Loan> allThisCustomerLoans = new ArrayList<>();
         for (Loan loan : Loan.getAllLoans()) {
-            if (loan.getId() == this.Id) {
+            if (loan.getId() == this.id) { // TODO: WTF? Did you mean loan.account.customer.getId()?
                 allThisCustomerLoans.add(loan);
             }
         }
@@ -126,17 +134,7 @@ public class Loan {
     }
 
     /*
-     * TODO: method for being pending paying or finished loans
-     * 
-     * public ArrayList<Loan> statusLoans() {
-     * for(Loan loan : Loan.getAllLoans())
-     * if(loan.getMustPaid() == 0)
-     * loan.status = LoanStatus.FINISHED ;
-     * else if(loan.getTotalPaid() > 0)
-     * loan.status = LoanStatus.PAYING ;
-     * else
-     * loan.status = LoanStatus.PENDING ;
-     * }
+     * Get Pending Loans
      */
 
     public static ArrayList<Loan> getPendingLoans() {
@@ -151,11 +149,11 @@ public class Loan {
         }
     }
 
-    public ArrayList<Loan> getCustomerPendingLoans(String Id) {
+    public ArrayList<Loan> getCustomerPendingLoans(String Id) { // TODO: id must be long, not String
         {
             ArrayList<Loan> allCustomerPendingLoans = new ArrayList<>();
             for (Loan loan : Loan.getPendingLoans()) {
-                if (loan.getId() == this.Id) {
+                if (loan.getId() == this.id) { // TODO: loan.account.customer.getId() and why this.id?
                     allCustomerPendingLoans.add(loan);
                 }
             }
@@ -164,7 +162,7 @@ public class Loan {
     }
 
     public static ArrayList<Loan> getPayingLoans() {
-        {
+        { // TODO: I don't understand why did you created another block inside this block
             ArrayList<Loan> allPayingLoans = new ArrayList<>();
             for (Loan loan : Loan.getAllLoans()) {
                 if (loan.getStatus() == LoanStatus.PAYING) {
@@ -175,11 +173,11 @@ public class Loan {
         }
     }
 
-    public ArrayList<Loan> getCustomerPayingLoans(String Id) {
+    public ArrayList<Loan> getCustomerPayingLoans(String Id) { // TODO: Same as previous methods
         {
             ArrayList<Loan> allCustomerPayingLoans = new ArrayList<>();
             for (Loan loan : Loan.getPayingLoans()) {
-                if (loan.getId() == this.Id) {
+                if (loan.getId() == this.id) { // TODO: Again
                     allCustomerPayingLoans.add(loan);
                 }
             }
@@ -199,11 +197,11 @@ public class Loan {
         }
     }
 
-    public ArrayList<Loan> getCustomerFinishedLoans(String Id) {
-        {
+    public ArrayList<Loan> getCustomerFinishedLoans(String Id) { // TODO: ...
+        { // TODO: Remove the unnecessary block identifiers
             ArrayList<Loan> allCustomerFinishedLoans = new ArrayList<>();
             for (Loan loan : Loan.getPayingLoans()) {
-                if (loan.getId() == this.Id) {
+                if (loan.getId() == this.id) { // TODO: .....
                     allCustomerFinishedLoans.add(loan);
                 }
             }
