@@ -210,7 +210,13 @@ public class Customer extends Person {
     // Getters and setters
 
     public static ArrayList<Customer> getAllCustomers() {
-        return allCustomers;
+        ArrayList<Customer> customers = new ArrayList<>();
+        for (Customer customer : allCustomers) {
+            if (customer.getStatus() != CustomerStatus.DELETED) {
+                customers.add(customer);
+            }
+        }
+        return customers;
     }
 
     public CustomerStatus getStatus() {

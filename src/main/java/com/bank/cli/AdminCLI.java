@@ -145,7 +145,8 @@ public class AdminCLI {
                         }
                         break;
                     case "transfer":
-                        transferMoney(Long.parseLong(inputSplit[1]), Long.parseLong(inputSplit[2]), Double.parseDouble(inputSplit[3]));
+                        transferMoney(Long.parseLong(inputSplit[1]), Long.parseLong(inputSplit[2]),
+                                Double.parseDouble(inputSplit[3]));
                         break;
                     case "stats":
                         printStats();
@@ -224,139 +225,24 @@ public class AdminCLI {
         System.out.println("    [C] exit : Exit program.");
     }
 
-    private static void transferMoney(long fromAccountId, long toAccountId, double amount) {
-        // TODO: Implement transferMoney
-    }
-
-    private static void searchTransactions() {
-        // TODO: Implement searchTransactions
-    }
-
-    private static void showTransaction(long parseLong) {
-        // TODO: Implement showTransaction
-    }
-
-    private static void listTransactions() {
-        // TODO: Implement listTransactions
-    }
-
-    private static void rejectLoan(long parseLong) {
-        // TODO: implement rejectLoan
-    }
-
-    private static void approveLoan(long parseLong) {
-        // TODO: implement approveLoan
-    }
-
-    private static void listPendingLoans() {
-        // TODO: implement listPendingLoans
-    }
-
-    private static void showLoan(long parseLong) {
-        // TODO: implement showLoan
-    }
-
-    private static void listLoans() {
-        // TODO: implement listLoans
-    }
-
-    private static void rejectAccount(long parseLong) {
-        // TODO: Implement rejectAccount
-    }
-
-    private static void approveAccount(long parseLong) {
-        // TODO: Implement approveAccount
-    }
-
-    private static void listPendingAccounts() {
-        // TODO: Implement listPendingAccounts
-    }
-
-    private static void editAccount(long parseLong) {
-        // TODO: Implement editAccount
-    }
-
-    private static void deleteAccount(long parseLong) {
-        // TODO: Implement deleteAccount
-    }
-
-    private static void createAccount() {
-        // TODO: Implement createAccount
-    }
-
-    private static void showAccount(long parseLong) {
-        // TODO: Implement showAccount
-    }
-
-    private static void listAccounts() {
-        // TODO: Implement listAccounts
-    }
-
-    private static void rejectCustomer(long parseLong) {
-        // TODO: Implement rejectCustomer
-    }
-
-    private static void approveCustomer(long parseLong) {
-        // TODO: Implement approveCustomer
-    }
-
-    private static void listPendingCustomers() {
-        // TODO: Implement listPendingCustomers
-    }
-
-    private static void searchCustomers() {
-        // TODO: Implement searchCustomers
-    }
-
-    private static void editCustomer(long parseLong) {
-        // TODO: Implement editCustomer
-    }
-
-    private static void deleteCustomer(long parseLong) {
-        // TODO: Implement deleteCustomer
-    }
-
-    private static void createCustomer() {
-        // TODO: Implement createCustomer
-    }
-
-    private static void showCustomer(long parseLong) {
-        // TODO: Implement showCustomer
-    }
-
-    private static void listCustomers() {
-        // TODO: Implement listCustomers
+    // ----------------------------------------------------------------------------
+    // ----------------------------- Employee Commands ----------------------------
+    // ----------------------------------------------------------------------------
+    
+    private static void listEmployees() {
+        ArrayList<Employee> employees = Employee.getAllEmployees();
+        if (employees.size() == 0) {
+            System.out.println("[!] No employees found.");
+        } else {
+            System.out.println("[+] Employees:");
+            for (Employee employee : employees) {
+                System.out.println("[~] ID: " + employee.getId() + " - Full Name: " + employee.getFullName());
+            }
+        }
     }
 
     private static void searchEmployees() {
         // TODO: Implement searchEmployees
-    }
-
-    private static void editEmployee(long parseLong) {
-        // TODO: Implement editEmployee
-    }
-
-    /**
-     * Show employee detailes and ask admin again
-     * to make sure he wants to delete the employee.
-     * 
-     * @param employeeId
-     */
-    private static void deleteEmployee(long employeeId) {
-        Employee employee = Employee.getById(employeeId);
-        if (employee == null) {
-            System.out.println("[!] Employee not found.");
-            return;
-        }
-        showEmployee(employeeId);
-        System.out.print("[?] Are you sure you want to delete this employee? (y/n)> ");
-        String input = sc.nextLine();
-        if (input.equals("y")) {
-            employee.delete();
-            System.out.println("[!] Employee deleted.");
-        } else {
-            System.out.println("[!] Employee not deleted.");
-        }
     }
 
     public static void createEmployee() {
@@ -483,17 +369,164 @@ public class AdminCLI {
         }
     }
 
-    private static void listEmployees() {
-        ArrayList<Employee> employees = Employee.getAllEmployees();
-        if (employees.size() == 0) {
-            System.out.println("[!] No employees found.");
+    private static void editEmployee(long parseLong) {
+        // TODO: Implement editEmployee
+    }
+
+    /**
+     * Show employee detailes and ask admin again
+     * to make sure he wants to delete the employee.
+     * 
+     * @param employeeId
+     */
+    private static void deleteEmployee(long employeeId) {
+        Employee employee = Employee.getById(employeeId);
+        if (employee == null) {
+            System.out.println("[!] Employee not found.");
+            return;
+        }
+        showEmployee(employeeId);
+        System.out.print("[?] Are you sure you want to delete this employee? (y/n)> ");
+        String input = sc.nextLine();
+        if (input.equals("y")) {
+            employee.delete();
+            System.out.println("[!] Employee deleted.");
         } else {
-            System.out.println("[+] Employees:");
-            for (Employee employee : employees) {
-                System.out.println("[~] ID: " + employee.getId() + " - Full Name: " + employee.getFullName());
+            System.out.println("[!] Employee not deleted.");
+        }
+    }
+
+    // ----------------------------------------------------------------------------
+    // ---------------------------- Customer Commands -----------------------------
+    // ----------------------------------------------------------------------------
+
+    private static void listPendingCustomers() {
+        // TODO: Implement listPendingCustomers
+    }
+
+    private static void listCustomers() {
+        ArrayList<Customer> customers = Customer.getAllCustomers();
+        if (customers.size() == 0) {
+            System.out.println("[!] No customers found.");
+        } else {
+            System.out.println("[+] Customers:");
+            for (Customer customer : customers) {
+                System.out.println("[~] ID: " + customer.getId() + " - Full Name: " + customer.getFullName());
             }
         }
     }
+
+    private static void searchCustomers() {
+        // TODO: Implement searchCustomers
+    }
+
+    private static void approveCustomer(long parseLong) {
+        // TODO: Implement approveCustomer
+    }
+
+    private static void rejectCustomer(long parseLong) {
+        // TODO: Implement rejectCustomer
+    }
+
+    private static void createCustomer() {
+        // TODO: Implement createCustomer
+    }
+
+    private static void showCustomer(long parseLong) {
+        // TODO: Implement showCustomer
+    }
+
+    private static void editCustomer(long parseLong) {
+        // TODO: Implement editCustomer
+    }
+
+    private static void deleteCustomer(long parseLong) {
+        // TODO: Implement deleteCustomer
+    }
+
+    // ----------------------------------------------------------------------------
+    // ----------------------------- Account Commands -----------------------------
+    // ----------------------------------------------------------------------------
+
+    private static void listAccounts() {
+        // TODO: Implement listAccounts
+    }
+
+    private static void listPendingAccounts() {
+        // TODO: Implement listPendingAccounts
+    }
+
+    private static void approveAccount(long parseLong) {
+        // TODO: Implement approveAccount
+    }
+
+    private static void rejectAccount(long parseLong) {
+        // TODO: Implement rejectAccount
+    }
+
+    private static void createAccount() {
+        // TODO: Implement createAccount
+    }
+
+    private static void showAccount(long parseLong) {
+        // TODO: Implement showAccount
+    }
+
+    private static void editAccount(long parseLong) {
+        // TODO: Implement editAccount
+    }
+
+    private static void deleteAccount(long parseLong) {
+        // TODO: Implement deleteAccount
+    }
+
+    // -----------------------------------------------------------------------------
+    // ------------------------------- Loan Commands -------------------------------
+    // -----------------------------------------------------------------------------
+
+    private static void listPendingLoans() {
+        // TODO: implement listPendingLoans
+    }
+
+    private static void listLoans() {
+        // TODO: implement listLoans
+    }
+
+    private static void showLoan(long parseLong) {
+        // TODO: implement showLoan
+    }
+
+    private static void approveLoan(long parseLong) {
+        // TODO: implement approveLoan
+    }
+
+    private static void rejectLoan(long parseLong) {
+        // TODO: implement rejectLoan
+    }
+
+    // -----------------------------------------------------------------------------
+    // --------------------------- Transaction Commands ----------------------------
+    // -----------------------------------------------------------------------------
+
+    private static void transferMoney(long fromAccountId, long toAccountId, double amount) {
+        // TODO: Implement transferMoney
+    }
+
+    private static void listTransactions() {
+        // TODO: Implement listTransactions
+    }
+
+    private static void searchTransactions() {
+        // TODO: Implement searchTransactions
+    }
+
+    private static void showTransaction(long parseLong) {
+        // TODO: Implement showTransaction
+    }
+
+    // -----------------------------------------------------------------------------
+    // ------------------------------- Misc Commands -------------------------------
+    // -----------------------------------------------------------------------------
 
     private static void printNotifications() {
         // Pending customers
