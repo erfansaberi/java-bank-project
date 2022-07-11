@@ -121,11 +121,10 @@ public class CustomerCLI {
             if (input.equals("y")) {
                 CustomerViews.AccountDeleteStatus deleteStatus = CustomerViews.customerDeleteAccount(customer, account);
                 if (deleteStatus == CustomerViews.AccountDeleteStatus.SUCCESS) {
-                    System.out.println("[+] Account deleted.");
+                    System.out.println("[~] Account deleted.");
                 } else {
                     System.out.println("[!] Account deletion failed.");
                 }
-                System.out.println("[~] Account deleted.");
             } else {
                 System.out.println("[~] Account not deleted.");
             }

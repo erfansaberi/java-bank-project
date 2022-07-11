@@ -20,6 +20,14 @@ public class Customer extends Person {
     private ArrayList<Account> accounts = new ArrayList<>();
     private CustomerStatus status;
 
+    public enum CustomerStatus {
+        PENDING,
+        ACTIVE,
+        INACTIVE,
+        BANNED,
+        DELETED
+    }
+
     /**
      * Create new customer. Customer is not saved to arraylist.
      * Save method must be called to save customer to arraylist.
@@ -39,6 +47,27 @@ public class Customer extends Person {
      */
     public void save() {
         allCustomers.add(this);
+    }
+
+    /**
+     * Delete customer
+     */
+    public void delete() {
+        this.status = CustomerStatus.DELETED;
+    }
+
+    /**
+     * Approve customer
+     */
+    public void approve() {
+        this.status = CustomerStatus.ACTIVE;
+    }
+
+    /**
+     * Ban customer
+     */
+    public void ban() {
+        this.status = CustomerStatus.BANNED;
     }
 
     /**
@@ -101,6 +130,23 @@ public class Customer extends Person {
     public static Customer getByEmail(String email) {
         for (Customer customer : allCustomers) {
             if (customer.getEmail().equals(email)) {
+                if (customer.getStatus() != CustomerStatus.DELETED) {
+                    return customer;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get customer by id.
+     * 
+     * @param id Id to get customer by.
+     * @return Customer with given id, null if not found.
+     */
+    public static Customer getById(long id) {
+        for (Customer customer : allCustomers) {
+            if (customer.getId() == id) {
                 if (customer.getStatus() != CustomerStatus.DELETED) {
                     return customer;
                 }
@@ -227,14 +273,6 @@ public class Customer extends Person {
         this.status = status;
     }
 
-    public enum CustomerStatus {
-        PENDING,
-        ACTIVE,
-        INACTIVE,
-        BANNED,
-        DELETED
-    }
-
     public ArrayList<Account> getPendingAccounts() {
         ArrayList<Account> pendingAccounts = new ArrayList<>();
         for (Account account : Account.getAllAccounts()) {
@@ -303,5 +341,9 @@ public class Customer extends Person {
             }
         }
         return pendingCustomers;
+    }
+
+    public ArrayList<Loan> getAllLoans() {
+        return Loan.getCustomerAllLoans(this.id);
     }
 }

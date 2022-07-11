@@ -228,7 +228,7 @@ public class AdminCLI {
     // ----------------------------------------------------------------------------
     // ----------------------------- Employee Commands ----------------------------
     // ----------------------------------------------------------------------------
-    
+
     private static void listEmployees() {
         ArrayList<Employee> employees = Employee.getAllEmployees();
         if (employees.size() == 0) {
@@ -401,7 +401,15 @@ public class AdminCLI {
     // ----------------------------------------------------------------------------
 
     private static void listPendingCustomers() {
-        // TODO: Implement listPendingCustomers
+        ArrayList<Customer> customers = Customer.getAllPendingCustomers();
+        if (customers.isEmpty()) {
+            System.out.println("[!] No pending customers.");
+        } else {
+            System.out.println("[!] Pending customers:");
+            for (Customer customer : customers) {
+                System.out.println("  [~] ID: " + customer.getId() + " - Full Name: " + customer.getFullName());
+            }
+        }
     }
 
     private static void listCustomers() {
@@ -420,28 +428,103 @@ public class AdminCLI {
         // TODO: Implement searchCustomers
     }
 
-    private static void approveCustomer(long parseLong) {
-        // TODO: Implement approveCustomer
+    private static void approveCustomer(long customerId) {
+        Customer customer = Customer.getById(customerId);
+        if (customer == null) {
+            System.out.println("[!] Customer not found.");
+            return;
+        }
+        showCustomer(customerId);
+        System.out.print("[?] Are you sure you want to approve this customer? (y/n)> ");
+        String input = sc.nextLine();
+        if (input.equals("y")) {
+            customer.approve();
+            System.out.println("[!] Customer approved.");
+        } else {
+            System.out.println("[!] Customer not approved.");
+        }
     }
 
-    private static void rejectCustomer(long parseLong) {
-        // TODO: Implement rejectCustomer
+    private static void rejectCustomer(long customerId) {
+        Customer customer = Customer.getById(customerId);
+        if (customer == null) {
+            System.out.println("[!] Customer not found.");
+            return;
+        }
+        showCustomer(customerId);
+        System.out.print("[?] Are you sure you want to reject this customer? (y/n)> ");
+        String input = sc.nextLine();
+        if (input.equals("y")) {
+            System.out.print("[?] Do you want to ban this customer or permanently delete it? (ban/delete)> ");
+            String input2 = sc.nextLine();
+            if (input2.equals("ban")) {
+                customer.ban();
+                System.out.println("[!] Customer rejected.");
+            } else if (input2.equals("delete")) {
+                customer.delete();
+                System.out.println("[!] Customer deleted.");
+            } else {
+                System.out.println("[!] Invalid input.");
+            }
+        } else {
+            System.out.println("[!] Customer not approved.");
+        }
     }
 
     private static void createCustomer() {
         // TODO: Implement createCustomer
     }
 
-    private static void showCustomer(long parseLong) {
-        // TODO: Implement showCustomer
+    private static void showCustomer(long customerId) {
+        Customer customer = Customer.getById(customerId);
+        if (customer == null) {
+            System.out.println("[!] Customer not found.");
+        } else {
+            System.out.println("[~] Customer: " + customer.getFullName());
+            System.out.println("[~] Customer ID: " + customer.getId());
+            System.out.println("[~] Customer Email: " + customer.getEmail());
+            System.out.println("[~] Customer Phone: " + customer.getPhoneNumber());
+            System.out.println("[~] Customer Gender: " + customer.getGender());
+            System.out.println("[~] Customer National ID: " + customer.getNationalId());
+            System.out.println("[~] Customer Birthday: " + customer.getBirthDate());
+            System.out.println("[~] Customer Status: " + customer.getStatus());
+            System.out.println("[~] Customer Safebox balance: " + customer.getSafeBoxBalance());
+            System.out.println("[~] Customer Accounts count: " + customer.getAllAccounts().size());
+            System.out.println("[~] Customer All Accounts: ");
+            for (Account account : customer.getAllAccounts()) {
+                System.out.println("  [~] Account ID: " + account.getId() + " - Account Type: " + account.getType() + " - Account Balance: " + account.getBalance());
+            }
+            // customer loans
+            System.out.println("[~] Customer Loans count: " + customer.getAllLoans().size());
+            System.out.println("[~] Customer All Loans: ");
+            for (Loan loan : customer.getAllLoans()) {
+                System.out.println("  [~] Loan ID: " + loan.getId() + " - Loan Amount: " + loan.getLoanAmount() + " - Loan Status: " + loan.getStatus());
+                System.out.println("      Payed: " + loan.getTotalPaid() + " - MustPay: " + loan.getMustPay() + " - Account Balance: " + loan.getAccount().getBalance());
+                System.out.println("      Request Date: " + loan.getRequestDate() + " - Accept Date: " + loan.getAcceptDate() +  " - Pay length (month): " + loan.getPayingLengthMonths());
+            }
+        }
     }
 
     private static void editCustomer(long parseLong) {
         // TODO: Implement editCustomer
     }
 
-    private static void deleteCustomer(long parseLong) {
-        // TODO: Implement deleteCustomer
+    private static void deleteCustomer(long customerId) {
+        Customer customer = Customer.getById(customerId);
+        if (customer == null) {
+            System.out.println("[!] Customer not found.");
+            return;
+        } else {
+            showCustomer(customerId);
+            System.out.print("[?] Are you sure you want to delete this customer? (y/n)> ");
+            String input = sc.nextLine();
+            if (input.equals("y")) {
+                customer.delete();
+                System.out.println("[!] Customer deleted.");
+            } else {
+                System.out.println("[!] Customer not deleted.");
+            }
+        }
     }
 
     // ----------------------------------------------------------------------------

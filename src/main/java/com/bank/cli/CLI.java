@@ -228,13 +228,12 @@ public class CLI {
             password = getPassword();
             System.out.print("  [>] Confirm password: ");
             confirmPassword = getPassword();
-            if (password.equals(confirmPassword)) {
+            if (password.length() < 8) {
+                System.out.println("[!] Password must be at least 8 characters!");
+            } else if (password.equals(confirmPassword)) {
                 break;
             } else {
                 System.out.println("[!] Passwords does'nt match!");
-            }
-            if (password.length() < 8) {
-                System.out.println("[!] Password must be at least 8 characters!");
             }
         }
 
@@ -285,6 +284,7 @@ public class CLI {
             System.out.println("[!] You are too young to register! Must be at least 18 years old.");
         } else {
             System.out.println("[!] Registration failed!");
+            System.out.println(registerStatus);
         }
     }
 

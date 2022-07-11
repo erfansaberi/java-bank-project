@@ -47,6 +47,14 @@ public class Loan {
     public long getId() {
         return this.id;
     }
+    
+    public Account getAccount() {
+        return this.account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public void setInstallment(double installment) {
         this.installment = installment;
@@ -104,6 +112,14 @@ public class Loan {
         this.payingLengthMonths = payingLengthMonths;
     }
 
+    public Date getAcceptDate() {
+        return acceptDate;
+    }
+
+    public void setAcceptDate(Date acceptDate) {
+        this.acceptDate = acceptDate;
+    }
+
     public String toString() {
         return "Loan :{ " +
                 "id = " + this.id +
@@ -123,7 +139,7 @@ public class Loan {
         return allLoans;
     }
 
-    public ArrayList<Loan> getCustomerAllLoans(long customerId) {
+    public static ArrayList<Loan> getCustomerAllLoans(long customerId) {
         ArrayList<Loan> allThisCustomerLoans = new ArrayList<>();
         for (Loan loan : Loan.getAllLoans()) {
             if (loan.account.getOwner().getId() == customerId) {
@@ -147,7 +163,7 @@ public class Loan {
         return allPendingLoans;
     }
 
-    public ArrayList<Loan> getCustomerPendingLoans(long customerId) {
+    public static ArrayList<Loan> getCustomerPendingLoans(long customerId) {
         ArrayList<Loan> allCustomerPendingLoans = new ArrayList<>();
         for (Loan loan : Loan.getPendingLoans()) {
             if (loan.account.getOwner().getId() == customerId) {
@@ -166,7 +182,7 @@ public class Loan {
         return allPayingLoans;
     }
 
-    public ArrayList<Loan> getCustomerPayingLoans(long customerId) {
+    public static ArrayList<Loan> getCustomerPayingLoans(long customerId) {
         ArrayList<Loan> allCustomerPayingLoans = new ArrayList<>();
         for (Loan loan : Loan.getPayingLoans()) {
             if (loan.account.getOwner().getId() == customerId) {
@@ -186,7 +202,7 @@ public class Loan {
         return allFinishedLoans;
     }
 
-    public ArrayList<Loan> getCustomerFinishedLoans(long customerId) {
+    public static ArrayList<Loan> getCustomerFinishedLoans(long customerId) {
         ArrayList<Loan> allCustomerFinishedLoans = new ArrayList<>();
         for (Loan loan : Loan.getPayingLoans()) {
             if (loan.account.getOwner().getId() == customerId) {
@@ -195,4 +211,5 @@ public class Loan {
         }
         return allCustomerFinishedLoans;
     }
+
 }
