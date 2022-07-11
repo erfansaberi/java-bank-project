@@ -106,16 +106,25 @@ public class CustomerCLI {
         Account account = Account.getAccountById(accountId);
         if (account == null) {
             System.out.println("[!] Account not found.");
+        } else if (account.getOwner().getId() != customer.getId()) {
+            System.out.println("[!] You are not the owner of this account.");
+        } else if (account.getStatus() == Account.AccountStatus.BANNED) {
+            System.out.println("[!] Can't delete a banned account.");
         } else {
             System.out.println("[~] Account ID:" + account.getId());
             System.out.println("[~] Type: " + account.getType());
             System.out.println("[~] Status: " + account.getStatus());
             System.out.println("[~] Balance: " + account.getBalance());
-            System.out.println("[!] Your account will be deleted and its balance will be lost!");
-            System.out.println("[~] Are you sure you want to delete this account? (y/n)");
+            System.out.println("[~] Your account balance will be added to your safebox.");
+            System.out.print("[?] Are you sure you want to delete this account? (y/n)> ");
             String input = sc.nextLine();
             if (input.equals("y")) {
-                account.delete();
+                CustomerViews.AccountDeleteStatus deleteStatus = CustomerViews.customerDeleteAccount(customer, account);
+                if (deleteStatus == CustomerViews.AccountDeleteStatus.SUCCESS) {
+                    System.out.println("[+] Account deleted.");
+                } else {
+                    System.out.println("[!] Account deletion failed.");
+                }
                 System.out.println("[~] Account deleted.");
             } else {
                 System.out.println("[~] Account not deleted.");
@@ -131,7 +140,6 @@ public class CustomerCLI {
      * Params: accountType, initialBalance
      */
     private static void createAccount() {
-        // TODO: Implement createAccount form for customer CLI
         System.out.println("  [T] Account types: 1) Transactional, 2) Long-Term, 3) Short-Term");
         System.out.print("  [>] Account type: ");
         int accountType = Integer.parseInt(sc.nextLine());
@@ -187,10 +195,10 @@ public class CustomerCLI {
     public static void printHelp() { // TODO: Add customer commands to help text
         System.out.println("[?] Customer Commands:");
         System.out.println("[C] safebox (Print your safebox balance)");
-        System.out.println("[C] account list (Print your accounts)"); // TODO: Add account list command
-        System.out.println("[C] account show $id (Print account details)"); // TODO: Add account show command
-        System.out.println("[C] account create (Create a new account)"); // TODO: Add account create command
-        System.out.println("[C] account delete $id (Delete an account)"); // TODO: Add account delete command
+        System.out.println("[C] account list (Print your accounts)");
+        System.out.println("[C] account show $id (Print account details)");
+        System.out.println("[C] account create (Create a new account)");
+        System.out.println("[C] account delete $id (Delete an account)");
         System.out.println("[C] transaction list $accountId (Print an account transactions)"); // TODO: Add transaction
                                                                                                // list command
         System.out.println("[C] transaction show &transactionId (Print a transaction details)"); // TODO: Add

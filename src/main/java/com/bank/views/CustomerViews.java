@@ -14,8 +14,6 @@ import com.bank.models.Gender;
 import com.bank.models.Account.AccountType;
 import com.bank.validator.Validator;
 
-import javafx.css.CssParser.ParseError;
-
 public class CustomerViews {
     /**
      * Customer register view
@@ -140,6 +138,24 @@ public class CustomerViews {
         }
     }
 
+    /**
+     * Customer delete account view
+     * Takes customer and account as input, checks if account belongs to customer,
+     * adds balance to safe box and deletes account
+     * @param account Account object
+     */
+    public static AccountDeleteStatus customerDeleteAccount(Customer customer, Account account) {
+        Customer accountOwner = account.getOwner();
+        if (accountOwner.getId() != customer.getId())
+            return AccountDeleteStatus.ACCOUNT_NOT_OWNED_BY_CUSTOMER;
+        if (account.getStatus() == Account.AccountStatus.BANNED)
+            return AccountDeleteStatus.ACCOUNT_BANNED;
+        double balance = account.getBalance();
+        customer.addToSafeBoxBalance(balance);
+        account.delete();
+        return AccountDeleteStatus.SUCCESS;
+    }
+
     public enum CreateAccountStatus {
         SUCCESS,
         CUSTOMER_NOT_ACTIVE,
@@ -163,5 +179,11 @@ public class CustomerViews {
         INVALID_BIRTH_DATE,
         INVALID_GENDER,
         TOO_YOUNG_TO_REGISTER;
+    }
+
+    public enum AccountDeleteStatus {
+        SUCCESS,
+        ACCOUNT_NOT_OWNED_BY_CUSTOMER,
+        ACCOUNT_BANNED
     }
 }
