@@ -126,7 +126,7 @@ public class Loan {
     public ArrayList<Loan> getCustomerAllLoans(long customerId) {
         ArrayList<Loan> allThisCustomerLoans = new ArrayList<>();
         for (Loan loan : Loan.getAllLoans()) {
-            if (loan.account.owner.getId() == customerId) {
+            if (loan.account.getOwner().getId() == customerId) {
                 allThisCustomerLoans.add(loan);
             }
         }
@@ -150,7 +150,7 @@ public class Loan {
     public ArrayList<Loan> getCustomerPendingLoans(long customerId) {
         ArrayList<Loan> allCustomerPendingLoans = new ArrayList<>();
         for (Loan loan : Loan.getPendingLoans()) {
-            if (loan.account.owner.getId() == customerId) {
+            if (loan.account.getOwner().getId() == customerId) {
             }
         }
         return allCustomerPendingLoans;
@@ -169,7 +169,7 @@ public class Loan {
     public ArrayList<Loan> getCustomerPayingLoans(long customerId) {
         ArrayList<Loan> allCustomerPayingLoans = new ArrayList<>();
         for (Loan loan : Loan.getPayingLoans()) {
-            if (loan.account.owner.getId() == customerId) {
+            if (loan.account.getOwner().getId() == customerId) {
                 allCustomerPayingLoans.add(loan);
             }
         }
@@ -189,7 +189,7 @@ public class Loan {
     public ArrayList<Loan> getCustomerFinishedLoans(long customerId) {
         ArrayList<Loan> allCustomerFinishedLoans = new ArrayList<>();
         for (Loan loan : Loan.getPayingLoans()) {
-            if (loan.account.owner.getId() == customerId) {
+            if (loan.account.getOwner().getId() == customerId) {
                 allCustomerFinishedLoans.add(loan);
             }
         }

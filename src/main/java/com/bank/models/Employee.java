@@ -166,7 +166,13 @@ public class Employee extends Person {
 
     // Getters and setters
     public static ArrayList<Employee> getAllEmployees() {
-        return allEmployees;
+        ArrayList<Employee> employees = new ArrayList<>();
+        for (Employee employee : allEmployees) {
+            if (employee.getStatus() != EmployeeStatus.DELETED) {
+                employees.add(employee);
+            }
+        }
+        return employees;
     }
 
     public EmployeeStatus getStatus() {
@@ -223,6 +229,10 @@ public class Employee extends Person {
         ACTIVE,
         INACTIVE,
         DELETED
+    }
+    
+    public void delete() {
+        this.status = EmployeeStatus.DELETED;
     }
 
 }
