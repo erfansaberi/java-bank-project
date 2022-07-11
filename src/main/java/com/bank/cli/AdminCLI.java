@@ -8,6 +8,7 @@ import com.bank.models.Admin;
 import com.bank.models.Customer;
 import com.bank.models.Employee;
 import com.bank.models.Loan;
+import com.bank.models.Transaction;
 import com.bank.validator.Validator;
 import com.bank.views.EmployeeViews;
 
@@ -60,6 +61,9 @@ public class AdminCLI {
                                 break;
                             case "show":
                                 showCustomer(Long.parseLong(inputSplit[2]));
+                                break;
+                            case "addtosafebox":
+                                addMoneyToCustomerSafeBox(Long.parseLong(inputSplit[2]), Double.parseDouble(inputSplit[3]));
                                 break;
                             case "add":
                                 createCustomer();
@@ -195,6 +199,7 @@ public class AdminCLI {
         System.out.println("    [C] customer list : List all customers.");
         System.out.println("    [C] customer add : Add a customer.");
         System.out.println("    [C] customer show $id : Show a customer.");
+        System.out.println("    [C] customer addtosafebox $id $amount : Add money to a customer safebox (Can be negative).");
         System.out.println("    [C] customer edit $id : Edit a customer.");
         System.out.println("    [C] customer delete $id : Delete a customer.");
         System.out.println("    [C] customer search : Find a customer.");
@@ -236,13 +241,14 @@ public class AdminCLI {
         } else {
             System.out.println("[+] Employees:");
             for (Employee employee : employees) {
-                System.out.println("[~] ID: " + employee.getId() + " - Full Name: " + employee.getFullName());
+                System.out.println("[~] ID: " + employee.getId() + " - Full Name: " + employee.getFullName() + " - Email: " + employee.getEmail() + " - Salary: " + employee.getSalary());
             }
         }
     }
 
     private static void searchEmployees() {
         // TODO: Implement searchEmployees
+        System.out.println("[!] Not implemented yet.");
     }
 
     public static void createEmployee() {
@@ -371,6 +377,7 @@ public class AdminCLI {
 
     private static void editEmployee(long parseLong) {
         // TODO: Implement editEmployee
+        System.out.println("[!] Not implemented yet.");
     }
 
     /**
@@ -426,6 +433,7 @@ public class AdminCLI {
 
     private static void searchCustomers() {
         // TODO: Implement searchCustomers
+        System.out.println("[!] Not implemented yet.");
     }
 
     private static void approveCustomer(long customerId) {
@@ -473,6 +481,7 @@ public class AdminCLI {
 
     private static void createCustomer() {
         // TODO: Implement createCustomer
+        System.out.println("[!] Not implemented yet.");
     }
 
     private static void showCustomer(long customerId) {
@@ -492,21 +501,37 @@ public class AdminCLI {
             System.out.println("[~] Customer Accounts count: " + customer.getAllAccounts().size());
             System.out.println("[~] Customer All Accounts: ");
             for (Account account : customer.getAllAccounts()) {
-                System.out.println("  [~] Account ID: " + account.getId() + " - Account Type: " + account.getType() + " - Account Balance: " + account.getBalance());
+                System.out.println("  [~] Account ID: " + account.getId() + " - Account Type: " + account.getType()
+                        + " - Account Balance: " + account.getBalance());
             }
             // customer loans
             System.out.println("[~] Customer Loans count: " + customer.getAllLoans().size());
             System.out.println("[~] Customer All Loans: ");
             for (Loan loan : customer.getAllLoans()) {
-                System.out.println("  [~] Loan ID: " + loan.getId() + " - Loan Amount: " + loan.getLoanAmount() + " - Loan Status: " + loan.getStatus());
-                System.out.println("      Payed: " + loan.getTotalPaid() + " - MustPay: " + loan.getMustPay() + " - Account Balance: " + loan.getAccount().getBalance());
-                System.out.println("      Request Date: " + loan.getRequestDate() + " - Accept Date: " + loan.getAcceptDate() +  " - Pay length (month): " + loan.getPayingLengthMonths());
+                System.out.println("  [~] Loan ID: " + loan.getId() + " - Loan Amount: " + loan.getLoanAmount()
+                        + " - Loan Status: " + loan.getStatus());
+                System.out.println("      Payed: " + loan.getTotalPaid() + " - MustPay: " + loan.getMustPay()
+                        + " - Account Balance: " + loan.getAccount().getBalance());
+                System.out.println("      Request Date: " + loan.getRequestDate() + " - Accept Date: "
+                        + loan.getAcceptDate() + " - Pay length (month): " + loan.getPayingLengthMonths());
             }
         }
     }
 
+    // Add to safebox
+    private static void addMoneyToCustomerSafeBox(long customerId, double amount) {
+        Customer customer = Customer.getById(customerId);
+        if (customer == null) {
+            System.out.println("[!] Customer not found.");
+            return;
+        }
+        customer.addToSafeBoxBalance(amount);
+        System.out.println("[~] Added " + amount + " to customer's safebox.");
+    }
+
     private static void editCustomer(long parseLong) {
         // TODO: Implement editCustomer
+        System.out.println("[!] Not implemented yet.");
     }
 
     private static void deleteCustomer(long customerId) {
@@ -532,35 +557,114 @@ public class AdminCLI {
     // ----------------------------------------------------------------------------
 
     private static void listAccounts() {
-        // TODO: Implement listAccounts
+        ArrayList<Account> accounts = Account.getAllAccounts();
+        if (accounts.size() == 0) {
+            System.out.println("[!] No accounts found.");
+        } else {
+            System.out.println("[+] Accounts:");
+            for (Account account : accounts) {
+                System.out.println("[~] ID: " + account.getId() + "Owner: " + account.getOwner() + " - Account Type: " + account.getType()
+                        + " - Account Balance: " + account.getBalance() + " - Account Status: " + account.getStatus());
+            }
+        }
     }
 
     private static void listPendingAccounts() {
-        // TODO: Implement listPendingAccounts
+        ArrayList<Account> accounts = Account.getAllPendingAccounts();
+        if (accounts.size() == 0) {
+            System.out.println("[!] No accounts found.");
+        } else {
+            System.out.println("[+] Pending Accounts:");
+            for (Account account : accounts) {
+                System.out.println("[~] ID: " + account.getId() + "Owner: " + account.getOwner() + " - Account Type: " + account.getType()
+                        + " - Account Balance: " + account.getBalance());
+            }
+        }
     }
 
-    private static void approveAccount(long parseLong) {
-        // TODO: Implement approveAccount
+    private static void approveAccount(long accountId) {
+        Account account = Account.getAccountById(accountId);
+        if (account == null) {
+            System.out.println("[!] Account not found.");
+            return;
+        } else {
+            showAccount(accountId);
+            System.out.print("[?] Are you sure you want to approve this account? (y/n)> ");
+            String input = sc.nextLine();
+            if (input.equals("y")) {
+                account.approve();
+                System.out.println("[+] Account approved.");
+            } else {
+                System.out.println("[~] Account not approved.");
+            }
+        }
     }
 
-    private static void rejectAccount(long parseLong) {
-        // TODO: Implement rejectAccount
+    private static void rejectAccount(long accountId) {
+        Account account = Account.getAccountById(accountId);
+        if (account == null) {
+            System.out.println("[!] Account not found.");
+            return;
+        } else {
+            showAccount(accountId);
+            System.out.print("[?] Are you sure you want to reject this account? (y/n)> ");
+            String input = sc.nextLine();
+            if (input.equals("y")) {
+                System.out.println("[?] Do you want to ban account or delete it? (ban/delete)> ");
+                String input2 = sc.nextLine();
+                if (input2.equals("ban")) {
+                    account.ban();
+                    System.out.println("[+] Account rejected and banned.");
+                } else if (input2.equals("delete")) {
+                    account.delete();
+                    System.out.println("[+] Account rejected and deleted.");
+                } else {
+                    System.out.println("[!] Invalid input.");
+                }
+            } else {
+                System.out.println("[~] Account not rejected.");
+            }
+        }
     }
 
     private static void createAccount() {
         // TODO: Implement createAccount
+        System.out.println("[!] Not implemented yet.");
     }
 
-    private static void showAccount(long parseLong) {
-        // TODO: Implement showAccount
+    private static void showAccount(long accountId) {
+        Account account = Account.getAccountById(accountId);
+        if (account == null) {
+            System.out.println("[!] Account not found.");
+            return;
+        } else {
+            System.out.println("[+] Account:");
+            System.out.println("[~] ID: " + account.getId() + "Owner: " + account.getOwner() + " - Account Type: " + account.getType()
+                    + " - Account Balance: " + account.getBalance() + " - Account Status: " + account.getStatus());
+        }
     }
 
-    private static void editAccount(long parseLong) {
+    private static void editAccount(long accountId) {
         // TODO: Implement editAccount
+        System.out.println("[!] Not implemented yet.");
     }
 
-    private static void deleteAccount(long parseLong) {
-        // TODO: Implement deleteAccount
+    private static void deleteAccount(long accountId) {
+        Account account = Account.getAccountById(accountId);
+        if (account == null) {
+            System.out.println("[!] Account not found.");
+            return;
+        } else {
+            showAccount(accountId);
+            System.out.print("[?] Are you sure you want to delete this account? (y/n)> ");
+            String input = sc.nextLine();
+            if (input.equals("y")) {
+                account.delete();
+                System.out.println("[+] Account deleted.");
+            } else {
+                System.out.println("[~] Account not deleted.");
+            }
+        }
     }
 
     // -----------------------------------------------------------------------------
@@ -592,19 +696,52 @@ public class AdminCLI {
     // -----------------------------------------------------------------------------
 
     private static void transferMoney(long fromAccountId, long toAccountId, double amount) {
-        // TODO: Implement transferMoney
+        // TODO: Implement the logic in views instead of here
+        Account fromAccount = Account.getAccountById(fromAccountId);
+        Account toAccount = Account.getAccountById(toAccountId);
+        if (fromAccount == null || toAccount == null) {
+            System.out.println("[!] Account not found.");
+            return;
+        }
+        if (fromAccount.getBalance() < amount) {
+            System.out.println("[!] Insufficient balance.");
+            return;
+        }
+        fromAccount.setBalance(fromAccount.getBalance() - amount);
+        toAccount.setBalance(toAccount.getBalance() + amount);
+        Transaction transaction = new Transaction(fromAccount, toAccount, amount);
+        transaction.save();
+        System.out.println("[!] Money transferred.");
     }
 
     private static void listTransactions() {
-        // TODO: Implement listTransactions
+        ArrayList<Transaction> transactions = Transaction.getAllTransactions();
+        if (transactions.size() == 0) {
+            System.out.println("[!] No transactions found.");
+            return;
+        }
+        System.out.println("[~] Transactions: ");
+        for (Transaction transaction : transactions) {
+            System.out.println("  [~] Transaction ID: " + transaction.getId() + " - From Account ID: "
+                    + transaction.getFromAccount().getId() + " - To Account ID: " + transaction.getToAccount().getId()
+                    + " - Amount: " + transaction.getAmount() + " - Date: " + transaction.getDate());
+        }
     }
 
     private static void searchTransactions() {
         // TODO: Implement searchTransactions
     }
 
-    private static void showTransaction(long parseLong) {
-        // TODO: Implement showTransaction
+    private static void showTransaction(long transactionId) {
+        Transaction transaction = Transaction.getTransactionById(transactionId);
+        if (transaction == null) {
+            System.out.println("[!] Transaction not found.");
+            return;
+        } else {
+            System.out.println("[~] Transaction ID: " + transaction.getId() + " - From Account ID: "
+                    + transaction.getFromAccount().getId() + " - To Account ID: " + transaction.getToAccount().getId()
+                    + " - Amount: " + transaction.getAmount() + " - Date: " + transaction.getDate());
+        }
     }
 
     // -----------------------------------------------------------------------------
@@ -626,13 +763,13 @@ public class AdminCLI {
             System.out.println(" *  There are " + pendingAccountsCount + " pending accounts.");
             System.out.println(" *  Type 'account pendinglist' to see them.");
         }
-        // Pending loans //TODO: pending loans
-        // ArrayList<Loan> pendingLoans = Loan.getAllPendingLoans();
-        // int pendingLoansCount = pendingLoans.size();
-        // if (pendingLoansCount > 0) {
-        // System.out.println("[!] There are " + pendingLoansCount + " pending loans.");
-        // System.out.println("[!] Type 'loan pendinglist' to see them.");
-        // }
+        // Pending loans
+        ArrayList<Loan> pendingLoans = Loan.getPendingLoans();
+        int pendingLoansCount = pendingLoans.size();
+        if (pendingLoansCount > 0) {
+        System.out.println("[!] There are " + pendingLoansCount + " pending loans.");
+        System.out.println("[!] Type 'loan pendinglist' to see them.");
+        }
     }
 
     private static void printStats() {

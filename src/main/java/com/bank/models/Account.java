@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Account {
+    static String ACCOUNT_DATAFILE_PATH = "src/main/java/com/bank/data/accounts.csv";
     static ArrayList<Account> allAccounts = new ArrayList<>(); // All created accounts
 
     private long id;
@@ -14,6 +15,9 @@ public class Account {
     private AccountStatus status;
     private ArrayList<Transaction> transactions = new ArrayList<>();
 
+    /**
+     * Constructor for Account
+     */
     public Account() {
         this.id = allAccounts.size() + 1;
         this.balance = 0;
@@ -21,6 +25,12 @@ public class Account {
         this.status = AccountStatus.ACTIVE;
     }
 
+    /**
+     * Constructor for Account
+     *
+     * @param owner Customer
+     * @param balance double
+     */
     public Account(Customer owner, double balance) {
         this.id = allAccounts.size() + 1;
         this.owner = owner;
@@ -29,10 +39,39 @@ public class Account {
         this.status = AccountStatus.ACTIVE;
     }
 
+    /**
+     * Save account to arraylist
+     */
     public void save() {
         allAccounts.add(this);
     }
 
+    /**
+     * Set account status = DELETED
+     */
+    public void delete() {
+        this.status = AccountStatus.DELETED;
+    }
+
+    /**
+     * Set account status = ACTIVE
+     */
+    public void approve() {
+        this.status = AccountStatus.ACTIVE;
+    }
+
+    /**
+     * Set account status = BANNED
+     */
+    public void ban() {
+        this.status = AccountStatus.BANNED;
+    }
+
+    /**
+     * Check if account id exists
+     * @param id account id to check
+     * @return true if account id exists, false if not
+     */
     public static boolean idExists(long id) {
         for (Account account : allAccounts) {
             if (account.getId() == id) {
@@ -42,6 +81,11 @@ public class Account {
         return false;
     }
 
+    /**
+     * Get account by id
+     * @param id account id to get
+     * @return account if found, null if not
+     */
     public static Account getAccountById(long id) {
         for (Account account : allAccounts) {
             if (account.getId() == id) {
@@ -53,6 +97,7 @@ public class Account {
 
     public static void loadData() {
         // TODO: Load all accounts from csv file
+
     }
 
     public static void saveData() {
@@ -123,7 +168,23 @@ public class Account {
     }
 
     public static ArrayList<Account> getAllAccounts() {
-        return allAccounts;
+        ArrayList<Account> accounts = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account.getStatus() != AccountStatus.DELETED) {
+                accounts.add(account);
+            }
+        }
+        return accounts;
+    }
+
+    public static ArrayList<Account> getAllPendingAccounts() {
+        ArrayList<Account> pendingAccounts = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account.getStatus() == AccountStatus.PENDING) {
+                pendingAccounts.add(account);
+            }
+        }
+        return pendingAccounts;
     }
 
     public enum AccountStatus {
@@ -138,20 +199,6 @@ public class Account {
         TRANSACTION,
         LONGTERM,
         SHORTTERM
-    }
-
-    public void delete() {
-        this.status = AccountStatus.DELETED;
-    }
-
-    public static ArrayList<Account> getAllPendingAccounts() {
-        ArrayList<Account> pendingAccounts = new ArrayList<>();
-        for (Account account : allAccounts) {
-            if (account.getStatus() == AccountStatus.PENDING) {
-                pendingAccounts.add(account);
-            }
-        }
-        return pendingAccounts;
     }
 }
 
