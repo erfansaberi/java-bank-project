@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="920.0" style="-fx-background-color: #262833;" stylesheets="@../CSS/MyStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.gui.EmployeeListController">
+   <top>
+      <AnchorPane prefHeight="55.0" prefWidth="600.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: #c3e5ff; -fx-background-color: #262833;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#c3e5ff" layoutX="382.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employees">
+               <font>
+                  <Font name="B Aria" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#c3e5ff" layoutX="14.0" layoutY="43.0" onMouseClicked="#EmployeePrevious" strokeType="OUTSIDE" strokeWidth="0.0" text="🔙">
+               <font>
+                  <Font size="40.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="928.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="EmployeeTable" layoutX="14.0" layoutY="14.0" prefHeight="454.0" prefWidth="873.0" style="-fx-background-color: #262833; -fx-padding: 15;">
+              <columns>
+                <TableColumn fx:id="fnameCol" prefWidth="96.00000381469727" sortType="DESCENDING" sortable="false" text="Name" />
+                <TableColumn fx:id="lnameCol" prefWidth="110.4000244140625" sortType="DESCENDING" sortable="false" text="LastName" />
+                  <TableColumn fx:id="emailCol" prefWidth="133.5999755859375" sortType="DESCENDING" sortable="false" text="Email" />
+                  <TableColumn fx:id="phoneCol" prefWidth="117.60003662109375" sortType="DESCENDING" sortable="false" text="Phone Number" />
+                  <TableColumn fx:id="genderCol" minWidth="3.20001220703125" prefWidth="74.4000244140625" sortType="DESCENDING" sortable="false" text="Gender" />
+                  <TableColumn fx:id="passCol" prefWidth="131.99993896484375" sortType="DESCENDING" sortable="false" text="Password" />
+                  <TableColumn fx:id="SalaryCol" editable="false" prefWidth="88.0" sortType="DESCENDING" sortable="false" text="Salary" />
+                  <TableColumn fx:id="StatusCol" editable="false" prefWidth="90.39990234375" sortType="DESCENDING" sortable="false" text="Status" />
+              </columns>
+            </TableView>
+            <Button layoutX="26.0" layoutY="480.0" mnemonicParsing="false" onMouseClicked="#EmployeeLoader" style="-fx-background-radius: 30; -fx-padding: 10; -fx-background-color: #c3e5ff;" text="Load Employees">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="178.0" layoutY="480.0" mnemonicParsing="false" onMouseClicked="#RemoveRow" style="-fx-background-radius: 30; -fx-padding: 10; -fx-background-color: red;" text="Delete Employee" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

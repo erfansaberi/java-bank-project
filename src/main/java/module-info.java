@@ -5,10 +5,16 @@ module com.bank.gui {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
+    requires validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
+    
+    
+    
     opens com.bank.gui to javafx.fxml;
+//    opens com.bank.gui to javafx.base;
+    opens com.bank.models to javafx.base;
     exports com.bank.gui;
 }

@@ -24,8 +24,10 @@ public class GUI extends Application {
             stage.setTitle("Login Page");
             Image myimg = new Image("file:icons/loginLogo.png");
             stage.getIcons().add(myimg);
+            scene.getStylesheets().add("CSS/MyStyle.css");
             stage.setScene(scene);
             stage.show();
+            
             preStage = stage;
         }
     

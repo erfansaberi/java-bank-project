@@ -1,0 +1,22 @@
+.table-view .column-header
+{
+    -fx-background-color : #c3e5ff;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color : black;
+    -fx-text-fill : red;
+}
+.table-row-cell:even 
+{
+    /* -fx-background-color :  #40445a; */
+    -fx-background-color : blue;
+    -fx-text-fill : rgb(185, 217, 255);
+    -fx-text-alignment : center;
+
+}
+.table-row-cell:odd 
+{
+    -fx-background-color :  #171927;
+    -fx-text-fill : rgb(219, 235, 255);
+    -fx-text-alignment : center;
+
+}
