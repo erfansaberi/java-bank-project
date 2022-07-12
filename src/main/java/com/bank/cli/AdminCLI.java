@@ -442,6 +442,10 @@ public class AdminCLI {
             System.out.println("[!] Customer not found.");
             return;
         }
+        if (customer.getStatus() != Customer.CustomerStatus.PENDING) {
+            System.out.println("[!] Customer is not pending.");
+            return;
+        }
         showCustomer(customerId);
         System.out.print("[?] Are you sure you want to approve this customer? (y/n)> ");
         String input = sc.nextLine();
