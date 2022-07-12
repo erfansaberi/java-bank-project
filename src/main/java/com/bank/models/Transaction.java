@@ -147,5 +147,15 @@ public class Transaction {
         return allTransactions;
     }
 
+    public static ArrayList<Transaction> getAccountTransactions(Account account) {
+        ArrayList<Transaction> accountTransactions = new ArrayList<>();
+        for (Transaction transaction : allTransactions) {
+            if (transaction.getFromAccount().getId() == account.getId() || transaction.getToAccount().getId() == account.getId()) {
+                accountTransactions.add(transaction);
+            }
+        }
+        return accountTransactions;
+    }
+
 
 }

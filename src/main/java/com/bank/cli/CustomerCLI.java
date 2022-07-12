@@ -49,7 +49,15 @@ public class CustomerCLI {
                         }
                         break;
 
-                    case "history":
+                    case "transaction":
+                        switch (inputSplit[1]) {
+                            case "list":
+                                listAccountTransactions(Long.parseLong(inputSplit[2]));
+                                break;
+                            case "show":
+                                showTransaction(Long.parseLong(inputSplit[2]));
+                                break;
+                        }
                         break;
 
                     case "transfer":
@@ -74,7 +82,18 @@ public class CustomerCLI {
         }
     }
 
+    /**
+     * Transfer money from one account to another account and save the transaction.
+     * Checks if the accounts exist and if the amount is greater than 0.
+     * @param fromAccountId Account id to transfer money from.
+     * @param toAccountId Account id to transfer money to.
+     * @param amount Amount to transfer.
+     */
     private static void transferMoney(long fromAccountId, long toAccountId, double amount) {
+        if (amount <= 0) {
+            System.out.println("[!] Amount must be greater than 0.");
+            return;
+        }
         Account fromAccount = Account.getAccountById(fromAccountId);
         Account toAccount = Account.getAccountById(toAccountId);
         if (fromAccount == null) {
@@ -96,6 +115,49 @@ public class CustomerCLI {
         Transaction transaction = Transaction.transferMoney(fromAccount, toAccount, amount);
         System.out.println("[+] Money transferred, Transaction ID: " + transaction.getId());
     }
+
+    /**
+     * Print account transactions.
+     * Checks if the account exists and if the customer is the owner of the account.
+     * @param accountId Account id to print transactions for.
+     */
+    private static void listAccountTransactions(long accountId) {
+        Account account = Account.getAccountById(accountId);
+        if (account == null) {
+            System.out.println("[!] Account not found.");
+            return;
+        }
+        if (account.getOwner() != customer) {
+            System.out.println("[!] You do not own this account.");
+            return;
+        }
+        System.out.println("[~] Transactions for account " + account.getId() + ":");
+        for (Transaction transaction : Transaction.getAccountTransactions(account)) {
+            System.out.println("\t" + transaction.getId() + ": " + transaction.getAmount() + " Account "
+                + transaction.getFromAccount().getId() + " -> " + transaction.getToAccount().getId() + " Date: " + transaction.getDate());
+        }
+
+    }
+
+    /**
+     * Print transaction details.
+     * @param transactionId Transaction id to print details for.
+     */
+    private static void showTransaction(long transactionId) {
+        Transaction transaction = Transaction.getTransactionById(transactionId);
+        if (transaction == null) {
+            System.out.println("[!] Transaction not found.");
+            return;
+        }
+        if (transaction.getFromAccount().getOwner() != customer || transaction.getToAccount().getOwner() != customer) {
+            System.out.println("[!] You do not own this transaction.");
+            return;
+        }
+        System.out.println("[~] Transaction " + transaction.getId() + ":");
+        System.out.println("\t" + transaction.getAmount() + " Account " + transaction.getFromAccount().getId() + " -> "
+            + transaction.getToAccount().getId() + " Date: " + transaction.getDate());
+    }
+
 
     /**
      * Prints the customer's safebox balance
