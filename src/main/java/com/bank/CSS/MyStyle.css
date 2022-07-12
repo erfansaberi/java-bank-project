@@ -1,0 +1,31 @@
+
+.table-view .column-header
+{
+  -fx-background-color : #c3e5ff;   
+     
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color : black;
+    -fx-text-fill : white;
+}
+.table-row-cell:even 
+{
+    -fx-background-color :  #40445a; 
+    -fx-text-fill : red;
+     -fx-background-insets: 0 11px 0 0;
+     -fx-alignment:center
+
+}
+.table-row-cell:odd 
+{
+ -fx-background-color :  #171927; 
+
+   
+     -fx-alignment:center
+     }
+.table-row-cell .text
+{
+	 -fx-text-FILL : white;
+}
+
+
+

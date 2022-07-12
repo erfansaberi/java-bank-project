@@ -65,7 +65,7 @@ public class loginController {
 			Loginstage.getIcons().add(new Image("file:icons/CustomerLogo.png"));
 			GUI.preStage.close();
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println(e.getMessage());
 		}
 
 	}
@@ -83,7 +83,7 @@ public class loginController {
 			ManageMentStage.show();
 			GUI.preStage.close();
 		} catch (Exception e) {
-			System.out.println("Error");
+			System.out.println(e.getMessage());
 		}
 
 	}

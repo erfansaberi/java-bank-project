@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="823.0" style="-fx-background-color: #262833;" stylesheets="@../CSS/MyStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.gui.CustomersListPanelController">
+   <top>
+      <AnchorPane prefHeight="55.0" prefWidth="600.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: #c3e5ff;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#c3e5ff" layoutX="351.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers">
+               <font>
+                  <Font name="B Aria" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#c3e5ff" layoutX="14.0" layoutY="43.0" onMouseClicked="#CustomerPrevious" strokeType="OUTSIDE" strokeWidth="0.0" text="🔙">
+               <font>
+                  <Font size="40.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="CustomersTable" layoutX="22.0" layoutY="14.0" prefHeight="420.0" prefWidth="770.0" style="-fx-background-color: #262833; -fx-padding: 15;">
+              <columns>
+                <TableColumn fx:id="fnameCol" prefWidth="86.39999008178711" resizable="false" text="Name" />
+                <TableColumn fx:id="lnameCol" prefWidth="94.4000244140625" resizable="false" text="LastName" />
+                  <TableColumn fx:id="emailCol" prefWidth="90.39997863769531" resizable="false" text="Email" />
+                  <TableColumn fx:id="phoneCol" prefWidth="123.20001220703125" resizable="false" text="Phone Number" />
+                  <TableColumn fx:id="genderCol" prefWidth="64.79998779296875" resizable="false" text="Gender" />
+                  <TableColumn fx:id="passCol" prefWidth="107.99993896484375" resizable="false" text="Password" />
+                  <TableColumn fx:id="BalanceCol" prefWidth="90.39990234375" resizable="false" text="Balance" />
+                  <TableColumn fx:id="StatusCol" prefWidth="84.0001220703125" resizable="false" text="Status" />
+              </columns>
+            </TableView>
+            <Button layoutX="22.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#CustomerLoader" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #c3e5ff; -fx-background-radius: 25;" text="Load Customers">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="182.0" layoutY="439.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="136.0" style="-fx-background-color: red; -fx-background-radius: 25;" text="Delete Customer" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
