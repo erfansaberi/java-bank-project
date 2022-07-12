@@ -60,7 +60,9 @@ public class CustomersListPanelController {
 	    @FXML
 	     void CustomerLoader()
 	    {
-	   
+//	       if(CustomersTable.hasProperties())
+	    	
+	    	
 	    	fnameCol.setCellValueFactory(new PropertyValueFactory<Customer , String>("firstName"));  
 	    	lnameCol.setCellValueFactory(new PropertyValueFactory<Customer , String>("lastName"));  
 	    	emailCol.setCellValueFactory(new PropertyValueFactory<Customer , String>("email")); 
@@ -79,9 +81,17 @@ public class CustomersListPanelController {
 	    static void setStage(Stage preStage,Stage currentStage)
 	    {
 	    	PreStage = preStage;
-	    	CurrentStage = currentStage;
+	    	CurrentStage = currentStage;	
+	    }
+	    @FXML
+	    void RemoveRow()
+	    {
+	    CustomersTable.getItems().removeAll(CustomersTable.getSelectionModel().getSelectedItems());
+	    System.out.println(CustomersTable.hasProperties());
 	    	
-	    	
+//	    	
+//	    	Employee.getAllEmployees().remove(EmployeeTable.getSelectionModel().getSelectedItem());
+//	    	EmployeeLoader();
 	    }
 }
 	    	

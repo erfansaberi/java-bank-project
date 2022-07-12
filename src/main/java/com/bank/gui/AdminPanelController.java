@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public class AdminPanelController {
 	public static Stage EmplooyeeList;
 	public static Stage CustomerListForAdmin;
+	public static Stage AccountListforAdmin;
 
 	@FXML
 	void Previous() {
@@ -49,10 +50,32 @@ public class AdminPanelController {
 			ManagementController.AdminStage.close();
 			CustomersListPanelController.setStage(ManagementController.AdminStage,CustomerListForAdmin);
 			
-			
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
+	
+	}
+	@FXML
+	void AccountList()
+	{
+		try
+		{
+			FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("AccountList.fxml"));
+			Parent root1 = (Parent) fxmlLoader.load();
+			AccountListforAdmin = new Stage();
+			AccountListforAdmin.setTitle("Customer List");
+			AccountListforAdmin.setScene(new Scene(root1));
+			AccountListforAdmin.initModality(Modality.APPLICATION_MODAL);
+			AccountListforAdmin.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+			AccountListforAdmin.show();
+			ManagementController.AdminStage.close();
+			AccountListController.setStage(ManagementController.AdminStage,AccountListforAdmin);
+		}
+		 catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		
 	}
 }

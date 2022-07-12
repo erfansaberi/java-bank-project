@@ -55,7 +55,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="328.0" layoutY="130.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="131.0" style="-fx-background-color: #3B83B4; -fx-background-radius: 30;" text="Accounts" textFill="WHITE">
+            <Button layoutX="328.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#AccountList" prefHeight="43.0" prefWidth="131.0" style="-fx-background-color: #3B83B4; -fx-background-radius: 30;" text="Accounts" textFill="WHITE">
                <font>
                   <Font name="B Aria" size="14.0" />
                </font>

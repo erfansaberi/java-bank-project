@@ -14,7 +14,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="638.0" style="-fx-background-color: #262833;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.gui.CustomerLoginController">
    <center>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="412.0" style="-fx-background-color: #262833; -fx-border-width: 1; -fx-border-color: #ced1ff; -fx-border-radius: 30;" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="412.0" style="-fx-background-color: #262833; -fx-border-width: 1; -fx-border-color: #ced1ff; -fx-border-radius: 30;" BorderPane.alignment="CENTER">
          <children>
             <Text fill="#d1d9ff" layoutX="107.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Login" wrappingWidth="225.3367156982422">
                <font>
@@ -40,11 +40,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Text fill="#e1dcff" layoutX="14.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cartel" textAlignment="CENTER" wrappingWidth="58.15501403808594">
-               <font>
-                  <Font name="Blackletter 686 BT" size="29.0" />
-               </font>
-            </Text>
             <Text fill="#d3d4ff" layoutX="79.0" layoutY="177.0" rotate="-15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="📞">
                <font>
                   <Font size="34.0" />

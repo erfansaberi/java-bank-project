@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -9,12 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="832.0" style="-fx-background-color: #262833;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#initiate" prefHeight="564.0" prefWidth="878.0" style="-fx-background-color: #262833;" stylesheets="@../CSS/MyStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.gui.DashboardController">
    <center>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="773.0" style="-fx-background-color: #262833; -fx-border-width: 1; -fx-border-color: #d1d8ff; -fx-border-radius: 32;" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="800.0" style="-fx-background-color: #262833; -fx-border-width: 1; -fx-border-color: #d1d8ff; -fx-border-radius: 32;" BorderPane.alignment="CENTER">
          <children>
-            <Line endX="100.0" layoutX="67.0" layoutY="-1.0" startX="100.00000762939453" startY="491.0" stroke="#f7faff73" />
+            <Line endX="100.0" layoutX="67.0" layoutY="-1.0" startX="100.0" startY="515.3999633789062" stroke="#f7faff73" />
             <Text fill="#bbc0c4" layoutX="186.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="86.37615966796875">
                <font>
                   <Font size="18.0" />
@@ -31,81 +31,108 @@
                   <Font name="B Arabic Style" size="16.0" />
                </font>
             </Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5ede8" height="68.0" layoutX="196.0" layoutY="136.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" style="-fx-arc-height: 34; -fx-arc-width: 34;" width="450.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e5ede8" height="74.0" layoutX="195.0" layoutY="135.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" style="-fx-arc-height: 34; -fx-arc-width: 34;" width="452.0" />
             <Text fill="#000000f7" layoutX="205.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance:" textAlignment="CENTER" wrappingWidth="66.1976318359375">
                <font>
                   <Font name="B Cheshmeh" size="12.0" />
                </font>
             </Text>
-            <Text fill="#c3e5ff" layoutX="700.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cartel" wrappingWidth="58.5">
-               <font>
-                  <Font name="Blackletter 686 BT" size="33.0" />
-               </font>
-            </Text>
             <VBox prefHeight="491.0" prefWidth="167.0">
                <children>
-                  <Pane fx:id="HomePane" prefHeight="120.0">
+                  <Pane fx:id="HomePane" prefHeight="110.0" prefWidth="167.0">
                      <children>
-                        <Text fill="#20ff0b" layoutX="77.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home">
+                        <Text fill="#d1d8ff" layoutX="61.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home">
                            <font>
                               <Font size="17.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Text>
-                        <Text fill="#20ff0b" layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🏠">
+                        <Text fill="#e4e9ff" layoutX="14.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="🏠">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <Text fill="#e4e9ff" layoutX="29.0" layoutY="49.0" onMouseClicked="#Previous" strokeType="OUTSIDE" strokeWidth="0.0" text="🔙" wrappingWidth="45.0">
                            <font>
                               <Font size="45.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Text>
                      </children>
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </Pane>
-                  <Pane fx:id="TransPane" prefHeight="120.0">
+                  <Pane fx:id="TransPane" prefHeight="92.0" prefWidth="167.0">
                      <children>
-                        <Text fill="#b79cd1" layoutX="72.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions">
+                        <Text fill="#b79cd1" layoutX="59.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Text>
-                        <Text fill="#d1d8ff" layoutX="14.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="♻">
+                        <Text fill="#d1d8ff" layoutX="14.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="♻">
                            <font>
-                              <Font size="45.0" />
+                              <Font size="30.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Text>
                      </children>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane fx:id="AcPane" prefHeight="120.0">
+                  <Pane fx:id="AcPane" prefHeight="92.0" prefWidth="167.0">
                      <children>
-                        <Text fill="#b79cd1" layoutX="72.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accounts">
+                        <Text fill="#b79cd1" layoutX="55.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accounts">
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Text>
-                        <Text fill="#d1d8ff" layoutX="14.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="💳">
+                        <Text fill="#d1d8ff" layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="💳">
                            <font>
-                              <Font size="45.0" />
+                              <Font size="30.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Text>
                      </children>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane fx:id="ExitPane" prefHeight="120.0">
+                  <Pane fx:id="ExitPane" prefHeight="91.0" prefWidth="167.0">
                      <children>
-                        <Text fill="#ff3f2a" layoutX="84.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit" wrappingWidth="32.655117988586426">
+                        <Text fill="#d1d8ff" layoutX="51.0" layoutY="66.0" onMouseClicked="#exitbut" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ex" text="Exit" wrappingWidth="32.655117988586426">
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Text>
-                        <Text fill="RED" layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="❌">
+                        <Text fill="#d1d8ff" layoutX="14.0" layoutY="71.0" onMouseClicked="#exitbut" strokeType="OUTSIDE" strokeWidth="0.0" text="❌">
                            <font>
-                              <Font size="45.0" />
+                              <Font size="30.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Text>
                      </children>
                      <cursor>
@@ -114,6 +141,36 @@
                   </Pane>
                </children>
             </VBox>
+            <Pane fx:id="card" layoutX="205.0" layoutY="266.0" prefHeight="124.0" prefWidth="246.0" style="-fx-background-color: #e4d6f3; -fx-background-radius: 20;">
+               <children>
+                  <Pane fx:id="card" layoutY="79.0" prefHeight="45.0" prefWidth="246.0" style="-fx-background-color: #a685c5; -fx-background-radius: 0 0 20 20;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Exp : 06/24">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="177.0" layoutY="14.0" text="AMSBank">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Label fx:id="AccountNum" layoutX="15.0" layoutY="14.0" prefHeight="25.0" prefWidth="216.0" style="-fx-alignment: center;">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Label>
+                  <Label fx:id="CustomerName" layoutX="15.0" layoutY="54.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+               </children>
+            </Pane>
+            <Label fx:id="AccountBalance" layoutX="216.0" layoutY="166.0" prefHeight="38.0" prefWidth="96.0" textFill="#262833">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </center>

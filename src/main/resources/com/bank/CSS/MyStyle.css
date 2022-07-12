@@ -1,28 +1,35 @@
 
 .table-view .column-header
 {
-  -fx-background-color : #c3e5ff;   
-     
+    -fx-background-color : #c3e5ff;   
     -fx-border-width: 0 1 0 0;
     -fx-border-color : black;
     -fx-text-fill : white;
 }
+
 .table-row-cell:even 
 {
     -fx-background-color :  #40445a; 
+    -fx-text-fill : rgb(185, 217, 255);
+    -fx-text-alignment : center;
+    -fx-background-color :  #40445a; 
     -fx-text-fill : red;
-     -fx-background-insets: 0 11px 0 0;
-     -fx-alignment:center
-
+    -fx-background-insets: 0 11px 0 0;
+    -fx-alignment:center
 }
+
 .table-row-cell:odd 
 {
- -fx-background-color :  #171927; 
+     -fx-background-color :  #171927; 
+}
 
-   
-     -fx-alignment:center
-     }
+.ex:hover
+{
+    -fx-text-fill : red;   
+    -fx-alignment:center
+}
+
 .table-row-cell .text
 {
-	 -fx-text-FILL : white;
+	  -fx-text-FILL : white;
 }
