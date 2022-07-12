@@ -1,7 +1,14 @@
 package com.bank.models;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Account {
     static String ACCOUNT_DATAFILE_PATH = "src/main/java/com/bank/data/accounts.csv";
@@ -95,13 +102,52 @@ public class Account {
         return null;
     }
 
+    /**
+     * Read all accounts from accounts.csv file and save them to arraylist.
+     * Format:
+     * id, ownerId, balance, creationDate, type, status
+     */
     public static void loadData() {
-        // TODO: Load all accounts from csv file
-
+        try (Scanner accountScanner = new Scanner(new File(ACCOUNT_DATAFILE_PATH))) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            while (accountScanner.hasNextLine()) {
+                String line = accountScanner.nextLine();
+                String[] customerData = line.split(", ");
+                Customer owner = Customer.getByIdEvenIfDeleted(Long.parseLong(customerData[1]));
+                Account account = new Account();
+                account.setId(Long.parseLong(customerData[0]));
+                account.setOwner(owner);
+                account.setBalance(Double.parseDouble(customerData[2]));
+                account.setCreationDate(dateFormat.parse(customerData[3]));
+                account.setType(AccountType.valueOf(customerData[4]));
+                account.setStatus(AccountStatus.valueOf(customerData[5]));
+                account.save();
+            }
+        } catch (NumberFormatException | FileNotFoundException | ParseException e) {
+            System.err.println("[!] Error loading accounts from file.");
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Save all accounts to accounts.csv file.
+     * Write all accounts data to accounts.csv file in format:
+     * id, ownerId, balance, creationDate, type, status
+     */
     public static void saveData() {
-        // TODO: Save all accounts to csv file
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            FileWriter dataFile = new FileWriter(ACCOUNT_DATAFILE_PATH);
+            for (Account accounts : allAccounts) {
+                dataFile.write(accounts.getId() + ", " + accounts.getOwner().getId() + ", " + accounts.getBalance() + ", "
+                        + dateFormat.format(accounts.getCreationDate()) + ", " + accounts.getType() + ", "
+                        + accounts.getStatus() + "\n");
+            }
+            dataFile.close();
+        } catch (Exception e) {
+            System.err.println("[!] Error saving accounts to file.");
+            System.err.println(e);
+        }
     }
 
     // Getters and setters

@@ -63,7 +63,8 @@ public class AdminCLI {
                                 showCustomer(Long.parseLong(inputSplit[2]));
                                 break;
                             case "addtosafebox":
-                                addMoneyToCustomerSafeBox(Long.parseLong(inputSplit[2]), Double.parseDouble(inputSplit[3]));
+                                addMoneyToCustomerSafeBox(Long.parseLong(inputSplit[2]),
+                                        Double.parseDouble(inputSplit[3]));
                                 break;
                             case "add":
                                 createCustomer();
@@ -199,7 +200,8 @@ public class AdminCLI {
         System.out.println("    [C] customer list : List all customers.");
         System.out.println("    [C] customer add : Add a customer.");
         System.out.println("    [C] customer show $id : Show a customer.");
-        System.out.println("    [C] customer addtosafebox $id $amount : Add money to a customer safebox (Can be negative).");
+        System.out.println(
+                "    [C] customer addtosafebox $id $amount : Add money to a customer safebox (Can be negative).");
         System.out.println("    [C] customer edit $id : Edit a customer.");
         System.out.println("    [C] customer delete $id : Delete a customer.");
         System.out.println("    [C] customer search : Find a customer.");
@@ -241,7 +243,8 @@ public class AdminCLI {
         } else {
             System.out.println("[+] Employees:");
             for (Employee employee : employees) {
-                System.out.println("[~] ID: " + employee.getId() + " - Full Name: " + employee.getFullName() + " - Email: " + employee.getEmail() + " - Salary: " + employee.getSalary());
+                System.out.println("[~] ID: " + employee.getId() + " - Full Name: " + employee.getFullName()
+                        + " - Email: " + employee.getEmail() + " - Salary: " + employee.getSalary());
             }
         }
     }
@@ -567,7 +570,8 @@ public class AdminCLI {
         } else {
             System.out.println("[+] Accounts:");
             for (Account account : accounts) {
-                System.out.println("[~] ID: " + account.getId() + "Owner: " + account.getOwner() + " - Account Type: " + account.getType()
+                System.out.println("[~] ID: " + account.getId() + " Owner: " + account.getOwner() + " - Account Type: "
+                        + account.getType()
                         + " - Account Balance: " + account.getBalance() + " - Account Status: " + account.getStatus());
             }
         }
@@ -580,7 +584,8 @@ public class AdminCLI {
         } else {
             System.out.println("[+] Pending Accounts:");
             for (Account account : accounts) {
-                System.out.println("[~] ID: " + account.getId() + "Owner: " + account.getOwner() + " - Account Type: " + account.getType()
+                System.out.println("[~] ID: " + account.getId() + " Owner: " + account.getOwner() + " - Account Type: "
+                        + account.getType()
                         + " - Account Balance: " + account.getBalance());
             }
         }
@@ -591,6 +596,8 @@ public class AdminCLI {
         if (account == null) {
             System.out.println("[!] Account not found.");
             return;
+        } else if (account.getStatus() != Account.AccountStatus.PENDING) {
+            System.out.println("[!] Account not pending!");
         } else {
             showAccount(accountId);
             System.out.print("[?] Are you sure you want to approve this account? (y/n)> ");
@@ -609,6 +616,8 @@ public class AdminCLI {
         if (account == null) {
             System.out.println("[!] Account not found.");
             return;
+        } else if (account.getStatus() != Account.AccountStatus.PENDING) {
+            System.out.println("[!] Account not pending!");
         } else {
             showAccount(accountId);
             System.out.print("[?] Are you sure you want to reject this account? (y/n)> ");
@@ -643,7 +652,8 @@ public class AdminCLI {
             return;
         } else {
             System.out.println("[+] Account:");
-            System.out.println("[~] ID: " + account.getId() + "Owner: " + account.getOwner() + " - Account Type: " + account.getType()
+            System.out.println("[~] ID: " + account.getId() + " Owner: " + account.getOwner() + " - Account Type: "
+                    + account.getType()
                     + " - Account Balance: " + account.getBalance() + " - Account Status: " + account.getStatus());
         }
     }
@@ -771,8 +781,8 @@ public class AdminCLI {
         ArrayList<Loan> pendingLoans = Loan.getPendingLoans();
         int pendingLoansCount = pendingLoans.size();
         if (pendingLoansCount > 0) {
-        System.out.println("[!] There are " + pendingLoansCount + " pending loans.");
-        System.out.println("[!] Type 'loan pendinglist' to see them.");
+            System.out.println("[!] There are " + pendingLoansCount + " pending loans.");
+            System.out.println("[!] Type 'loan pendinglist' to see them.");
         }
     }
 

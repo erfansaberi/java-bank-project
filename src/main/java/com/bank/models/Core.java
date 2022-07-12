@@ -15,7 +15,7 @@ public class Core {
         Admin.setAdminCredentials(); // Set admin username and password from configs.properties file
         Employee.loadData();
         Customer.loadData();
-        // TODO: Account.loadData()
+        Account.loadData();
         // TODO: Transaction.loadData()
         // TODO: Loan.loadData()
     }
@@ -26,7 +26,7 @@ public class Core {
     public static void shutdown() {
         Employee.saveData();
         Customer.saveData();
-        // TODO: Account.saveData()
+        Account.saveData();
         // TODO: Transaction.saveData()
         // TODO: Loan.saveData()
     }

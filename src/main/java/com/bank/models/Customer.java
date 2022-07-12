@@ -17,7 +17,6 @@ public class Customer extends Person {
     static ArrayList<Customer> allCustomers = new ArrayList<>(); // All created accounts
 
     // Note: Customer logs-in with phone number
-    private ArrayList<Account> accounts = new ArrayList<>();
     private CustomerStatus status;
 
     public enum CustomerStatus {
@@ -150,6 +149,21 @@ public class Customer extends Person {
                 if (customer.getStatus() != CustomerStatus.DELETED) {
                     return customer;
                 }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get customer by id even if customer is deleted.
+     * 
+     * @param id Id to get customer by.
+     * @return Customer with given id, null if not found.
+     */
+    public static Customer getByIdEvenIfDeleted(long id) {
+        for (Customer customer : allCustomers) {
+            if (customer.getId() == id) {
+                return customer;
             }
         }
         return null;
