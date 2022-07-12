@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.bank.models.Account;
 import com.bank.models.Customer;
+import com.bank.models.Transaction;
 import com.bank.views.CustomerViews;
 
 public class CustomerCLI {
@@ -52,6 +53,8 @@ public class CustomerCLI {
                         break;
 
                     case "transfer":
+                        transferMoney(Long.parseLong(inputSplit[1]), Long.parseLong(inputSplit[2]),
+                            Double.parseDouble(inputSplit[3]));
                         break;
 
                     case "logout":
@@ -69,6 +72,29 @@ public class CustomerCLI {
                 System.out.println("[!] Missing arguments. Type 'help' for help.");
             }
         }
+    }
+
+    private static void transferMoney(long fromAccountId, long toAccountId, double amount) {
+        Account fromAccount = Account.getAccountById(fromAccountId);
+        Account toAccount = Account.getAccountById(toAccountId);
+        if (fromAccount == null) {
+            System.out.println("[!] Account " + fromAccountId + " does not exist.");
+            return;
+        }
+        if (toAccount == null) {
+            System.out.println("[!] Account " + toAccountId + " does not exist.");
+            return;
+        }
+        if (fromAccount.getOwner().getId() != customer.getId()) {
+            System.out.println("[!] You are not the owner of account " + fromAccountId + ".");
+            return;
+        }
+        if (fromAccount.getBalance() < amount) {
+            System.out.println("[!] You do not have enough money in account " + fromAccountId + ".");
+            return;
+        }
+        Transaction transaction = Transaction.transferMoney(fromAccount, toAccount, amount);
+        System.out.println("[+] Money transferred, Transaction ID: " + transaction.getId());
     }
 
     /**

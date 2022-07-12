@@ -721,11 +721,8 @@ public class AdminCLI {
             System.out.println("[!] Insufficient balance.");
             return;
         }
-        fromAccount.setBalance(fromAccount.getBalance() - amount);
-        toAccount.setBalance(toAccount.getBalance() + amount);
-        Transaction transaction = new Transaction(fromAccount, toAccount, amount);
-        transaction.save();
-        System.out.println("[!] Money transferred.");
+        Transaction transaction = Transaction.transferMoney(fromAccount, toAccount, amount);
+        System.out.println("[+] Money transferred, Transaction ID: " + transaction.getId());
     }
 
     private static void listTransactions() {

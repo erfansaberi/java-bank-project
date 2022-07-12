@@ -103,6 +103,20 @@ public class Account {
     }
 
     /**
+     * Get account by id even if account is deleted
+     * @param id account id to get
+     * @return account if found, null if not
+     */
+    public static Account getByIdEvenIfDeleted(long accountId) {
+        for (Account account : allAccounts) {
+            if (account.getId() == accountId) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Read all accounts from accounts.csv file and save them to arraylist.
      * Format:
      * id, ownerId, balance, creationDate, type, status
@@ -112,15 +126,15 @@ public class Account {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             while (accountScanner.hasNextLine()) {
                 String line = accountScanner.nextLine();
-                String[] customerData = line.split(", ");
-                Customer owner = Customer.getByIdEvenIfDeleted(Long.parseLong(customerData[1]));
+                String[] accountData = line.split(", ");
+                Customer owner = Customer.getByIdEvenIfDeleted(Long.parseLong(accountData[1]));
                 Account account = new Account();
-                account.setId(Long.parseLong(customerData[0]));
+                account.setId(Long.parseLong(accountData[0]));
                 account.setOwner(owner);
-                account.setBalance(Double.parseDouble(customerData[2]));
-                account.setCreationDate(dateFormat.parse(customerData[3]));
-                account.setType(AccountType.valueOf(customerData[4]));
-                account.setStatus(AccountStatus.valueOf(customerData[5]));
+                account.setBalance(Double.parseDouble(accountData[2]));
+                account.setCreationDate(dateFormat.parse(accountData[3]));
+                account.setType(AccountType.valueOf(accountData[4]));
+                account.setStatus(AccountStatus.valueOf(accountData[5]));
                 account.save();
             }
         } catch (NumberFormatException | FileNotFoundException | ParseException e) {
@@ -246,5 +260,6 @@ public class Account {
         LONGTERM,
         SHORTTERM
     }
+
 }
 

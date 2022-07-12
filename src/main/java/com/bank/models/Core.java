@@ -16,7 +16,7 @@ public class Core {
         Employee.loadData();
         Customer.loadData();
         Account.loadData();
-        // TODO: Transaction.loadData()
+        Transaction.loadData();
         // TODO: Loan.loadData()
     }
 
@@ -27,7 +27,7 @@ public class Core {
         Employee.saveData();
         Customer.saveData();
         Account.saveData();
-        // TODO: Transaction.saveData()
+        Transaction.saveData();
         // TODO: Loan.saveData()
     }
 
