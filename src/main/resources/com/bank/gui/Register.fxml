@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -20,16 +21,16 @@
             <TextField fx:id="fname" layoutX="67.0" layoutY="130.0" prefHeight="30.0" prefWidth="200.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
             <TextField fx:id="lname" layoutX="67.0" layoutY="174.0" prefHeight="30.0" prefWidth="200.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
             <TextField fx:id="phnum" layoutX="67.0" layoutY="217.0" prefHeight="30.0" prefWidth="200.0" promptText="Number Phone" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
-            <TextField fx:id="IDnum" layoutX="285.0" layoutY="174.0" prefHeight="30.0" prefWidth="214.0" promptText="ID number" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
-            <DatePicker fx:id="birthDay" layoutX="285.0" layoutY="218.0" prefHeight="28.0" prefWidth="213.0" promptText="BirthDate" style="-fx-font-size: 13;" />
-            <TextField fx:id="emailAd" layoutX="67.0" layoutY="296.0" prefHeight="30.0" prefWidth="200.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
+            <TextField fx:id="IDnum" layoutX="279.0" layoutY="202.0" prefHeight="30.0" prefWidth="214.0" promptText="National ID Number" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
+            <DatePicker fx:id="birthDay" layoutX="279.0" layoutY="257.0" prefHeight="28.0" prefWidth="213.0" promptText="BirthDate" style="-fx-font-size: 13;" />
+            <TextField fx:id="emailAd" layoutX="286.0" layoutY="130.0" prefHeight="30.0" prefWidth="200.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
             <Text fill="#f2f0ff" layoutX="187.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register Form" textAlignment="CENTER" wrappingWidth="185.716796875">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>
             </Text>
             <Line endX="145.5999755859375" endY="-1.52587890625E-5" layoutX="286.0" layoutY="73.0" startX="-159.20001220703125" startY="-1.52587890625E-5" stroke="#e2e9ff" />
-            <Button fx:id="confirmbutt" layoutX="207.0" layoutY="353.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #3B83B4; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
+            <Button fx:id="confirmbutt" layoutX="207.0" layoutY="363.0" mnemonicParsing="false" onMouseClicked="#Registor" prefHeight="38.0" prefWidth="145.0" style="-fx-background-color: #3B83B4; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
                <font>
                   <Font name="B Arabic Style" size="15.0" />
                </font>
@@ -43,18 +44,24 @@
                   <Font name="B Badkonak" size="15.0" />
                </font>
             </Text>
-            <Text fill="#e4eaff" layoutX="14.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cartel">
+            <RadioButton fx:id="FemaleGender" layoutX="413.0" layoutY="180.0" mnemonicParsing="false" text="Female" textFill="#d6d6ff" />
+            <RadioButton fx:id="MaleGender" layoutX="280.0" layoutY="180.0" mnemonicParsing="false" text="Male" textFill="#d6d6ff" />
+            <PasswordField fx:id="ConfrimPass" layoutX="67.0" layoutY="292.0" prefHeight="30.0" prefWidth="200.0" promptText="Confrim Password" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: white; -fx-text-fill: white;" />
+            <Label fx:id="RegError" layoutX="290.0" layoutY="307.0" prefHeight="17.0" prefWidth="192.0" textFill="RED">
                <font>
-                  <Font name="Blackletter 686 BT" size="30.0" />
+                  <Font size="13.0" />
                </font>
-            </Text>
-            <RadioButton fx:id="FemaleGender" layoutX="412.0" layoutY="143.0" mnemonicParsing="false" text="Female" textFill="#d6d6ff" />
-            <RadioButton fx:id="MaleGender" layoutX="285.0" layoutY="143.0" mnemonicParsing="false" text="Male" textFill="#d6d6ff" />
+            </Label>
+            <Label fx:id="SucMes" layoutX="290.0" layoutY="307.0" textFill="#40ff00">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </center>
    <top>
-      <AnchorPane prefHeight="54.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="54.0" prefWidth="800.0" style="-fx-border-color: #f2f0ff; -fx-border-width: 0 0 1 0;" BorderPane.alignment="CENTER">
          <children>
             <Text fx:id="prePage" cache="true" depthTest="DISABLE" fill="#ffe3e3" layoutX="14.0" layoutY="48.0" onMouseClicked="#Previous" stroke="#ff000000" strokeType="OUTSIDE" strokeWidth="0.0" text="🔙">
                <font>

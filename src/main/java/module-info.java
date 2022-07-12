@@ -9,6 +9,10 @@ module com.bank.gui {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
+    
+    
+    
     opens com.bank.gui to javafx.fxml;
+    opens com.bank.models to javafx.base;
     exports com.bank.gui;
 }
