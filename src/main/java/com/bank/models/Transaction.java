@@ -32,6 +32,22 @@ public class Transaction {
         allTransactions.add(this);
     }
 
+    /**
+     * Transfer money from one account to another account and save the transaction.
+     * 
+     * @param fromAccount Account id to transfer money from.
+     * @param toAccount Account id to transfer money to.
+     * @param amount Amount to transfer.
+     * @return Transaction object.
+     */
+    public static Transaction transferMoney(Account fromAccount, Account toAccount, double amount) {
+        fromAccount.setBalance(fromAccount.getBalance() - amount);
+        toAccount.setBalance(toAccount.getBalance() + amount);
+        Transaction transaction = new Transaction(fromAccount, toAccount, amount);
+        transaction.save();
+        return transaction;
+    }
+
      /**
      * Read all transactions from transactions.csv file and save them to arraylist.
      * Format:
@@ -131,11 +147,5 @@ public class Transaction {
         return allTransactions;
     }
 
-    public static Transaction transferMoney(Account fromAccount, Account toAccount, double amount) {
-        fromAccount.setBalance(fromAccount.getBalance() - amount);
-        toAccount.setBalance(toAccount.getBalance() + amount);
-        Transaction transaction = new Transaction(fromAccount, toAccount, amount);
-        transaction.save();
-        return transaction;
-    }
+
 }
