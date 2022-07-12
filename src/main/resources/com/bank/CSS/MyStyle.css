@@ -7,8 +7,7 @@
 }
 .table-row-cell:even 
 {
-    /* -fx-background-color :  #40445a; */
-    -fx-background-color : blue;
+     -fx-background-color :  #40445a; 
     -fx-text-fill : rgb(185, 217, 255);
     -fx-text-alignment : center;
 
@@ -19,4 +18,9 @@
     -fx-text-fill : rgb(219, 235, 255);
     -fx-text-alignment : center;
 
+}
+
+.ex:hover
+{
+	-fx-text-fill : red;
 }

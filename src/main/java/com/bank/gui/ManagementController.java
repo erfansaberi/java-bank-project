@@ -68,7 +68,7 @@ public class ManagementController {
 				AdminStage.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
 				AdminStage.show();
 				loginController.ManageMentStage.close();
-				
+				UsPasError.setText(" ");
 
 			} catch (Exception e) {
 				System.out.println("Error");

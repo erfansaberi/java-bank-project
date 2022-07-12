@@ -19,6 +19,7 @@ public class GUI extends Application {
 
     	@Override
     	public void start(Stage stage) throws IOException {
+    		
             FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 800, 500);
             stage.setTitle("Login Page");
@@ -28,7 +29,7 @@ public class GUI extends Application {
             stage.setScene(scene);
             stage.show();
             
-            preStage = stage;
+            preStage = stage; 
         }
     
 

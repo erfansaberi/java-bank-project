@@ -45,6 +45,8 @@ public class loginController {
 			Regstage.getIcons().add(new Image("file:icons/RegisterFormLogo.png"));
 			Regstage.show();
 			GUI.preStage.close();
+			
+			
 
 		} catch (Exception e) {
 			System.out.println("Error");

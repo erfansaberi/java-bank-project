@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class EmployeePanelController {
 	
 	public static Stage CustomerListforEmployee;
+	public static Stage AccountListforEmployee;
 	
 	@FXML
 	void CustomerList()
@@ -32,6 +33,27 @@ public class EmployeePanelController {
 			
 			
 		} 
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	@FXML
+	void AccountList()
+	{
+		try
+		{
+			FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("AccountList.fxml"));
+			Parent root1 = (Parent) fxmlLoader.load();
+			AccountListforEmployee = new Stage();
+			AccountListforEmployee.setTitle("Customer List");
+			AccountListforEmployee.setScene(new Scene(root1));
+			AccountListforEmployee.initModality(Modality.APPLICATION_MODAL);
+			AccountListforEmployee.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+			AccountListforEmployee.show();	
+			ManagementController.EmployeeStage.close();
+			AccountListController.setStage(ManagementController.EmployeeStage,AccountListforEmployee);
+		}
+			
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

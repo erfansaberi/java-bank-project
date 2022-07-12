@@ -62,9 +62,14 @@ public class RegisterController {
 //	   System.out.println(birthDay.getValue());
 	   if(FemaleGender.isSelected())
 	   {
+		  
 		   String status = CustomerViews.customerRegister(fname.getText(),lname.getText(),emailAd.getText(),phnum.getText(),password.getText(),ConfrimPass.getText(),birthDay.getValue().toString(),"FEMALE",IDnum.getText()).toString();
 		  if(!status.equals("SUCCESS"))
+		  {
 			  RegError.setText(status);
+			  SucMes.setText(" ");
+		  }
+			 
 		  else
 		  {
 			  SucMes.setText("Registered Successfully");
@@ -75,9 +80,14 @@ public class RegisterController {
 		       
 	   if(MaleGender.isSelected())
 	   {
+		   
 		   String status = CustomerViews.customerRegister(fname.getText(),lname.getText(),emailAd.getText(),phnum.getText(),password.getText(),ConfrimPass.getText(),birthDay.getValue().toString(),"MALE",IDnum.getText()).toString();
 			  if(!status.equals("SUCCESS"))
+			  {
 				  RegError.setText(status);
+			      SucMes.setText(" ");
+			  }
+				  
 			  else
 			  {
 				  SucMes.setText("Registered Successfully");
