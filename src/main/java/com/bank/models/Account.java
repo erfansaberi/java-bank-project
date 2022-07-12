@@ -1,7 +1,14 @@
 package com.bank.models;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Account {
     static String ACCOUNT_DATAFILE_PATH = "src/main/java/com/bank/data/accounts.csv";
@@ -95,13 +102,66 @@ public class Account {
         return null;
     }
 
-    public static void loadData() {
-        // TODO: Load all accounts from csv file
-
+    /**
+     * Get account by id even if account is deleted
+     * @param id account id to get
+     * @return account if found, null if not
+     */
+    public static Account getByIdEvenIfDeleted(long accountId) {
+        for (Account account : allAccounts) {
+            if (account.getId() == accountId) {
+                return account;
+            }
+        }
+        return null;
     }
 
+    /**
+     * Read all accounts from accounts.csv file and save them to arraylist.
+     * Format:
+     * id, ownerId, balance, creationDate, type, status
+     */
+    public static void loadData() {
+        try (Scanner accountScanner = new Scanner(new File(ACCOUNT_DATAFILE_PATH))) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            while (accountScanner.hasNextLine()) {
+                String line = accountScanner.nextLine();
+                String[] accountData = line.split(", ");
+                Customer owner = Customer.getByIdEvenIfDeleted(Long.parseLong(accountData[1]));
+                Account account = new Account();
+                account.setId(Long.parseLong(accountData[0]));
+                account.setOwner(owner);
+                account.setBalance(Double.parseDouble(accountData[2]));
+                account.setCreationDate(dateFormat.parse(accountData[3]));
+                account.setType(AccountType.valueOf(accountData[4]));
+                account.setStatus(AccountStatus.valueOf(accountData[5]));
+                account.save();
+            }
+        } catch (NumberFormatException | FileNotFoundException | ParseException e) {
+            System.err.println("[!] Error loading accounts from file.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Save all accounts to accounts.csv file.
+     * Write all accounts data to accounts.csv file in format:
+     * id, ownerId, balance, creationDate, type, status
+     */
     public static void saveData() {
-        // TODO: Save all accounts to csv file
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            FileWriter dataFile = new FileWriter(ACCOUNT_DATAFILE_PATH);
+            for (Account accounts : allAccounts) {
+                dataFile.write(accounts.getId() + ", " + accounts.getOwner().getId() + ", " + accounts.getBalance() + ", "
+                        + dateFormat.format(accounts.getCreationDate()) + ", " + accounts.getType() + ", "
+                        + accounts.getStatus() + "\n");
+            }
+            dataFile.close();
+        } catch (Exception e) {
+            System.err.println("[!] Error saving accounts to file.");
+            System.err.println(e);
+        }
     }
 
     // Getters and setters
@@ -200,5 +260,6 @@ public class Account {
         LONGTERM,
         SHORTTERM
     }
+
 }
 
