@@ -9,7 +9,7 @@ import com.bank.models.Customer;
 import com.bank.models.Admin;
 import com.bank.models.Employee;
 import com.bank.validator.Validator;
-import com.bank.views.CustomerViews;
+import com.bank.logics.CustomerLogics;
 
 public class CLI {
     public static Scanner sc = new Scanner(System.in);
@@ -177,7 +177,7 @@ public class CLI {
     /**
      * Customer register.
      * Takes arguments from user and validates them, then creates a new customer
-     * by calling CustomerViews.customerRegister() and passing the arguments.
+     * by calling CustomerLogics.customerRegister() and passing the arguments.
      * New customer status will be set to 'PENDING' by default and needs to be
      * approved by an admin.
      * 
@@ -270,17 +270,17 @@ public class CLI {
             }
         }
 
-        CustomerViews.RegisterStatus registerStatus = CustomerViews.customerRegister(firstName, lastName, email,
+        CustomerLogics.RegisterStatus registerStatus = CustomerLogics.customerRegister(firstName, lastName, email,
                 phoneNumber, password, confirmPassword, birthDateStr, genderStr, nationalId);
-        if (registerStatus == CustomerViews.RegisterStatus.SUCCESS) {
+        if (registerStatus == CustomerLogics.RegisterStatus.SUCCESS) {
             System.out.println("[+] Registration successful!");
-        } else if (registerStatus == CustomerViews.RegisterStatus.EMAIL_IN_USE) {
+        } else if (registerStatus == CustomerLogics.RegisterStatus.EMAIL_IN_USE) {
             System.out.println("[!] Email address already exists!");
-        } else if (registerStatus == CustomerViews.RegisterStatus.PHONE_NUMBER_IN_USE) {
+        } else if (registerStatus == CustomerLogics.RegisterStatus.PHONE_NUMBER_IN_USE) {
             System.out.println("[!] Phone number already exists!");
-        } else if (registerStatus == CustomerViews.RegisterStatus.NATIONAL_ID_IN_USE) {
+        } else if (registerStatus == CustomerLogics.RegisterStatus.NATIONAL_ID_IN_USE) {
             System.out.println("[!] National ID already exists!");
-        } else if (registerStatus == CustomerViews.RegisterStatus.TOO_YOUNG_TO_REGISTER) {
+        } else if (registerStatus == CustomerLogics.RegisterStatus.TOO_YOUNG_TO_REGISTER) {
             System.out.println("[!] You are too young to register! Must be at least 18 years old.");
         } else {
             System.out.println("[!] Registration failed!");

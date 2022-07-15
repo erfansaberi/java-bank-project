@@ -1,8 +1,6 @@
 package com.bank.gui;
 
-import com.bank.views.ManagementViews;
-import com.bank.models.Employee;
-import com.bank.models.Admin;
+import com.bank.logics.ManagementLogics;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +36,7 @@ public class ManagementController {
 	@FXML
 	void authentication() {
 		
-		if(ManagementViews.authenticate(EmailManageAuth.getText(), PasswordManageAuth.getText()).toString().equals("EMPLOYEE"))
+		if(ManagementLogics.authenticate(EmailManageAuth.getText(), PasswordManageAuth.getText()).toString().equals("EMPLOYEE"))
 		{
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("EmployeePanel.fxml"));
@@ -56,7 +54,7 @@ public class ManagementController {
 				System.out.println("Error");
 			}
 		}
-		else if(ManagementViews.authenticate(EmailManageAuth.getText(), PasswordManageAuth.getText()).toString().equals("ADMIN"))
+		else if(ManagementLogics.authenticate(EmailManageAuth.getText(), PasswordManageAuth.getText()).toString().equals("ADMIN"))
 		{
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("AdminPanel.fxml"));

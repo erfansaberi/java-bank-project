@@ -5,7 +5,7 @@ import java.util.Scanner;
 import com.bank.models.Account;
 import com.bank.models.Customer;
 import com.bank.models.Transaction;
-import com.bank.views.CustomerViews;
+import com.bank.logics.CustomerLogics;
 
 public class CustomerCLI {
     static Scanner sc;
@@ -207,8 +207,8 @@ public class CustomerCLI {
             System.out.print("[?] Are you sure you want to delete this account? (y/n)> ");
             String input = sc.nextLine();
             if (input.equals("y")) {
-                CustomerViews.AccountDeleteStatus deleteStatus = CustomerViews.customerDeleteAccount(customer, account);
-                if (deleteStatus == CustomerViews.AccountDeleteStatus.SUCCESS) {
+                CustomerLogics.AccountDeleteStatus deleteStatus = CustomerLogics.customerDeleteAccount(customer, account);
+                if (deleteStatus == CustomerLogics.AccountDeleteStatus.SUCCESS) {
                     System.out.println("[~] Account deleted.");
                 } else {
                     System.out.println("[!] Account deletion failed.");
@@ -222,7 +222,7 @@ public class CustomerCLI {
     /**
      * Create a new account
      * Ask customer to enter account type and initial balance
-     * Calls CustomerViews.createAccount() to create account
+     * Calls CustomerLogics.createAccount() to create account
      * and prints creation status message.
      * Params: accountType, initialBalance
      */
@@ -232,7 +232,7 @@ public class CustomerCLI {
         int accountType = Integer.parseInt(sc.nextLine());
         System.out.print("  [>] Initial money: ");
         Double initialMoney = Double.parseDouble(sc.nextLine());
-        CustomerViews.CreateAccountStatus status = CustomerViews.customerCreateAccount(customer, accountType,
+        CustomerLogics.CreateAccountStatus status = CustomerLogics.customerCreateAccount(customer, accountType,
                 initialMoney);
         switch (status) {
             case SUCCESS:

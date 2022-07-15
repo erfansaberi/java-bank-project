@@ -1,4 +1,4 @@
-package com.bank.views;
+package com.bank.logics;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,9 +14,9 @@ import com.bank.models.Gender;
 import com.bank.models.Account.AccountType;
 import com.bank.validator.Validator;
 
-public class CustomerViews {
+public class CustomerLogics {
     /**
-     * Customer register view
+     * Customer register logic
      * 
      * @param firstName
      * @param lastName
@@ -86,7 +86,7 @@ public class CustomerViews {
     }
 
     /**
-     * Customer create account view
+     * Customer create account logic
      * Takes customer, account type and balance as input
      * Creates new account with status = PENDING
      * Needs to be approved by admin or employees
@@ -139,7 +139,7 @@ public class CustomerViews {
     }
 
     /**
-     * Customer delete account view
+     * Customer delete account logic
      * Takes customer and account as input, checks if account belongs to customer,
      * adds balance to safe box and deletes account
      * @param account Account object

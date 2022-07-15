@@ -10,7 +10,7 @@ import com.bank.models.Employee;
 import com.bank.models.Loan;
 import com.bank.models.Transaction;
 import com.bank.validator.Validator;
-import com.bank.views.EmployeeViews;
+import com.bank.logics.EmployeeLogics;
 
 public class AdminCLI {
     static Scanner sc;
@@ -344,15 +344,15 @@ public class AdminCLI {
             }
         }
 
-        EmployeeViews.RegisterStatus registerStatus = EmployeeViews.employeeRegister(firstName, lastName, email,
+        EmployeeLogics.RegisterStatus registerStatus = EmployeeLogics.employeeRegister(firstName, lastName, email,
                 phoneNumber, password, confirmPassword, birthDateStr, genderStr, nationalId, salary);
-        if (registerStatus == EmployeeViews.RegisterStatus.SUCCESS) {
+        if (registerStatus == EmployeeLogics.RegisterStatus.SUCCESS) {
             System.out.println("[+] Registration successful!");
-        } else if (registerStatus == EmployeeViews.RegisterStatus.EMAIL_IN_USE) {
+        } else if (registerStatus == EmployeeLogics.RegisterStatus.EMAIL_IN_USE) {
             System.out.println("[!] Email address already exists!");
-        } else if (registerStatus == EmployeeViews.RegisterStatus.PHONE_NUMBER_IN_USE) {
+        } else if (registerStatus == EmployeeLogics.RegisterStatus.PHONE_NUMBER_IN_USE) {
             System.out.println("[!] Phone number already exists!");
-        } else if (registerStatus == EmployeeViews.RegisterStatus.NATIONAL_ID_IN_USE) {
+        } else if (registerStatus == EmployeeLogics.RegisterStatus.NATIONAL_ID_IN_USE) {
             System.out.println("[!] National ID already exists!");
         } else {
             System.out.println("[!] Registration failed!");
@@ -710,7 +710,7 @@ public class AdminCLI {
     // -----------------------------------------------------------------------------
 
     private static void transferMoney(long fromAccountId, long toAccountId, double amount) {
-        // TODO: Implement the logic in views instead of here
+        // TODO: Implement the logic in logics instead of here
         Account fromAccount = Account.getAccountById(fromAccountId);
         Account toAccount = Account.getAccountById(toAccountId);
         if (fromAccount == null || toAccount == null) {

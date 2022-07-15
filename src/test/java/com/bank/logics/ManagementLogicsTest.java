@@ -1,4 +1,4 @@
-package com.bank.views;
+package com.bank.logics;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 
-class ManagementViewsTest {
+class ManagementLogicsTest {
     static Employee employee;
     static String testEmail = "erfan.saberi@ut.ac.ir";
     static String testPassword = "HESOYAM";
@@ -32,7 +32,7 @@ class ManagementViewsTest {
 
     @Test
     void managerAuthenticateTest() {
-        assertEquals(ManagementViews.accessLevel.EMPLOYEE, ManagementViews.authenticate(testEmail, testPassword));
-        assertEquals(ManagementViews.accessLevel.NONE, ManagementViews.authenticate("wrong@email.com", testPassword));
+        assertEquals(ManagementLogics.accessLevel.EMPLOYEE, ManagementLogics.authenticate(testEmail, testPassword));
+        assertEquals(ManagementLogics.accessLevel.NONE, ManagementLogics.authenticate("wrong@email.com", testPassword));
     }
 }

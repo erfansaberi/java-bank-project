@@ -1,7 +1,6 @@
 package com.bank.gui;
 
 import javafx.fxml.FXML;
-//import com.bank.views.*;
 //import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 //import javafx.scene.control.Label;

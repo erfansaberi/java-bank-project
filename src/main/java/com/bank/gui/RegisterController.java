@@ -1,6 +1,6 @@
 package com.bank.gui;
 
-import com.bank.views.CustomerViews;
+import com.bank.logics.CustomerLogics;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +8,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class RegisterController {
@@ -63,7 +62,7 @@ public class RegisterController {
 	   if(FemaleGender.isSelected())
 	   {
 		  
-		   String status = CustomerViews.customerRegister(fname.getText(),lname.getText(),emailAd.getText(),phnum.getText(),password.getText(),ConfrimPass.getText(),birthDay.getValue().toString(),"FEMALE",IDnum.getText()).toString();
+		   String status = CustomerLogics.customerRegister(fname.getText(),lname.getText(),emailAd.getText(),phnum.getText(),password.getText(),ConfrimPass.getText(),birthDay.getValue().toString(),"FEMALE",IDnum.getText()).toString();
 		  if(!status.equals("SUCCESS"))
 		  {
 			  RegError.setText(status);
@@ -81,7 +80,7 @@ public class RegisterController {
 	   if(MaleGender.isSelected())
 	   {
 		   
-		   String status = CustomerViews.customerRegister(fname.getText(),lname.getText(),emailAd.getText(),phnum.getText(),password.getText(),ConfrimPass.getText(),birthDay.getValue().toString(),"MALE",IDnum.getText()).toString();
+		   String status = CustomerLogics.customerRegister(fname.getText(),lname.getText(),emailAd.getText(),phnum.getText(),password.getText(),ConfrimPass.getText(),birthDay.getValue().toString(),"MALE",IDnum.getText()).toString();
 			  if(!status.equals("SUCCESS"))
 			  {
 				  RegError.setText(status);

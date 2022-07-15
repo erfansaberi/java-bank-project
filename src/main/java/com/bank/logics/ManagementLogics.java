@@ -1,10 +1,10 @@
-package com.bank.views;
+package com.bank.logics;
 
 import com.bank.models.Admin;
 import com.bank.models.Employee;
 import com.bank.validator.Validator;
 
-public class ManagementViews {
+public class ManagementLogics {
 
     // Access level of manager
     public enum accessLevel {
@@ -14,7 +14,7 @@ public class ManagementViews {
     };
 
     /**
-     * Managers login view.
+     * Managers login logic.
      * Admin logs in with username and password, saved in configs.properties.
      * Employees login with email and password.
      * 

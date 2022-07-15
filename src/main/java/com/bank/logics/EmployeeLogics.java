@@ -1,4 +1,4 @@
-package com.bank.views;
+package com.bank.logics;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -12,9 +12,9 @@ import com.bank.models.Employee;
 import com.bank.models.Gender;
 import com.bank.validator.Validator;
 
-public class EmployeeViews {
+public class EmployeeLogics {
     /**
-     * Employee register view
+     * Employee register logic
      * 
      * @param firstName
      * @param lastName
@@ -22,8 +22,8 @@ public class EmployeeViews {
      * @param phoneNumber
      * @param password
      * @param confirmPassword
-     * @param birthDate
-     * @param gender
+     * @param birthDateStr
+     * @param genderStr
      * @param nationalId
      * @param salary
      * @return Status message
