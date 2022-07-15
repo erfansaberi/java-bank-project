@@ -41,7 +41,7 @@ public class loginController {
 			Regstage.setTitle("Register Page");
 			Regstage.setScene(new Scene(root1));
 			Regstage.initModality(Modality.APPLICATION_MODAL);
-			Regstage.getIcons().add(new Image("file:icons/RegisterFormLogo.png"));
+			Regstage.getIcons().add(new Image("file:src/main/resources/com/bank/icons/RegisterFormLogo.png"));
 			Regstage.show();
 			GUI.preStage.close();
 			
@@ -63,7 +63,7 @@ public class loginController {
 			Loginstage.setScene(new Scene(root1));
 			Loginstage.initModality(Modality.APPLICATION_MODAL);
 			Loginstage.show();
-			Loginstage.getIcons().add(new Image("file:icons/CustomerLogo.png"));
+			Loginstage.getIcons().add(new Image("file:src/main/resources/com/bank/icons/CustomerLogo.png"));
 			GUI.preStage.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -80,7 +80,7 @@ public class loginController {
 			ManageMentStage.setTitle("Managment Page");
 			ManageMentStage.setScene(new Scene(root1));
 			ManageMentStage.initModality(Modality.APPLICATION_MODAL);
-			ManageMentStage.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+			ManageMentStage.getIcons().add(new Image("file:src/main/resources/com/bank/icons/ManagmentLogo.png"));
 			ManageMentStage.show();
 			GUI.preStage.close();
 		} catch (Exception e) {

@@ -24,7 +24,7 @@ public class EmployeePanelController {
 			CustomerListforEmployee.setTitle("Customer List");
 			CustomerListforEmployee.setScene(new Scene(root1));
 			CustomerListforEmployee.initModality(Modality.APPLICATION_MODAL);
-			CustomerListforEmployee.getIcons().add(new Image("file:icons/ManagmentLogo.png"));		
+			CustomerListforEmployee.getIcons().add(new Image("file:src/main/resources/com/bank/icons/ManagmentLogo.png"));		
 			
 			CustomerListforEmployee.show();		
 			ManagementController.EmployeeStage.close();
@@ -48,7 +48,7 @@ public class EmployeePanelController {
 			AccountListforEmployee.setTitle("Customer List");
 			AccountListforEmployee.setScene(new Scene(root1));
 			AccountListforEmployee.initModality(Modality.APPLICATION_MODAL);
-			AccountListforEmployee.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+			AccountListforEmployee.getIcons().add(new Image("file:src/main/resources/com/bank/icons/ManagmentLogo.png"));
 			AccountListforEmployee.show();	
 			ManagementController.EmployeeStage.close();
 			AccountListController.setStage(ManagementController.EmployeeStage,AccountListforEmployee);

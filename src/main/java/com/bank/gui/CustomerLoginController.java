@@ -36,7 +36,7 @@ public class CustomerLoginController {
 				FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("Dashboard.fxml"));
 				Parent root1 = (Parent) fxmlLoader.load();
 				DashboardStage = new Stage();
-				DashboardStage.getIcons().add(new Image("file:icons/DashBoardLogo.png"));
+				DashboardStage.getIcons().add(new Image("file:src/main/resources/com/bank/icons/DashBoardLogo.png"));
 				DashboardStage.setTitle("Dashboard Panel");
 				DashboardStage.setScene(new Scene(root1));
 				DashboardStage.show();

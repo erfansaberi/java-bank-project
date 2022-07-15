@@ -45,7 +45,7 @@ public class ManagementController {
 				EmployeeStage.setTitle("Employee Panel");
 				EmployeeStage.setScene(new Scene(root1));
 				EmployeeStage.initModality(Modality.APPLICATION_MODAL);
-				EmployeeStage.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+				EmployeeStage.getIcons().add(new Image("file:src/main/resources/com/bank/icons/ManagmentLogo.png"));
 				EmployeeStage.show();
 				loginController.ManageMentStage.close();
 				
@@ -63,7 +63,7 @@ public class ManagementController {
 				AdminStage.setTitle("Admin Panel");
 				AdminStage.setScene(new Scene(root1));
 				AdminStage.initModality(Modality.APPLICATION_MODAL);
-				AdminStage.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+				AdminStage.getIcons().add(new Image("file:src/main/resources/com/bank/icons/ManagmentLogo.png"));
 				AdminStage.show();
 				loginController.ManageMentStage.close();
 				UsPasError.setText(" ");

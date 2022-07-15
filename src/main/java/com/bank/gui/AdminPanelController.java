@@ -28,7 +28,7 @@ public class AdminPanelController {
 		EmplooyeeList.setTitle("Employee List");
 		EmplooyeeList.setScene(new Scene(root1));
 		EmplooyeeList.initModality(Modality.APPLICATION_MODAL);
-		EmplooyeeList.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+		EmplooyeeList.getIcons().add(new Image("file:src/main/resources/com/bank/icons/ManagmentLogo.png"));
 		EmplooyeeList.show();
 		ManagementController.AdminStage.close();
 		
@@ -45,7 +45,7 @@ public class AdminPanelController {
 			CustomerListForAdmin.setTitle("Customer List");
 			CustomerListForAdmin.setScene(new Scene(root1));
 			CustomerListForAdmin.initModality(Modality.APPLICATION_MODAL);
-			CustomerListForAdmin.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+			CustomerListForAdmin.getIcons().add(new Image("file:src/main/resources/com/bank/icons/ManagmentLogo.png"));
 			CustomerListForAdmin.show();
 			ManagementController.AdminStage.close();
 			CustomersListPanelController.setStage(ManagementController.AdminStage,CustomerListForAdmin);
@@ -68,7 +68,7 @@ public class AdminPanelController {
 			AccountListforAdmin.setTitle("Customer List");
 			AccountListforAdmin.setScene(new Scene(root1));
 			AccountListforAdmin.initModality(Modality.APPLICATION_MODAL);
-			AccountListforAdmin.getIcons().add(new Image("file:icons/ManagmentLogo.png"));
+			AccountListforAdmin.getIcons().add(new Image("file:src/main/resources/com/bank/icons/ManagmentLogo.png"));
 			AccountListforAdmin.show();
 			ManagementController.AdminStage.close();
 			AccountListController.setStage(ManagementController.AdminStage,AccountListforAdmin);
