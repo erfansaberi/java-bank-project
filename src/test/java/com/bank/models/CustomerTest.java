@@ -42,6 +42,7 @@ class CustomerTest {
         activeCustomer.setEmail(testEmailActive);
         activeCustomer.setPassword(testPassword);
         activeCustomer.save();
+        activeCustomer.addToSafeBoxBalance(30000);
 
         // Create an inactive Customer
         inactiveCustomer = new Customer();
